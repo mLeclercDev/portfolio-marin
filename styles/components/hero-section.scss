@@ -1,0 +1,74 @@
+.hero-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    max-width: calc(100% - 30px);
+    h1, p {
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        position: relative;
+        .project-names-wrapper {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 100%;
+            .project-name {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%) translateY(100%);
+                display: block;
+                will-change: tansform;
+            } 
+        }
+    }
+    h1, .description {
+        > div {
+            overflow: hidden;
+            display: block;
+        }
+    }
+    .line {
+        display: block;
+    }
+    .description {
+        width: 600px;
+        max-width: 100%;
+        text-align: center;
+        position: relative;
+        margin: 0 auto;
+        .line-wrapper {
+            display: block;
+            overflow: hidden;
+        }
+        .projects-description-wrapper {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 100%;
+            .project-description {
+                position: relative;
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                .line {
+                    transform: translateY(100%);
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -9,11 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cyriacbr/react-split-text": "^1.0.0",
     "@next/font": "14.1.4",
+    "@react-three/drei": "^9.102.6",
+    "@studio-freight/hamo": "^0.6.28",
+    "@studio-freight/react-lenis": "^0.0.46",
+    "@zeit/next-css": "^1.0.1",
+    "contentful": "^10.8.7",
+    "drei": "^2.2.21",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.4",
-    "next": "14.1.4",
+    "gsap": "^3.12.5",
+    "next": "^14.1.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-three-fiber": "^6.0.13",
+    "sass": "^1.72.0",
+    "three": "^0.162.0"
+  },
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^3.3.4"
   }
 }

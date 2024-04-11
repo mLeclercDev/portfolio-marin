@@ -1,0 +1,33 @@
+footer {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: calc(100% - 60px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    @media (max-width: 992px) {
+        width: calc(100% - 30px);
+        left: 15px;
+    }
+    p:first-child {
+        font-size: 14px;
+    }
+    p.description  {
+        width: 300px;
+        color: rgba(255, 255, 255, 0.60);
+        font-size: 14px;
+        font-weight: 400;
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    div.informations {
+        display: flex;
+        gap: 15px;
+        div {
+            font-size: 14px;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+.next-project {
+    padding: 150px 0 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media (max-width: 768px) {
+        padding: 75px 0 150px;
+    }
+    .introduction {
+        color: rgba($color: #fff, $alpha: 0.6);
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        width: 200px;
+        margin: 0 auto;
+    } 
+    span.divider {
+        height: 100px;
+        width: 1px;
+        background-color: rgba($color: #fff, $alpha: 0.6);
+        margin: 25px auto 85px;
+    }
+    .name-project {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        max-width: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+        width: fit-content;
+        padding-bottom: 2px;
+        position: relative;
+        .line-wrapper {
+            display: block;
+            overflow: hidden;
+        }
+        .line {
+            display: block;
+            will-change: transform;
+            font-size: 66px;
+            line-height: 1.2;
+            font-weight: 700;
+            font-family: var(--font2);
+            @media (max-width: 768px) {
+                font-size: 44px;
+            }
+        }
+        &:after {
+            content: "";
+            display: block;
+            height: 1px;
+            left: 0;
+            margin-top: 3px;
+            position: absolute;
+            transform: scaleX(0);
+            transform-origin: top right;
+            transition: transform .3s ease;
+            width: 100%;
+            background-color: #fff;
+        }
+        &:hover:after {
+            transform: scaleX(1);
+            transform-origin: top left;
+        }
+    }
+}

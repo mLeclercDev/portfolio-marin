@@ -1,11 +1,74 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import SmoothScrolling from "../components/global/SmoothScrolling"
+import Navbar from '../components/global/Navbar';
+import Footer from '../components/global/Footer';
+import HeroSection from '../components/HeroSection';
+import Gallery from '../components/InfiniteImage';
+import Loader from '../components/Loader';
+import Layers from '../components/global/Layers';
+import '../styles/globals.scss'
+import '../styles/components/navbar.scss'
+import '../styles/components/footer.scss'
+import '../styles/components/hero-section.scss'
+import '../styles/components/infinite-image.scss'
+import '../styles/components/gallery-3d.scss'
+import '../styles/components/loader.scss'
+import '../styles/components/layers.scss'
+import { createClient } from 'contentful';
 
-const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+const images = [
+  { src: '/images/image-pixel.png', alt: 'Image 1' },
+  { src: '/images/image-11.jpeg', alt: 'Image 1' },
+  { src: '/images/image-12.jpeg', alt: 'Image 1' },
+  { src: '/images/image-13.jpeg', alt: 'Image 1' },
+  { src: '/images/image-14.jpeg', alt: 'Image 1' },
+  { src: '/images/image-15.jpeg', alt: 'Image 1' },
+  { src: '/images/image-16.jpeg', alt: 'Image 1' },
+  { src: '/images/image-17.jpeg', alt: 'Image 1' },
+  { src: '/images/image-18.jpeg', alt: 'Image 1' },
+];
+
+export async function getStaticProps() {
+  // Créer une instance du client Contentful en utilisant les identifiants d'accès
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  try {
+    // Récupérer les données depuis Contentful en utilisant différentes requêtes
+    const heroSection = await client.getEntries({ content_type: 'heroSection' });
+    const footer = await client.getEntries({ content_type: 'footer' });
+    const projects = await client.getEntries({ content_type: 'projects' });
+    // Ajoutez d'autres requêtes pour chaque content type nécessaire
+
+    // Renvoyer les données récupérées en tant que props
+    return {
+      props: {
+        heroSection: heroSection.items,
+        footer: footer.items,
+        projects: projects.items,
+        // Ajoutez d'autres propriétés pour chaque type de contenu récupéré
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data from Contentful:', error);
+    return {
+      props: {
+        heroSection: [],
+        footer: [],
+        projects: [],
+        // Initialisez d'autres propriétés à un tableau vide en cas d'erreur
+      },
+    };
+  }
+}
+
+
+export default function Home({heroSection, footer, projects}) {
   return (
     <>
       <Head>
@@ -14,110 +77,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+      <SmoothScrolling infinite={true}>
+      <Navbar />
+      <main className="">
+          <Loader />
+          <HeroSection title={heroSection[0].fields.title} description={heroSection[0].fields.description.content[0].content[0].value} projects={projects} />
+          <Gallery images={images} projects={projects} />
+          <Gallery images={images} projects={projects} infinite="true" />
       </main>
+      <Footer word={footer[0].fields.leftWord} description={footer[0].fields.description.content[0].content[0].value} informations={footer[0].fields.textItem} />
+      <Layers />
+      </SmoothScrolling>
     </>
   )
 }
+ 
