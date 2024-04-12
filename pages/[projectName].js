@@ -11,7 +11,7 @@ import Footer from '../components/global/Footer';
 import HeroProject from '../components/HeroProject';
 import ProjectContent from '../components/ProjectContent';
 import ProjectImages from '../components/ProjectImages';
-import NextProject from '../components/nextProject';
+import NextProject from '../components/NextProject';
 import Layers from '../components/global/Layers';
 import '../styles/components/navbar.scss'
 import '../styles/components/footer.scss'
