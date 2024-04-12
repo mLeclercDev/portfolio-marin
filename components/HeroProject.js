@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
+import AnimatedTitle from "./utils/AnimateTitle";
+
 
 const HeroProject = ({ image, title }) => {
 
@@ -37,6 +39,7 @@ const HeroProject = ({ image, title }) => {
           >
             {title}
           </SplitText>
+          <AnimatedTitle textRef={textRef} >{title}</AnimatedTitle>
         </h1>
         <div className='wrapper-image'>
           <Image className='fit-cover' ref={wrapperImageRef} src={`https:${image}`}alt="Ma belle image" width={1149} height={520} />
