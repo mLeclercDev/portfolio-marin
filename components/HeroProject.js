@@ -31,14 +31,14 @@ const HeroProject = ({ image, title }) => {
     <div className="hero-project">
       <div className='content-wrapper'>
         <h1>
-          <SplitText
+{/*           <SplitText
             LineWrapper={({ children }) =><div className="line-wrapper"><span className="line">{children}</span></div>}
             WordWrapper={({ children }) => <>{children}</>}
             LetterWrapper={({ children }) => <>{children}</>}
             ref={textRef}
           >
             {title}
-          </SplitText>
+          </SplitText> */}
           <AnimatedTitle textRef={textRef} >{title}</AnimatedTitle>
         </h1>
         <div className='wrapper-image'>
