@@ -12,6 +12,7 @@ export const animatePageOut = (href, router) => {
 
     gsap.set(".layers", {zIndex: 11,})
     gsap.set("main", { opacity: 0, delay: 1 })
+    gsap.set(".hero-project img",{ className: "fit-cover", delay: 0.5 })
     
     tl.to([banners], {
       duration: 1, className: "layers__item out", stagger: 0.25, onComplete: () => {

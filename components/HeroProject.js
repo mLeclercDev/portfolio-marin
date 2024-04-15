@@ -16,7 +16,7 @@ const HeroProject = ({ image, title }) => {
 
     const tl = gsap.timeline();
 
-    gsap.set(wrapperImageRef.current,{ className: "fit-cover" })
+    /* gsap.set(wrapperImageRef.current,{ className: "fit-cover" }) */
 
     tl.to(wrapperImageRef.current, { className: "fit-cover view", delay: 0.55 }) // cibler les enfants de wrapperImageRef.current
 
