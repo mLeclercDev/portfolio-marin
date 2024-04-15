@@ -18,7 +18,7 @@ const HeroProject = ({ image, title }) => {
 
     /* gsap.set(wrapperImageRef.current,{ className: "fit-cover" }) */
 
-    tl.to(wrapperImageRef.current, { className: "fit-cover view", delay: 0.55 }) // cibler les enfants de wrapperImageRef.current
+    tl.to(wrapperImageRef.current, { className: "fit-cover view", delay: 0.65 }) // cibler les enfants de wrapperImageRef.current
 
     const timer = setTimeout(() => {
       var lines = textRef.current.querySelectorAll(".line");
@@ -26,7 +26,7 @@ const HeroProject = ({ image, title }) => {
 
       gsap.set(lines,{ y: "100%" })
   
-      tl.to(lines, { y: "0%", ease: 'power4.inOut', duration: 1, delay: 0.55, stagger: 0 });
+      tl.to(lines, { y: "0%", ease: 'power4.inOut', duration: 1, delay: 0.45, stagger: 0 });
     }, 555); // Délai en millisecondes (1000 ms = 1 seconde)
   
     // Retour de fonction de nettoyage pour annuler le timer si le composant est démonté avant l'exécution du code
@@ -52,7 +52,7 @@ const HeroProject = ({ image, title }) => {
           </SplitText> 
         </h1>
         <div className='wrapper-image'>
-          <Image className='fit-cover' ref={wrapperImageRef} src={`https:${image}`}alt="Ma belle image" width={1149} height={520} />
+          <Image className='fit-cover' ref={wrapperImageRef} src={`https:${image}`}alt="Ma belle image" width={1150} height={520} />
         </div>
       </div>
     </div>
