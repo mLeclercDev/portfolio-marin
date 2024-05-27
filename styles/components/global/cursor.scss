@@ -1,0 +1,35 @@
+.cursor-container {
+    width: 140px;
+    height: 160px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    //transform: translate(-50%, -50%);
+    z-index: 11;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    &:nth-child(1) {
+        transform: translate(-10px, -10px) rotate(0deg);
+        &.active {
+            transform: translate(-10px, 0px) rotate(3deg);
+        }
+    }
+    &:nth-child(2) {
+        transform: translate(-10px, -10px) rotate(0deg);
+        &.active {
+            transform: translate(-10px, 0px) rotate(-3deg);
+        }
+    }
+    &:nth-child(3) {
+        transform: translate(-10px, -10px) rotate(0deg);
+        &.active {
+            transform: translate(-10px, 0px) rotate(3deg);
+        }
+    }
+    &.active {
+        opacity: 1;
+    }
+}

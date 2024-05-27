@@ -4,16 +4,16 @@
     // COLORS
     --text-color1: #000;
     --text-color2: #ccc;
-    --color1: #2954ff;
-    --color2: #0bcca9;
-    --color3: #ff6a40;
-    --color4: #942bff;
+    --color1: #FCFBF6;
+    --color2: #110F09;
 
     //FONTS
-    --font1: 'DM Sans', sans-serif;
-    --font2: 'safiromedium', sans-serif;
+    --font1: 'Inter', sans-serif;
+    --font2: 'Anderson Grotesk', sans-serif;
+    //--font3: 'silkaitalic', sans-serif;
 
     //SIZES BREAKPOINT
+    --size0: 1380px;
     --size1: 1024px;
     --size2: 992px;
     --size3: 768px;
@@ -39,9 +39,8 @@ body {
 }
 
 body {
-  color: #FFF;
+  color: var(--color2);
   font-family: var(--font1);
-  background-color: #000000;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -52,9 +51,11 @@ body {
 
 // CONTAINER
 div.container {
-  max-width: calc(var(--size1) + 60px);
+  //max-width: var(--size0);
+  width: calc(100% - 120px);
   margin: 0 auto;
   padding: 0 30px;
+  width: 100%;
 }
 
 // CONTAINER
@@ -75,11 +76,11 @@ h4,
 .h4,
 h5,
 .h5 {
-  line-height: 1.2;
   font-weight: 700;
+  line-height: 1.2;
   font-family: var(--font2);
   overflow-wrap: break-word;
-  margin-top: 0;
+  margin: 0;
 }
 
 h1,
@@ -134,14 +135,12 @@ a {
 }
 
 main {
-  .gallery.infinite {
-    height: 100vh;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  row-gap: 200px;
+  background-color: var(--color1);
+  transition: background-color 0.55s cubic-bezier(0.4,0,0.2,1);
+  &.tools-active {
+    background-color: var(--color2);
   }
-}
-
-.transition-link {
-  width: 200px;
-  height: 200px;
-  background-color: red;
 }

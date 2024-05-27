@@ -1,0 +1,87 @@
+.presentation {
+    position: relative;
+    padding-top: 262px;
+    .container {
+        position: relative;
+        .toggler {
+            cursor: pointer;
+        }
+    }
+    .img-wrapper {
+        width: 250px;
+        aspect-ratio: 250 / 320;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        transform: translateY(-262px);
+        img {
+            -webkit-clip-path: inset(0 0 100% 0);
+            clip-path: inset(0 0 100% 0);
+            transform: scale(1.2); 
+            will-change: transform;
+            &.view {
+                clip-path: inset(0 0 0 0);
+                transform: scale(1);
+                transition: -webkit-clip-path 1.2s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1);
+                transition: clip-path 1.2s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1);
+                transition: clip-path 1.2s cubic-bezier(0.4,0,0.2,1), -webkit-clip-path 1.2s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1);
+            }
+        }
+    }
+    span {
+        font-family: Inter;
+        font-size: 60px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        span.spacer {
+            display: inline-block;
+            width: 300px;
+        }
+        .line-wrapper:first-child .line .word:first-child {
+            opacity: 0;
+        }
+        .line-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: block;
+            .line {
+                display: block;
+                transform-origin: left;
+                transform: translateY(100%) rotate(5deg);
+            }
+        }
+    }
+    .text-wrapper {
+        &.first {
+            opacity: 0;
+        }
+        &.second {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: calc(100% - 60px);
+        }
+    }
+    button.toggler {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: var(--color2);
+        position: absolute;
+        top: -250px;
+        right: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+            font-weight: 600;
+            display: block;
+            font-style: italic;
+            font-family: var(--font2);
+            text-align: center;
+            color: var(--color1);
+            font-size: 20px;
+        }
+    }
+}

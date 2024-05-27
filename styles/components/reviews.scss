@@ -1,0 +1,108 @@
+.reviews {
+    padding-bottom: 200px;
+    h2 {
+        font-size: 260px;
+        position: relative;
+        overflow: hidden;
+        span.word-wrapper {
+            display: block;
+            transform: translateY(100%) rotate(8deg);
+            transform-origin: left;
+        }
+    }
+    .reviews-wrapper {
+        margin-top: 110px;
+        .review {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 0;
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1);
+            z-index: 1111;
+            //border-bottom: 2px solid var(--color2);
+            &.active {
+                z-index: 111;
+            }
+            &.unactive {
+                opacity: 0.3;
+                z-index: 0;
+            }
+            span.line {
+                width: 0%;
+                height: 2px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                background-color: var(--color2);
+            }
+            &:hover {
+                cursor: none;
+                .right-content .quote {
+                    opacity: 1; 
+                    transform: translateY(0) rotate(0);
+                }
+            } 
+            .name {
+                font-size: 46px;
+                font-weight: 500;
+                min-width: fit-content;
+                position: relative;
+                z-index: 11;
+            }
+            .right-content {
+                display: flex;
+                align-items: center;
+
+                .quote {
+                    position: relative;
+                    z-index: 11;
+                    width: 600px;
+                    margin-right: 70px;
+                    opacity: 0;
+                    will-change: opacity;
+                    transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1);
+                    font-weight: 500;
+                    transform-origin: left;
+                    transform: translateY(5px) rotate(2deg);
+                }
+                .arrow {
+                    width: 47px;
+                    height: 47px;
+                    position: relative;
+                    overflow: hidden;
+                    svg {
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transition: 0s;
+                        &.first {
+                            opacity: 0;
+                            transform: translateY(100%) translateX(-100%);
+                        }
+                        &.second {
+                            right: 0;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                    }
+                }
+            }
+            &:hover {
+                .right-content .arrow svg {
+                    &.first {
+                        opacity: 1;
+                        transform: translateY(-50%) translateX(0);
+                        transition: all .5s cubic-bezier(0.4,0,0.2,1);
+                    }
+                    &.second {
+                        opacity: 0;
+                        transform: translateY(-100%) translateX(100%);
+                        transition: all .5s cubic-bezier(0.4,0,0.2,1);
+                    }
+                }
+            }
+        }
+    }
+}

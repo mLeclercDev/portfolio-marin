@@ -1,74 +1,112 @@
 .hero-section {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 11;
-    max-width: calc(100% - 30px);
-    h1, p {
-        text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    .container {
+      transform: translateY(35px);
     }
     h1 {
-        margin-bottom: 20px;
+      font-family: var(--font2);
+      font-size: 180px;
+      text-transform: uppercase;
+      letter-spacing: -5.4px;
+      line-height: 100%; /* 180px */
+      .o-wrapper {
+        overflow: hidden;
         position: relative;
-        .project-names-wrapper {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 100%;
-            .project-name {
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%) translateY(100%);
-                display: block;
-                will-change: tansform;
-            } 
-        }
-    }
-    h1, .description {
-        > div {
-            overflow: hidden;
-            display: block;
-        }
-    }
-    .line {
-        display: block;
-    }
-    .description {
-        width: 600px;
-        max-width: 100%;
-        text-align: center;
-        position: relative;
-        margin: 0 auto;
-        .line-wrapper {
-            display: block;
-            overflow: hidden;
-        }
-        .projects-description-wrapper {
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 100%;
-            .project-description {
-                position: relative;
-                overflow: hidden;
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100%;
-                .line {
-                    transform: translateY(100%);
-                    display: block;
-                }
+        .transform {
+          display: block;
+          transform: translateY(100%) rotate(5deg);
+          transform-origin: left;
+          &.second {
+            //font-style: italic;
+            //position: relative;
+            span.line-bar {
+              position: absolute;
+              width: 0%;
+              left: -10px;
+              height: 10px;
+              top: calc(50% + 0px);
+              transform: translateY(-50%);
+              background-color: var(--color2);
+              background-color: red;
+              z-index: 11;
             }
+          }
         }
+      }
+      div {
+        width: 100%;
+        &:nth-child(2) {
+          display: flex;
+          justify-content: space-between;
+          > span.o-wrapper {
+            display: flex;
+            align-items: flex-start;
+          }
+          span {
+            position: relative;
+            span.o-wrapper {
+              margin: 20px 0 0 30px;
+              display: flex;
+              span.informations {
+                letter-spacing: -0.4px;
+                font-size: 18px;
+                line-height: 1;
+                transform: translateY(100%) rotate(10deg);
+                transform-origin: left;
+              }
+            }
+          }
+        }
+        &:nth-child(3) {
+          text-align: right;
+          padding-right: 70px;
+          display: flex;
+          justify-content: space-between;
+          .shape svg {
+            width: 120px;
+            height: 150px;
+            aspect-ratio: 1;
+            margin-top: 5px;
+            transform: rotate(0deg);
+            display: block;
+          }
+          span.images {
+            width: 240px;
+            height: 140px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+          }
+        }
+      }
     }
-}
+    .circle-content {
+        width: 360px;
+        height: 360px;
+        border-radius: 50%;
+        background-color: var(--color2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font3);
+        transform: rotate(5deg) translateY(50%);
+        color: var(--color1);
+        font-size: 50px;
+        line-height: 1.4;
+        position: absolute;
+        right: 15px;
+        bottom: 100px;
+    }
+    span.line {
+      width: calc(100% - 60px);
+      height: 1px;
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background-color: var(--color2);
+      transform-origin: right; /* Origine de la transformation à gauche */
+      transform: scaleX(1); 
+    }
+  } 

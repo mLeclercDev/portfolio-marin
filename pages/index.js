@@ -1,74 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head'
 import SmoothScrolling from "../components/global/SmoothScrolling"
+import Cursor from '../components/global/Cursor';
 import Navbar from '../components/global/Navbar';
-import Footer from '../components/global/Footer';
 import HeroSection from '../components/HeroSection';
-import Gallery from '../components/InfiniteImage';
-import Loader from '../components/Loader';
-import Layers from '../components/global/Layers';
+import TextSeparator from '../components/TextSeparator';
+import Presentation from '../components/Presentation';
+import Tools from '../components/Tools';
+import Works from '../components/Works';
+import Reviews from '../components/Reviews';
+import Footer from '../components/global/Footer';
+import { SplitText } from "@cyriacbr/react-split-text";
 import '../styles/globals.scss'
-import '../styles/components/navbar.scss'
-import '../styles/components/footer.scss'
-import '../styles/components/hero-section.scss'
-import '../styles/components/infinite-image.scss'
-import '../styles/components/gallery-3d.scss'
-import '../styles/components/loader.scss'
-import '../styles/components/layers.scss'
-import { createClient } from 'contentful';
 
 
-const images = [
-  { src: '/images/image-pixel.png', alt: 'Image 1' },
-  { src: '/images/image-11.jpeg', alt: 'Image 1' },
-  { src: '/images/image-12.jpeg', alt: 'Image 1' },
-  { src: '/images/image-13.jpeg', alt: 'Image 1' },
-  { src: '/images/image-14.jpeg', alt: 'Image 1' },
-  { src: '/images/image-15.jpeg', alt: 'Image 1' },
-  { src: '/images/image-16.jpeg', alt: 'Image 1' },
-  { src: '/images/image-17.jpeg', alt: 'Image 1' },
-  { src: '/images/image-18.jpeg', alt: 'Image 1' },
-];
-
-export async function getStaticProps() {
-  // Créer une instance du client Contentful en utilisant les identifiants d'accès
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  try {
-    // Récupérer les données depuis Contentful en utilisant différentes requêtes
-    const heroSection = await client.getEntries({ content_type: 'heroSection' });
-    const footer = await client.getEntries({ content_type: 'footer' });
-    const projects = await client.getEntries({ content_type: 'projects' });
-    // Ajoutez d'autres requêtes pour chaque content type nécessaire
-
-    // Renvoyer les données récupérées en tant que props
-    return {
-      props: {
-        heroSection: heroSection.items,
-        footer: footer.items,
-        projects: projects.items,
-        // Ajoutez d'autres propriétés pour chaque type de contenu récupéré
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data from Contentful:', error);
-    return {
-      props: {
-        heroSection: [],
-        footer: [],
-        projects: [],
-        // Initialisez d'autres propriétés à un tableau vide en cas d'erreur
-      },
-    };
-  }
-}
-
-
-export default function Home({heroSection, footer, projects}) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -77,16 +22,18 @@ export default function Home({heroSection, footer, projects}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SmoothScrolling infinite={true}>
+      <SmoothScrolling>
+      <main>
+      <Cursor />
       <Navbar />
-      <main className="">
-          <Loader />
-          <HeroSection title={heroSection[0].fields.title} description={heroSection[0].fields.description.content[0].content[0].value} projects={projects} />
-          <Gallery images={images} projects={projects} />
-          <Gallery images={images} projects={projects} infinite="true" />
+      <HeroSection title="" description="" projects="" />
+      <TextSeparator content={" Who I am - "} />
+      <Presentation />
+      <Tools />
+      <Works />
+      <Reviews />
       </main>
-      <Footer word={footer[0].fields.leftWord} description={footer[0].fields.description.content[0].content[0].value} informations={footer[0].fields.textItem} />
-      <Layers />
+      <Footer />
       </SmoothScrolling>
     </>
   )

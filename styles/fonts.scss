@@ -1,14 +1,131 @@
 /* styles/fonts.css */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 @font-face {
-    font-family: 'safiromedium';
-    src: url('../fonts/safiro/safiro-medium-webfont.eot');
-    src: url('../fonts/safiro/safiro-medium-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/safiro/safiro-medium-webfont.woff2') format('woff2'),
-         url('../fonts/safiro/safiro-medium-webfont.woff') format('woff'),
-         url('../fonts/safiro/safiro-medium-webfont.ttf') format('truetype');
+    font-family: 'silkaregular';
+    src: url('../fonts/silka-regular-webfont.eot');
+    src: url('../fonts/silka-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/silka-regular-webfont.woff2') format('woff2'),
+         url('../fonts/silka-regular-webfont.woff') format('woff'),
+         url('../fonts/silka-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
+}
+ 
+ 
+@font-face {
+     font-family: 'silkaitalic';
+     src: url('../fonts/silka-regularitalic-webfont.eot');
+     src: url('../fonts/silka-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/silka-regularitalic-webfont.woff2') format('woff2'),
+          url('../fonts/silka-regularitalic-webfont.woff') format('woff'),
+          url('../fonts/silka-regularitalic-webfont.ttf') format('truetype');
+     font-weight: normal;
+     font-style: normal;
+}
+
+// Anderson Grotest
+@font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLightOblique.svg#AndersonGroteskLightOblique') format('svg');
+     font-weight: 300;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBoldOblique.svg#AndersonGroteskBoldOblique') format('svg');
+     font-weight: bold;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskLight.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskLight.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLight.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLight.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLight.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskLight.svg#AndersonGroteskLight') format('svg');
+     font-weight: 300;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltrabold.svg#AndersonGroteskUltrabold') format('svg');
+     font-weight: bold;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskBold.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBold.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBold.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBold.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskBold.svg#AndersonGroteskBold') format('svg');
+     font-weight: bold;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskOblique.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskOblique.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskOblique.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskOblique.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskOblique.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskOblique.svg#AndersonGroteskOblique') format('svg');
+     font-weight: normal;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskRegular.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskRegular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskRegular.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskRegular.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskRegular.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskRegular.svg#AndersonGroteskRegular') format('svg');
+     font-weight: normal;
+     font-style: normal;
+     font-display: swap;
+ }
+ 
+ @font-face {
+     font-family: 'Anderson Grotesk';
+     src: url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.eot');
+     src: url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.woff2') format('woff2'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.woff') format('woff'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.ttf') format('truetype'),
+         url('../fonts/anderson-grotesk/AndersonGroteskUltraOblique.svg#AndersonGroteskUltraOblique') format('svg');
+     font-weight: normal;
+     font-style: normal;
+     font-display: swap;
+ }
   
