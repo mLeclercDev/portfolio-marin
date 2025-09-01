@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
   return (
     <SmoothScrolling lenisRef={lenisRef}>
       <ScrollProvider  lenisRef={lenisRef}>
-          <Navbar delay={delayNav} />
+          {delayNav !== null && <Navbar delay={delayNav} />}
           <Component {...pageProps} />
           <Cursor />
       </ScrollProvider>
