@@ -6,6 +6,7 @@ import LoaderSecond from '../components/LoaderSecond';
 import HeroSecond from '../components/HeroSecond';
 import TextSeparator from '../components/TextSeparator';
 import Presentation from '../components/Presentation';
+import PresentationSecond from '../components/PresentationSecond';
 import Tools from '../components/Tools';
 import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
@@ -28,14 +29,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, isFirstVisit }) {
-  const [showLoader, setShowLoader] = useState(false);
-
-  useEffect(() => {
-    if (isFirstVisit) {
-      setShowLoader(true);
-    }
-  }, [isFirstVisit]);
+export default function Home({ projects, isFirstVisit, showLoader }) {
 
   return (
     <>
