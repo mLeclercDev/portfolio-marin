@@ -3,32 +3,47 @@ import SmoothScrolling from "../components/global/SmoothScrolling";
 import { ScrollProvider } from '../components/global/ScrollContext';
 import Navbar from '../components/global/Navbar';
 import Cursor from '../components/global/Cursor';
+import LoaderSecond from '../components/LoaderSecond';
 
 export default function App({ Component, pageProps }) {
   const lenisRef = useRef(null);
-  const [isFirstVisit, setIsFirstVisit] = useState(false); // false par défaut
-  const [hydrated, setHydrated] = useState(false); // pour ne rendre Navbar qu'après hydratation
+  const [isFirstVisit, setIsFirstVisit] = useState(null); // null = pas encore déterminé
+  const [showLoader, setShowLoader] = useState(false);
+
+  // Durée de ton loader en ms
+  const loaderDuration = 5000;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const firstVisit = !sessionStorage.getItem('isFirstVisit');
+      setIsFirstVisit(firstVisit);
 
       if (firstVisit) {
         sessionStorage.setItem('isFirstVisit', 'false');
-      }
+        setShowLoader(true);
 
-      setIsFirstVisit(firstVisit);
-      setHydrated(true);
+        // Cacher le loader après la durée définie
+        setTimeout(() => setShowLoader(false), loaderDuration);
+      }
     }
   }, []);
 
-  if (!hydrated) return null; // rien rendre côté serveur
+  if (isFirstVisit === null) return null; // Ne rien rendre tant qu'on ne sait pas
 
   return (
     <SmoothScrolling lenisRef={lenisRef}>
       <ScrollProvider lenisRef={lenisRef}>
+        {/* Loader global */}
+        {showLoader && <LoaderSecond />}
+        {/* Navbar avec delay seulement si premier chargement */}
         <Navbar delay={isFirstVisit ? 5 : 0} />
-        <Component {...pageProps} isFirstVisit={isFirstVisit} />
+        {/* Component avec delayHero passé via props */}
+        <Component 
+          {...pageProps} 
+          delayHero={showLoader ? loaderDuration / 1000 : 0} 
+          isFirstVisit={isFirstVisit} 
+          showLoader={showLoader} 
+        />
         <Cursor />
       </ScrollProvider>
     </SmoothScrolling>

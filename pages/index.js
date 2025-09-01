@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { createClient } from 'contentful';
 import Layer from '../components/global/Layer';
-import LoaderSecond from '../components/LoaderSecond';
 import HeroSecond from '../components/HeroSecond';
 import TextSeparator from '../components/TextSeparator';
 import Presentation from '../components/Presentation';
-import PresentationSecond from '../components/PresentationSecond';
 import Tools from '../components/Tools';
 import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
@@ -29,17 +27,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, isFirstVisit }) {
-   
-  const [showLoader, setShowLoader] = React.useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && isFirstVisit) {
-      setShowLoader(true);
-    }
-  }, [isFirstVisit]);
-
-
+export default function Home({ projects, delayHero = 0 }) {
   return (
     <>
       <Head>
@@ -50,8 +38,8 @@ export default function Home({ projects, isFirstVisit }) {
       </Head>
 
       <main>
-        {typeof window !== 'undefined' && showLoader && <LoaderSecond />}
-        <HeroSecond delay={isFirstVisit ? 5 : 0} />
+        {/* HeroSecond prend un delayHero pour gérer l'animation */}
+        <HeroSecond delay={delayHero} />
         <TextSeparator content=" Who I am - " />
         <Presentation />
         <Tools />
