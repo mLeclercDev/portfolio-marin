@@ -65,13 +65,10 @@ const HeroSection = ({delay}) => {
       },
     });
 
-    // Exemple d'animations synchronisées au scroll
-    tl.to(videoWrapperRef.current, { 
-      scale: 0.85, 
-      rotation: -8, 
-      duration: 1,
-      immediateRender: false
-    });
+tl.fromTo(videoWrapperRef.current, 
+  { scale: 1, rotation: 0 }, // état final du reveal
+  { scale: 0.85, rotation: -8, duration: 1 }
+);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
