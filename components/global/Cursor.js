@@ -11,11 +11,6 @@ const Cursor = () => {
   const [isHoveringScale, setIsHoveringScale] = useState(false);
   const [isHoveringScaleXl, setIsHoveringScaleXl] = useState(false);
   const animationState = useRef(1);
-
-
-
-
-
   
    useEffect(() => {
     const handleRouteChangeStart = () => {
@@ -225,15 +220,6 @@ const Cursor = () => {
 
   return (
     <>
-      <div className="cursor-container" data-index="1" data-cursor-container>
-        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
-      </div>
-      <div className="cursor-container" data-index="2" data-cursor-container>
-        <Image className='fit-cover' src="/Images/layer-2.png" alt="Mon image" width={1150} height={520} />
-      </div>
-      <div className="cursor-container" data-index="3" data-cursor-container>
-      <Image className='fit-cover' src="/Images/layer-3.png" alt="Mon image" width={1150} height={520} />
-    </div>
     <div className={`cursor-presentation ${isHoveringHeader ? 'hovering-header' : ''} ${isHoveringScale ? 'hovering-scale' : ''} ${isHoveringScaleXl ? 'hovering-scale-xl' : ''}`} style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}>
       <div className='arrow'>
         <svg className="first" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

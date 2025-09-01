@@ -144,7 +144,7 @@ const Reviews = () => {
                 <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Mon image" width={666} height={666} />
             </div>
             <div className="cursor-container" data-index="3" data-cursor-container ref={el => cursorContainersRef.current[2] = el}>
-                <Image className='fit-cover' src="/Images/layer-3.png" alt="Mon image" width={1150} height={520} />
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={1150} height={520} />
             </div>
             <div className='container'>
                 <h2>
