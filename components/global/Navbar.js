@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from "next/navigation"
+import gsap from "gsap";
+import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import '../../styles/components/global/navbar.scss';
 import { animatePageOut } from "../../utils/animations"
 
@@ -29,6 +31,16 @@ const Navbar = () => {
     const handleMouseLeave = () => {
       setIsHoveringHeader(false);
     };
+
+    // Hyper bounce custom
+    CustomEase.create(
+      "hyperBounce",
+      "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+    );
+
+    gsap.to("nav .logo", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
+    gsap.to("nav .contact-link", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
+    gsap.set("nav", { delay: 2, overflow: "visible" })
 
     window.addEventListener('mousemove', handleMouseMove);
 

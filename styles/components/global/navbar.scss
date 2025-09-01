@@ -13,6 +13,12 @@ header {
         justify-content: space-between;
         align-items: center;
         position: relative;
+        overflow: hidden;
+        .logo,
+        .contact-link { /* ton élément à cacher */
+        transform: translateY(100%);
+        }
+        overflow: hidden;
         .logo {
             font-family: var(--font2);
             font-weight: 700;

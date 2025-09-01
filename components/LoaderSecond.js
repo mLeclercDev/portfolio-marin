@@ -18,9 +18,9 @@ const LoaderSecond = () => {
 
     const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "hyperBounce" } });
 
-     tl.set("nav", { overflow: "hidden" })
+/*      tl.set("nav", { overflow: "hidden" })
      tl.set("nav .logo", { y: "100%" })
-     tl.set("nav .contact-link", { y: "100%" })
+     tl.set("nav .contact-link", { y: "100%" }) */
 
     // 0% sort, 11% entre
     tl.to(linesRef.current[0], { y: "0%" })
