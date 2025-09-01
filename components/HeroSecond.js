@@ -99,6 +99,7 @@ const HeroSection = ({ delay }) => {
         end: "bottom top",
         scrub: true,
         markers: false,
+        invalidateOnRefresh: true, // 🔑
       },
     });
 
@@ -109,7 +110,7 @@ const HeroSection = ({ delay }) => {
       window._heroScrollTimeout = setTimeout(() => {
         setSpeed(400);
       }, 200);
-    };
+    }; 
 
     window.addEventListener("scroll", handleScroll);
 
