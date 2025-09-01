@@ -29,7 +29,16 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, isFirstVisit, showLoader }) {
+export default function Home({ projects, isFirstVisit }) {
+   
+  const [showLoader, setShowLoader] = React.useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && isFirstVisit) {
+      setShowLoader(true);
+    }
+  }, [isFirstVisit]);
+
 
   return (
     <>
@@ -41,7 +50,7 @@ export default function Home({ projects, isFirstVisit, showLoader }) {
       </Head>
 
       <main>
-        {showLoader && <LoaderSecond />}
+        {typeof window !== 'undefined' && showLoader && <LoaderSecond />}
         <HeroSecond delay={isFirstVisit ? 5 : 0} />
         <TextSeparator content=" Who I am - " />
         <Presentation />

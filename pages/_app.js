@@ -6,28 +6,29 @@ import Cursor from '../components/global/Cursor';
 
 export default function App({ Component, pageProps }) {
   const lenisRef = useRef(null);
-  const [isFirstVisit, setIsFirstVisit] = useState(null); // null = pas encore déterminé
-  const [showLoader, setShowLoader] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(false); // false par défaut
+  const [hydrated, setHydrated] = useState(false); // pour ne rendre Navbar qu'après hydratation
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const firstVisit = !sessionStorage.getItem('isFirstVisit');
-      setIsFirstVisit(firstVisit);
 
       if (firstVisit) {
         sessionStorage.setItem('isFirstVisit', 'false');
-        setShowLoader(true);
       }
+
+      setIsFirstVisit(firstVisit);
+      setHydrated(true);
     }
   }, []);
 
-  if (isFirstVisit === null) return null; // ne rien rendre tant qu'on ne sait pas
+  if (!hydrated) return null; // rien rendre côté serveur
 
   return (
     <SmoothScrolling lenisRef={lenisRef}>
       <ScrollProvider lenisRef={lenisRef}>
         <Navbar delay={isFirstVisit ? 5 : 0} />
-        <Component {...pageProps} isFirstVisit={isFirstVisit} showLoader={showLoader} />
+        <Component {...pageProps} isFirstVisit={isFirstVisit} />
         <Cursor />
       </ScrollProvider>
     </SmoothScrolling>
