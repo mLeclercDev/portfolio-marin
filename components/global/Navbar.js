@@ -13,7 +13,8 @@ function formatToUrl(title) {
   return url;
 }
 
-const Navbar = ({ delay }) => {
+const Navbar = ({ delay = 0 }) => {
+  console.log("delay : ", delay)
   const router = useRouter();
   const pathname = usePathname();
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });

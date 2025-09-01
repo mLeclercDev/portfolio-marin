@@ -6,7 +6,6 @@ import LoaderSecond from '../components/LoaderSecond';
 import HeroSecond from '../components/HeroSecond';
 import TextSeparator from '../components/TextSeparator';
 import Presentation from '../components/Presentation';
-import PresentationSecond from '../components/PresentationSecond';
 import Tools from '../components/Tools';
 import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
@@ -29,23 +28,14 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects }) {
+export default function Home({ projects, isFirstVisit }) {
   const [showLoader, setShowLoader] = useState(false);
-  const [delayHero, setDelayHero] = useState(null);
-  const [delayNav, setDelayNav] = useState(null);
 
   useEffect(() => {
-    const isFirstVisit = sessionStorage.getItem('isFirstVisit');
-
-    if (!isFirstVisit) {
-      sessionStorage.setItem('isFirstVisit', 'false');
+    if (isFirstVisit) {
       setShowLoader(true);
-      setDelayHero(5); // animation retardée
-    } else {
-      setShowLoader(false);
-      setDelayHero(0); // animation immédiate
     }
-  }, []);
+  }, [isFirstVisit]);
 
   return (
     <>
@@ -58,7 +48,7 @@ export default function Home({ projects }) {
 
       <main>
         {showLoader && <LoaderSecond />}
-        <HeroSecond delay={delayHero} />
+        <HeroSecond delay={isFirstVisit ? 5 : 0} />
         <TextSeparator content=" Who I am - " />
         <Presentation />
         <Tools />
