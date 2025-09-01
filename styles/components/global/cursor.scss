@@ -10,6 +10,7 @@
     z-index: 11111;
     pointer-events: none;
     opacity: 0;
+    visibility: hidden;
     border-radius: 4px;
     transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
     &:nth-child(1) {

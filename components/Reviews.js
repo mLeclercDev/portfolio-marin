@@ -11,11 +11,17 @@ import '../styles/components/global/cursor.scss'
 const Reviews = () => {
     const cursorContainersRef = useRef([]);
     const reviewsRef = useRef([]);
+    const [mounted, setMounted] = useState(false); // pour gérer visibilité initiale
     CustomEase.create("hyperBounce", "0.4,0,0.2,1");
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
 
-        var titleAnimation = gsap.timeline({
+    useEffect(() => {
+        setMounted(true); // le composant est monté, on peut montrer les cursor-container
+    }, []);
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const titleAnimation = gsap.timeline({
             scrollTrigger: {
                 trigger: ".reviews h2",
                 markers: false,
@@ -25,22 +31,22 @@ const Reviews = () => {
 
         titleAnimation.to(".reviews h2 span.word-wrapper", {
             y: "0%", rotate: 0, duration: 1, ease: "hyperBounce"
-        })
+        });
 
-        var timeline = gsap.timeline({
+        const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: ".reviews",
                 markers: false,
                 start: 'top 45%',
             }
         });
-      
+
         timeline.to(".reviews span.line", {
             width: "100%",
             duration: 1.2,
             ease: "hyperBounce",
             stagger: 0.075
-        })
+        });
 
         timeline.to(".reviews .reviews-wrapper .review .arrow svg.second", {
             delay: -1,
@@ -50,7 +56,7 @@ const Reviews = () => {
             duration: 0.5,
             ease: "hyperBounce",
             stagger: 0.05
-        })
+        });
 
         timeline.to(".reviews .reviews-wrapper .review .name", {
             delay: -1,
@@ -59,7 +65,7 @@ const Reviews = () => {
             duration: 0.5,
             ease: "hyperBounce",
             stagger: 0.05
-        })
+        });
 
         const cursorContainers = cursorContainersRef.current;
         const reviews = reviewsRef.current;
@@ -72,30 +78,23 @@ const Reviews = () => {
                 cursor.style.left = `${posX}px`;
                 cursor.style.top = `${posY}px`;
             });
-        }
+        };
 
         const handleMouseEnter = (e) => {
             const index = e.target.getAttribute('data-index');
             const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-            if (cursor) {
-                cursor.classList.add('active');
-            }
+            if (cursor) cursor.classList.add('active');
 
             reviews.forEach((review, i) => {
-                if (i + 1 == index) {
-                    review.classList.add('active');
-                } else {
-                    review.classList.add('unactive');
-                }
+                if (i + 1 === Number(index)) review.classList.add('active');
+                else review.classList.add('unactive');
             });
         };
 
         const handleMouseLeave = (e) => {
             const index = e.target.getAttribute('data-index');
             const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-            if (cursor) {
-                cursor.classList.remove('active');
-            }
+            if (cursor) cursor.classList.remove('active');
 
             reviews.forEach(review => {
                 review.classList.remove('active', 'unactive');
@@ -104,13 +103,7 @@ const Reviews = () => {
 
         window.addEventListener("mousemove", moveCursors);
 
-        // Initialize Intersection Observers for reviews
-        const options = { 
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 // Adjust as needed
-        };
-
+        const options = { root: null, rootMargin: '0px', threshold: 0.5 };
         const reviewObservers = [];
         reviews.forEach(review => {
             const observer = new IntersectionObserver(entries => {
@@ -128,40 +121,51 @@ const Reviews = () => {
             observer.observe(review);
         });
 
-        // Cleanup function
         return () => {
             window.removeEventListener("mousemove", moveCursors);
             reviewObservers.forEach(observer => observer.disconnect());
         };
     }, []);
-    
+
     return (
         <section className="reviews">
-            <div className="cursor-container" data-index="1" data-cursor-container ref={el => cursorContainersRef.current[0] = el}>
-                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={444} height={444} />
+            {/** cursor-container initialement invisible */}
+            <div
+                className="cursor-container"
+                data-index="1"
+                data-cursor-container
+                ref={el => cursorContainersRef.current[0] = el}
+                style={{ visibility: mounted ? 'visible' : 'hidden' }}
+            >
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Killian" width={444} height={444} />
             </div>
-            <div className="cursor-container" data-index="2" data-cursor-container ref={el => cursorContainersRef.current[1] = el}>
-                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Mon image" width={666} height={666} />
+            <div
+                className="cursor-container"
+                data-index="2"
+                data-cursor-container
+                ref={el => cursorContainersRef.current[1] = el}
+                style={{ visibility: mounted ? 'visible' : 'hidden' }}
+            >
+                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Zoé" width={666} height={666} />
             </div>
-            <div className="cursor-container" data-index="3" data-cursor-container ref={el => cursorContainersRef.current[2] = el}>
-                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={1150} height={520} />
+            <div
+                className="cursor-container"
+                data-index="3"
+                data-cursor-container
+                ref={el => cursorContainersRef.current[2] = el}
+                style={{ visibility: mounted ? 'visible' : 'hidden' }}
+            >
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Murielle" width={1150} height={520} />
             </div>
+
             <div className='container'>
                 <h2>
-                    <span className='word-wrapper'>
-                    Reviews
-                    </span>
+                    <span className='word-wrapper'>Reviews</span>
                 </h2>
                 <div className='reviews-wrapper'>
                     <a href='https://www.linkedin.com/in/killian-le-bras/' target='_blank' className='review' data-index='1' ref={el => reviewsRef.current[0] = el}>
-                        <div className='name-wrapper'>
-                            <div className='name'>
-                                Killian Lebras
-                            </div>
-                        </div>
-                        <div className='quote'>
-                        Great collaboration with Marin on a WordPress project. Professional, meticulous, and responsive, I highly recommend him!
-                        </div>
+                        <div className='name-wrapper'><div className='name'>Killian Lebras</div></div>
+                        <div className='quote'>Great collaboration with Marin on a WordPress project. Professional, meticulous, and responsive, I highly recommend him!</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
@@ -173,14 +177,8 @@ const Reviews = () => {
                         <span className='line'></span>
                     </a>
                     <a href='https://www.linkedin.com/in/zo%C3%A9-ringenbach-directrice-artistique/' target='_blank' className='review' data-index='2' ref={el => reviewsRef.current[1] = el}>
-                        <div className='name-wrapper'>
-                            <div className='name'>
-                                Zoé Ringenbach 
-                            </div>
-                        </div>
-                        <div className='quote'>
-                        Marin perfectly understood my needs and expectations for my photography portfolio. Professional, creative, and meticulous, I highly recommend him.
-                        </div>
+                        <div className='name-wrapper'><div className='name'>Zoé Ringenbach</div></div>
+                        <div className='quote'>Marin perfectly understood my needs and expectations for my photography portfolio. Professional, creative, and meticulous, I highly recommend him.</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
@@ -188,17 +186,12 @@ const Reviews = () => {
                             <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
                             </svg>
-                        </div> 
+                        </div>
                         <span className='line'></span>
                     </a>
                     <a href='http://muriellepariscreations.fr/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
-                        <div className='name-wrapper'>
-                            <div className='name'>
-                                Murielle Paris
-                            </div>
-                        </div>
-                        <div className='quote'>
-Working with him was a seamless experience. He perfectly captured the essence of Murielle Paris Creations, creating a website that showcases her handcrafted work. Professional, attentive, and highly skilled.                        </div>
+                        <div className='name-wrapper'><div className='name'>Murielle Paris</div></div>
+                        <div className='quote'>Working with him was a seamless experience. He perfectly captured the essence of Murielle Paris Creations, creating a website that showcases her handcrafted work. Professional, attentive, and highly skilled.</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
