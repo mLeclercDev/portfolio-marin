@@ -138,13 +138,13 @@ const Reviews = () => {
     return (
         <section className="reviews">
             <div className="cursor-container" data-index="1" data-cursor-container ref={el => cursorContainersRef.current[0] = el}>
-                <Image className='fit-cover'   style={{ opacity: 0 }} src="/Images/killian-lebras.webp" alt="Mon image" width={444} height={444} />
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={444} height={444} />
             </div>
             <div className="cursor-container" data-index="2" data-cursor-container ref={el => cursorContainersRef.current[1] = el}>
-                <Image className='fit-cover'   style={{ opacity: 0 }} src="/Images/zoe-ringenbach.png" alt="Mon image" width={666} height={666} />
+                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Mon image" width={666} height={666} />
             </div>
             <div className="cursor-container" data-index="3" data-cursor-container ref={el => cursorContainersRef.current[2] = el}>
-                <Image className='fit-cover'   style={{ opacity: 0 }} src="/Images/killian-lebras.webp" alt="Mon image" width={1150} height={520} />
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={1150} height={520} />
             </div>
             <div className='container'>
                 <h2>

@@ -1,237 +1,151 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import Image from 'next/image';
-import '../../styles/components/global/cursor.scss';
-import gsap from "gsap";
+import "../../styles/components/global/cursor.scss";
 
 const Cursor = () => {
   const router = useRouter();
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [isHoveringHeader, setIsHoveringHeader] = useState(false);
-  const [isHoveringScale, setIsHoveringScale] = useState(false);
-  const [isHoveringScaleXl, setIsHoveringScaleXl] = useState(false);
+  const cursorRef = useRef(null);
+  const cursorContainersRef = useRef([]);
   const animationState = useRef(1);
-  
-   useEffect(() => {
+
+  const [hoverStates, setHoverStates] = useState({
+    header: false,
+    scale: false,
+    scaleXl: false,
+  });
+
+  // Reset hover states on route change
+  useEffect(() => {
     const handleRouteChangeStart = () => {
-      setIsHoveringScale(false);
-      setIsHoveringScaleXl(false);
-      setIsHoveringHeader(false);
+      setHoverStates({ header: false, scale: false, scaleXl: false });
     };
-
     router.events.on("routeChangeStart", handleRouteChangeStart);
-
     return () => {
       router.events.off("routeChangeStart", handleRouteChangeStart);
     };
   }, [router]);
 
-
-
-
-
+  // Cursor movement & hover listeners
   useEffect(() => {
-    const cursorContainers = document.querySelectorAll("[data-cursor-container]");
-
     const moveCursors = (e) => {
-      const posX = e.clientX;
-      const posY = e.clientY;
-
-      cursorContainers.forEach(cursor => {
-        cursor.style.left = `${posX}px`;
-        cursor.style.top = `${posY}px`;
-      });
-    }
-
-    const handleMouseEnter = (e) => {
-      const index = e.target.getAttribute('data-index');
-      const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-      if (cursor) {
-        cursor.classList.add('active');
+      const { clientX: x, clientY: y } = e;
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${x}px`;
+        cursorRef.current.style.top = `${y}px`;
       }
-    };
-
-    const handleMouseLeave = (e) => {
-      const index = e.target.getAttribute('data-index');
-      const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-      if (cursor) {
-        cursor.classList.remove('active');
-      }
-    };
-
-    window.addEventListener("mousemove", moveCursors);
-
-    const reviews = document.querySelectorAll('.review');
-    reviews.forEach(review => {
-      review.addEventListener('mouseenter', handleMouseEnter);
-      review.addEventListener('mouseleave', handleMouseLeave);
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursors);
-      reviews.forEach(review => {
-        review.removeEventListener('mouseenter', handleMouseEnter);
-        review.removeEventListener('mouseleave', handleMouseLeave);
+      cursorContainersRef.current.forEach((el) => {
+        if (el) {
+          el.style.left = `${x}px`;
+          el.style.top = `${y}px`;
+        }
       });
     };
-  }, []);
 
-  useEffect(() => {
-    const cursorContainers = document.querySelectorAll("[data-cursor-container]");
-
-    const moveCursors = (e) => {
-      const posX = e.clientX;
-      const posY = e.clientY;
-
-      cursorContainers.forEach(cursor => {
-        cursor.style.left = `${posX}px`;
-        cursor.style.top = `${posY}px`;
-      });
-    }
-
-    const handleMouseEnter = (e) => {
-      const index = e.target.getAttribute('data-index');
-      const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-      if (cursor) {
-        cursor.classList.add('active');
-      }
-    };
-
-    const handleMouseLeave = (e) => {
-      const index = e.target.getAttribute('data-index');
-      const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
-      if (cursor) {
-        cursor.classList.remove('active');
-      }
-    };
-
-    window.addEventListener("mousemove", moveCursors);
-
-    const reviews = document.querySelectorAll('.review');
-    reviews.forEach(review => {
-      review.addEventListener('mouseenter', handleMouseEnter);
-      review.addEventListener('mouseleave', handleMouseLeave);
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursors);
-      reviews.forEach(review => {
-        review.removeEventListener('mouseenter', handleMouseEnter);
-        review.removeEventListener('mouseleave', handleMouseLeave);
-      });
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const handleClick = () => {
-      if (animationState.current === 1) {
-        animateFirst().then(() => {
-          animationState.current = 2;
-        });
+    const handleHover = (e, type, state) => {
+      if (type === "review") {
+        const index = e.currentTarget.dataset.index;
+        const cursor = cursorContainersRef.current[index - 1];
+        if (cursor) cursor.classList.toggle("active", state);
       } else {
-        animateSecond().then(() => {
-          animationState.current = 1;
-        });
+        setHoverStates((prev) => ({ ...prev, [type]: state }));
       }
     };
 
-    const handleMouseEnterHeader = () => {
-      setIsHoveringHeader(true);
-    };
+    // Mouse move
+    window.addEventListener("mousemove", moveCursors);
 
-    const handleMouseLeaveHeader = () => {
-      setIsHoveringHeader(false);
-    };
-
-    const handleMouseEnterScale = () => {
-      setIsHoveringScale(true);
-    };
-
-    const handleMouseLeaveScale = () => {
-      setIsHoveringScale(false);
-    };
-
-    const handleMouseEnterScaleXl = () => {
-      setIsHoveringScaleXl(true);
-    };
-
-    const handleMouseLeaveScaleXl = () => {
-      setIsHoveringScaleXl(false);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    const presentationElement = document.querySelector('.presentation');
-    const headerElement = document.querySelector('header');
-
-    if (headerElement) {
-      headerElement.addEventListener('mouseenter', handleMouseEnterHeader);
-      headerElement.addEventListener('mouseleave', handleMouseLeaveHeader);
+    // Header hover
+    const header = document.querySelector("header");
+    if (header) {
+      header.addEventListener("mouseenter", (e) => handleHover(e, "header", true));
+      header.addEventListener("mouseleave", (e) => handleHover(e, "header", false));
     }
 
-    // Fonction pour ajouter les écouteurs d'événements de survol
-    const addHoverListeners = () => {
-      const csScaleElements = document.querySelectorAll('.cs-scale');
-      const csScaleElementsXl = document.querySelectorAll('.cs-scale-xl');
-
-      csScaleElements.forEach(element => {
-        element.addEventListener('mouseenter', handleMouseEnterScale);
-        element.addEventListener('mouseleave', handleMouseLeaveScale);
-      });
-
-      csScaleElementsXl.forEach(element => {
-        element.addEventListener('mouseenter', handleMouseEnterScaleXl);
-        element.addEventListener('mouseleave', handleMouseLeaveScaleXl);
-      });
-    };
-
-    // Observer pour les changements dans le DOM
-    const observer = new MutationObserver(() => {
-      addHoverListeners();
+    // cs-scale / cs-scale-xl hover
+    const csScaleEls = document.querySelectorAll(".cs-scale");
+    csScaleEls.forEach((el) => {
+      el.addEventListener("mouseenter", (e) => handleHover(e, "scale", true));
+      el.addEventListener("mouseleave", (e) => handleHover(e, "scale", false));
     });
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
+    const csScaleXlEls = document.querySelectorAll(".cs-scale-xl");
+    csScaleXlEls.forEach((el) => {
+      el.addEventListener("mouseenter", (e) => handleHover(e, "scaleXl", true));
+      el.addEventListener("mouseleave", (e) => handleHover(e, "scaleXl", false));
     });
 
-    // Ajouter les écouteurs d'événements de survol lors du montage initial
-    addHoverListeners();
+    // Review hover
+    const reviewEls = document.querySelectorAll(".review");
+    reviewEls.forEach((el) => {
+      el.addEventListener("mouseenter", (e) => handleHover(e, "review", true));
+      el.addEventListener("mouseleave", (e) => handleHover(e, "review", false));
+    });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (presentationElement) {
-        presentationElement.removeEventListener('mouseenter', handleMouseEnterPresentation);
-        presentationElement.removeEventListener('mouseleave', handleMouseLeavePresentation);
-        presentationElement.removeEventListener('click', handleClick);
-      }
-      if (headerElement) {
-        headerElement.removeEventListener('mouseenter', handleMouseEnterHeader);
-        headerElement.removeEventListener('mouseleave', handleMouseLeaveHeader);
+      window.removeEventListener("mousemove", moveCursors);
+
+      if (header) {
+        header.removeEventListener("mouseenter", (e) => handleHover(e, "header", true));
+        header.removeEventListener("mouseleave", (e) => handleHover(e, "header", false));
       }
 
-      observer.disconnect();
+      csScaleEls.forEach((el) => {
+        el.removeEventListener("mouseenter", (e) => handleHover(e, "scale", true));
+        el.removeEventListener("mouseleave", (e) => handleHover(e, "scale", false));
+      });
+
+      csScaleXlEls.forEach((el) => {
+        el.removeEventListener("mouseenter", (e) => handleHover(e, "scaleXl", true));
+        el.removeEventListener("mouseleave", (e) => handleHover(e, "scaleXl", false));
+      });
+
+      reviewEls.forEach((el) => {
+        el.removeEventListener("mouseenter", (e) => handleHover(e, "review", true));
+        el.removeEventListener("mouseleave", (e) => handleHover(e, "review", false));
+      });
     };
   }, []);
 
   return (
     <>
-    <div className={`cursor-presentation ${isHoveringHeader ? 'hovering-header' : ''} ${isHoveringScale ? 'hovering-scale' : ''} ${isHoveringScaleXl ? 'hovering-scale-xl' : ''}`} style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}>
-      <div className='arrow'>
-        <svg className="first" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z" fill="black"/>
-        </svg>
-        <svg className="second" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z" fill="black"/>
-        </svg>
+      <div
+        ref={cursorRef}
+        className={`cursor-presentation 
+          ${hoverStates.header ? "hovering-header" : ""} 
+          ${hoverStates.scale ? "hovering-scale" : ""} 
+          ${hoverStates.scaleXl ? "hovering-scale-xl" : ""}`}
+      >
+        <div className="arrow">
+          <svg
+            className="first"
+            width="35"
+            height="35"
+            viewBox="0 0 35 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
+              fill="black"
+            />
+          </svg>
+          <svg
+            className="second"
+            width="35"
+            height="35"
+            viewBox="0 0 35 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
+              fill="black"
+            />
+          </svg>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 };
 
 export default Cursor;
