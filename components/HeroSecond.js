@@ -8,10 +8,9 @@ import "../styles/components/hero-second.scss";
 
 const HeroSection = ({ delay }) => {
   const videoWrapperRef = useRef(null);
-  const entryFinishedRef = useRef(false);
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [speed, setSpeed] = useState(550);
+  const [entryDone, setEntryDone] = useState(false);
 
   const images = [
     "/Images/showreel/mockup-video-1.png",
@@ -40,13 +39,12 @@ const HeroSection = ({ delay }) => {
     CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
     const reveal = gsap.timeline({
-      onComplete: () => (entryFinishedRef.current = true),
+      onComplete: () => setEntryDone(true),
     });
 
     // Set initial state
     gsap.set(videoWrapperRef.current, { scale: 0, rotate: -9 });
 
-    // Animations texte + vidéo
     reveal
       .to(".hero-second .word-wrapper.first", {
         y: "0%",
@@ -90,6 +88,8 @@ const HeroSection = ({ delay }) => {
 
   // ⚡ Timeline Scroll
   useEffect(() => {
+    if (!entryDone) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const tl = gsap.timeline({
@@ -99,33 +99,31 @@ const HeroSection = ({ delay }) => {
         end: "bottom top",
         scrub: true,
         markers: false,
-        invalidateOnRefresh: true, // 🔑
+        invalidateOnRefresh: true,
       },
     });
 
     const handleScroll = () => {
-      if (!entryFinishedRef.current) return; // attend que l'entrée soit finie
       setSpeed(100);
       clearTimeout(window._heroScrollTimeout);
       window._heroScrollTimeout = setTimeout(() => {
         setSpeed(400);
       }, 200);
-    }; 
+    };
 
     window.addEventListener("scroll", handleScroll);
 
-    tl.to(videoWrapperRef.current, {
-      scale: 0.85,
-      rotation: -8,
-      duration: 1,
-      immediateRender: false, // très important pour ne pas sauter à l'état initial
-    });
+    tl.fromTo(
+      videoWrapperRef.current,
+      { scale: 1, rotation: 0 },
+      { scale: 0.85, rotation: -8, duration: 1, immediateRender: false }
+    );
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       tl.kill();
     };
-  }, []);
+  }, [entryDone]);
 
   return (
     <section className="hero-second">
@@ -161,7 +159,6 @@ const HeroSection = ({ delay }) => {
           </div>
         </div>
         <div className="catchline">
-
           <div className="line-wrapper">
             <span className="line">HubSpot</span>
           </div>
