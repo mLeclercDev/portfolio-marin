@@ -130,6 +130,7 @@ const Reviews = () => {
     return (
         <section className="reviews">
             {/** cursor-container initialement invisible */}
+            {mounted && (
             <div
                 className="cursor-container"
                 data-index="1"
@@ -139,6 +140,8 @@ const Reviews = () => {
             >
                 <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Killian" width={444} height={444} />
             </div>
+            )}
+            {mounted && (
             <div
                 className="cursor-container"
                 data-index="2"
@@ -148,6 +151,8 @@ const Reviews = () => {
             >
                 <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Zoé" width={666} height={666} />
             </div>
+                )}
+            {mounted && (
             <div
                 className="cursor-container"
                 data-index="3"
@@ -157,6 +162,7 @@ const Reviews = () => {
             >
                 <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Murielle" width={1150} height={520} />
             </div>
+            )}
 
             <div className='container'>
                 <h2>
