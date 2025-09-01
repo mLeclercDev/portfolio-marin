@@ -10,11 +10,11 @@ const LoaderSecond = () => {
     linesRef.current = linesRef.current.slice(0, 3);
       const banners = document.querySelectorAll(".layers__items")
 
-        // Hyper bounce custom
-        CustomEase.create(
-          "hyperBounce",
-          "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-        );
+    // Hyper bounce custom
+    CustomEase.create(
+      "hyperBounce",
+      "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+    );
 
     const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "hyperBounce" } });
 

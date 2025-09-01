@@ -13,13 +13,14 @@ function formatToUrl(title) {
   return url;
 }
 
-const Navbar = () => {
+const Navbar = ({ delay }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHoveringHeader, setIsHoveringHeader] = useState(false);
 
   useEffect(() => {
+    if (delay == null) return;
     const handleMouseMove = (e) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
@@ -41,9 +42,8 @@ const Navbar = () => {
     gsap.set("nav .logo", { opacity: 1 })
     gsap.set("nav .contact-link", { opacity: 1 })
 
-    gsap.to("nav .logo", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
-    gsap.to("nav .contact-link", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
-    gsap.set("nav", { delay: 4, overflow: "visible" })
+    gsap.to("nav .logo", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
+    gsap.to("nav .contact-link", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
 
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -60,7 +60,7 @@ const Navbar = () => {
         headerElement.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
-  }, []);
+  }, [delay]);
 
   const handleLinkHover = (e) => {
     const target = e.target.closest('.hover-this');

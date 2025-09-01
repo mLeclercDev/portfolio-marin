@@ -32,6 +32,7 @@ export async function getStaticProps() {
 export default function Home({ projects }) {
   const [showLoader, setShowLoader] = useState(false);
   const [delayHero, setDelayHero] = useState(null);
+  const [delayNav, setDelayNav] = useState(null);
 
   useEffect(() => {
     const isFirstVisit = sessionStorage.getItem('isFirstVisit');
