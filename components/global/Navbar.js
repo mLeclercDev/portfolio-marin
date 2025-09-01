@@ -38,6 +38,9 @@ const Navbar = () => {
       "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
     );
 
+    gsap.set("nav .logo", { opacity: 1 })
+    gsap.set("nav .contact-link", { opacity: 1 })
+
     gsap.to("nav .logo", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
     gsap.to("nav .contact-link", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
     gsap.set("nav", { delay: 4, overflow: "visible" })
