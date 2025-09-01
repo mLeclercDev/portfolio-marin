@@ -1,0 +1,35 @@
+.presentation-second {
+  position: relative;
+  padding-top: 262px;
+  @media (max-width: 462px) {
+    padding-top: 0;
+  }
+  .container {
+    position: relative;
+    .presentation-wrapper {
+      width: 100%;
+      position: relative;
+      div.text-wrapper {
+        font-size: 60px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  div:not(.arrow-span) {
+    .line-wrapper {
+      overflow: hidden;
+      display: block;
+      &:first-child .word:first-child {
+        opacity: 0;
+      }
+      .line {
+        //white-space: pre;
+        display: inline-block;
+        //white-space: nowrap; // force chaque "line" à rester sur une seule ligne
+        will-change: transform; // optimisé pour GSAP
+        /*        transform: translateY(100%); */
+      }
+    }
+  }
+}

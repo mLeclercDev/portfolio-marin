@@ -6,6 +6,7 @@ import LoaderSecond from '../components/LoaderSecond';
 import HeroSecond from '../components/HeroSecond';
 import TextSeparator from '../components/TextSeparator';
 import Presentation from '../components/Presentation';
+import PresentationSecond from '../components/PresentationSecond';
 import Tools from '../components/Tools';
 import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
@@ -57,7 +58,6 @@ export default function Home({ projects }) {
       <main>
         {showLoader && <LoaderSecond />}
         <HeroSecond delay={delayHero} />
-
         <TextSeparator content=" Who I am - " />
         <Presentation />
         <Tools />
