@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/hero-section.scss'
 
-const HeroSection = ({title, description, projects}) => {
+const HeroSection = ({delay}) => {
   const [isRendered, setIsRendered] = useState(false);
   const textRef = useRef(null);
   const descriptionref = useRef(null);
@@ -17,13 +17,12 @@ const HeroSection = ({title, description, projects}) => {
 
     var reveal = gsap.timeline({});
 
-    gsap.to(".transform", {y: "0%", rotate: 0, duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: 0.8, stagger: 0.05 })
-
+    gsap.to(".hero-section .transform", {y: "0%", rotate: 0, duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: delay })
     
-
-    gsap.to(".transform.second .line-bar", {width: "calc(100% + 20px)", duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: 1.8 })
-    gsap.to(".transform.second .target ", {opacity: 0.5, duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: 1.8 })
-    gsap.to(".hero-section .informations ", {y: "0%", rotate: 0,duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: 1.8 })
+    gsap.to(".hero-section .transform.second .line-bar", {width: "calc(100% + 20px)", duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: delay +  0.8 })
+    gsap.to(".hero-section .transform.second .target ", {opacity: 0.5, duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: delay +  0.8 })
+    gsap.to(".hero-section .informations ", {y: "0%", rotate: 0,duration: 0.8, ease: "cubic-bezier(0.4,0,0.2,1)", delay: delay +  0.8 })
+    gsap.to(".hero-section span.line ", { opacity: 1, duration: 0, delay: delay })
 
     var timeline = gsap.timeline({
       scrollTrigger: {
@@ -38,20 +37,6 @@ const HeroSection = ({title, description, projects}) => {
       transform: "scaleX(0)",
       ease: "cubic-bezier(0.4,0,0.2,1)"
     })
-
-    var rotate = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".hero-section",
-            markers: false,
-            start: 'top 0%',
-            scrub: 1
-        }
-      });
-
-      rotate.to(".hero-section span.shape svg", {
-        rotate: 360,
-        ease: "cubic-bezier(0.4,0,0.2,1)"
-      })
 
   })
 
@@ -79,8 +64,15 @@ const HeroSection = ({title, description, projects}) => {
                             </span>
                         </span>
                     </span>
-                    <span className='o-wrapper'>
+                    <span className='o-wrapper d-sm-none d-md-block'>
                         <span className='transform third'>
+                        in
+                        </span>
+                    </span>
+                </div>
+                <div className='d-sm-block d-md-none'>
+                    <span className='o-wrapper'>
+                        <span className='transform'>
                         in
                         </span>
                     </span>
@@ -92,7 +84,7 @@ const HeroSection = ({title, description, projects}) => {
                         </svg>
                     </span> */}
                     <span className='images'>
-                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                        {/* <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} /> */}
                     </span>
                     <span className='o-wrapper'>
                         <span className='transform fourth'>

@@ -1,0 +1,38 @@
+.brief {
+  position: relative;
+  .container {
+    position: relative;
+  }
+  span {
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    span.spacer {
+      display: inline-block;
+      width: 300px;
+    }
+    .line-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      .line {
+        //white-space: pre;
+        display: block;
+        transform-origin: left;
+        transform: translateY(0%) rotate(0deg);
+      }
+    }
+  }
+  @media (max-width: 992px) {
+    span {
+      font-size: 40px;
+    }
+  }
+  @media (max-width: 468px) {
+    span {
+      font-size: 30px;
+    }
+  }
+}

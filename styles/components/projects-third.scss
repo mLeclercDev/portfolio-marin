@@ -1,0 +1,95 @@
+.projects-third {
+  position: relative;
+  z-index: 11;
+  .grid-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    .grid-item {
+      &:nth-child(1),
+      &:nth-child(4) {
+        width: calc(66% - 15px / 2);
+      }
+      &:nth-child(2),
+      &:nth-child(3) {
+        width: calc(34% - 15px / 2);
+      }
+      .project-media-wrapper {
+        width: 100%;
+        height: 34vw;
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+        &.white {
+          div {
+            color: var(--color1);
+          }
+        }
+        .o-hidden {
+          position: relative;
+          overflow: hidden;
+          span {
+            display: block;
+          }
+        }
+        .informations {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          width: calc(100% - 30px);
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          z-index: 111;
+          .flex-wrapper {
+            display: flex;
+            gap: 45px;
+            div {
+              font-size: 14px;
+              font-weight: 500;
+            }
+            .descriptions {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+            }
+          }
+          .year {
+            div {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+        img {
+          //opacity: 0;
+        }
+        .cross-inner {
+          position: relative;
+          width: 25px;
+          height: 25px;
+          will-change: transform opacity;
+          transform: scale(0);
+          z-index: 11;
+          span {
+            position: absolute;
+            display: block;
+            background-color: var(--color2);
+            &:first-child {
+              top: 50%;
+              transform: translateY(-50%);
+              width: 100%;
+              height: 2px;
+            }
+            &:nth-child(2) {
+              left: 50%;
+              transform: translateX(-50%);
+              height: 100%;
+              width: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

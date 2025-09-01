@@ -1,0 +1,16 @@
+.cursor-pres {
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    display: none;
+    transition: transform 0.45s ease;
+    z-index: 111111;
+    &.cursor-first {
+        background-color: #000;
+        padding: 3px;
+    }
+    &.cursor-second {
+        background-color: red;
+        padding: 3px;
+    }
+}

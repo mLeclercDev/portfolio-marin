@@ -1,0 +1,85 @@
+.hero-section-project {
+  position: relative;
+  z-index: 11;
+  .container:first-child {
+    transform: translateY(35px);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    h1 {
+      width: 100%;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      > div:not(.arrow-link) {
+        display: flex;
+        flex-direction: column;
+        row-gap: 50px;
+      }
+      .o-wrapper {
+        overflow: hidden;
+        position: relative;
+        display: block;
+        &:nth-child(2) {
+          text-align: right;
+        }
+        .transform {
+          display: block;
+          transform-origin: left;
+          transform: translateY(100%);
+        }
+      }
+      div:not(.arrow-link) {
+        width: 100%;
+      }
+    }
+  }
+  .wrapper-image {
+    width: 100%;
+    aspect-ratio: 1380 / 630;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    img {
+      -webkit-clip-path: inset(0 0 100% 0);
+      clip-path: inset(0 0 100% 0);
+      transform: scale(1.2);
+      will-change: transform;
+      transition: -webkit-clip-path 1.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.75s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: clip-path 1.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.75s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: clip-path 1.75s cubic-bezier(0.4, 0, 0.2, 1),
+        -webkit-clip-path 1.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.75s cubic-bezier(0.4, 0, 0.2, 1);
+      &.view {
+        clip-path: inset(0 0 0 0);
+        transform: scale(1);
+      }
+    }
+  }
+  @media (max-width: 992px) {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    .container:first-child {
+      min-height: auto;
+      transform: none;
+      h1 > div {
+        row-gap: 30px;
+      }
+    }
+  }
+  @media (max-width: 468px) {
+    .container:first-child {
+      row-gap: 15px;
+      h1 {
+        font-size: 5.5rem;
+        > div {
+          row-gap: 15px;
+        }
+      }
+    }
+  }
+}

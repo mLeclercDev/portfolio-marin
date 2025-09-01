@@ -1,18 +1,91 @@
-// components/Navbar.js
-import Link from 'next/link';
-import '../../styles/components/global/navbar.scss'
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from "next/navigation"
+import '../../styles/components/global/navbar.scss';
+import { animatePageOut } from "../../utils/animations"
+
+function formatToUrl(title) {
+  // Convertir en minuscules et remplacer les espaces par des tirets
+  let url = title.toLowerCase().replace(/\s+/g, '-');
+  // Supprimer les caractères spéciaux
+  url = url.replace(/[^\w-]+/g, '');
+  return url;
+}
 
 const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isHoveringHeader, setIsHoveringHeader] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = () => {
+      setIsHoveringHeader(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsHoveringHeader(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    const headerElement = document.querySelector('header');
+    if (headerElement) {
+      headerElement.addEventListener('mouseenter', handleMouseEnter);
+      headerElement.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (headerElement) {
+        headerElement.removeEventListener('mouseenter', handleMouseEnter);
+        headerElement.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, []);
+
+  const handleLinkHover = (e) => {
+    const target = e.target.closest('.hover-this');
+    console.log("target : ", target)
+    if (!target) return;
+
+    const span = target.querySelector("span");
+    if (!span) return;
+
+    const { offsetX, offsetY, target: { offsetWidth, offsetHeight } } = e.nativeEvent;
+
+    const move = 25,
+      xMove = offsetX / offsetWidth * (move * 2) - move,
+      yMove = offsetY / offsetHeight * (move * 2) - move;
+
+    span.style.transform = `translate(${xMove}px, ${yMove}px)`;
+
+    if (e.type === 'mouseleave') span.style.transform = 'translate(0px, 0px)';
+  };
+
+  // Fonction à exécuter au clic sur un élément de class layers__item
+  const layersIn = (href) => {    
+    console.log("href : ", href) 
+    console.log("pathname : ", pathname)    
+    if (pathname !== href) {
+      animatePageOut(href, router)
+    } 
+  };
+
   return (
     <header>
       <div className='container'>
         <nav>
-            <Link className='logo' href="/">
-                marin.
-            </Link>
-            <Link className='contact-link' href="mailto:marin.leclerc.dev@gmail.com">
-                Contact
-            </Link>
+          <div className={`logo hover-this ${pathname === '/' ? 'no-interaction' : ''}`} onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} onClick={() => layersIn(`http://localhost:3000/`)}>
+            <span>marin.</span></div>
+          <a className='contact-link hover-this' onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} href='mailto:marin.leclerc.dev@gmail.com'>
+            <span>Contact</span>
+          </a>
+          <div className={`cursor ${isHoveringHeader ? 'hovering-header' : ''}`} style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}>
+          </div>
         </nav>
       </div>
     </header>

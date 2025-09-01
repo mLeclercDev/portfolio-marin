@@ -1,14 +1,13 @@
-import React, { useRef } from 'react';
-import { ReactLenis } from "@studio-freight/react-lenis";
+// SmoothScrolling.js
 
-console.log('SmoothScrolling component is rendered');
+import React, { useRef } from 'react';
+import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 
 function SmoothScrolling({ children, infinite }) {
-
-  const lenisRef = useRef(null); // Créer une référence au composant Lenis
+  const lenisRef = useRef(null);
 
   return (
-    <ReactLenis ref={lenisRef} root options={{ lerp: 0.1, duration: 1.5, smoothTouch: true, infinite: infinite }}>
+    <ReactLenis ref={lenisRef} root options={{ lerp: 0.075, duration: 2, smoothTouch: true, infinite: infinite }}>
       {children}
     </ReactLenis>
   );

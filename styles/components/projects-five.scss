@@ -1,0 +1,84 @@
+.projects-five {
+  .projects-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 90px;
+    padding: 0 15%;
+    .column {
+      width: calc(50% - 90px / 2);
+      display: flex;
+      flex-direction: column;
+      gap: 5.5rem;
+      &.right-column {
+        margin-top: 11rem;
+      }
+      .project-wrapper {
+        width: 100%;
+        .image-wrapper {
+          width: 100%;
+          aspect-ratio: 100 / 110;
+          position: relative;
+          overflow: hidden;
+          border-radius: 10px;
+          transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: transform;
+          .image-inner {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+          }
+          img {
+            position: absolute;
+            left: -20px !important;
+            top: -20px !important;
+            object-fit: cover;
+            width: calc(100% + 40px) !important;
+            height: calc(100% + 40px) !important;
+            will-change: transform;
+          }
+        }
+        .project-information {
+          margin-top: 1.5rem;
+          font-weight: 400;
+          font-size: 24px;
+          span {
+            font-weight: 600;
+          }
+        }
+        &:hover {
+          .image-wrapper {
+            transform: scale(0.97);
+            .image-inner {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .projects-five .projects-wrapper {
+    gap: 5%;
+    padding: 0px 5%;
+  }
+}
+
+@media (max-width: 425px) {
+  .projects-five .projects-wrapper {
+    gap: 5.5rem;
+    padding: 0px 0%;
+    .column {
+      width: 100%;
+      &.right-column {
+        margin-top: 0;
+      }
+    }
+  }
+}

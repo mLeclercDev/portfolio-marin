@@ -1,15 +1,16 @@
 .cursor-container {
     width: 140px;
     height: 160px;
-    border-radius: 3px;
+    //border-radius: 3px;
     overflow: hidden;
     position: fixed;
     top: 0;
     left: 0;
     //transform: translate(-50%, -50%);
-    z-index: 11;
+    z-index: 11111;
     pointer-events: none;
     opacity: 0;
+    border-radius: 4px;
     transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
     &:nth-child(1) {
         transform: translate(-10px, -10px) rotate(0deg);
@@ -33,3 +34,72 @@
         opacity: 1;
     }
 }
+
+.cursor-presentation {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+    background-color: #fff;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%) scale(0.04);
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    z-index: 111;
+    &.hovering-header {
+        display: none;
+    }
+    &.hovering-scale {
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+    &.hovering-scale-xl {
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    &.hovering-cross-wrapper {
+        transition: transform 0.3s ease;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    .arrow {
+        min-width: 35px;
+        width: 35px;
+        height: 35px;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+        svg {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transition: 0s;
+            &.first {
+                opacity: 0;
+                transform: translateY(100%) translateX(-100%);
+            }
+            &.second {
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    &.hovering-presentation {
+        transform: translate(-50%, -50%) scale(1);
+        .arrow {
+            opacity: 1;
+            transition: opacity 0s cubic-bezier(0.4,0,0.2,1);
+        }
+    }
+}  
+
+/* Dans votre fichier CSS (par exemple, cursor.scss) */
+@media (max-width: 992px) {
+    .cursor-container,
+    .cursor-presentation {
+      display: none !important;
+    }
+}
+  

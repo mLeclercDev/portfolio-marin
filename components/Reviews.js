@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
+import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/reviews.scss'
 import '../styles/components/global/cursor.scss'
@@ -10,33 +11,53 @@ import '../styles/components/global/cursor.scss'
 const Reviews = () => {
     const cursorContainersRef = useRef([]);
     const reviewsRef = useRef([]);
+    CustomEase.create("hyperBounce", "0.4,0,0.2,1");
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
 
         var titleAnimation = gsap.timeline({
             scrollTrigger: {
                 trigger: ".reviews h2",
-                markers: true,
+                markers: false,
                 start: 'top 50%',
             }
         });
 
         titleAnimation.to(".reviews h2 span.word-wrapper", {
-            y: "0%", rotate: 0, duration: 1, ease: "cubic-bezier(0.4,0,0.2,1)"
+            y: "0%", rotate: 0, duration: 1, ease: "hyperBounce"
         })
 
         var timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: ".reviews",
                 markers: false,
-                start: 'top 30%',
+                start: 'top 45%',
             }
         });
       
         timeline.to(".reviews span.line", {
             width: "100%",
-            duration: 1.45,
-            ease: "cubic-bezier(0.4,0,0.2,1)",
+            duration: 1.2,
+            ease: "hyperBounce",
+            stagger: 0.075
+        })
+
+        timeline.to(".reviews .reviews-wrapper .review .arrow svg.second", {
+            delay: -1,
+            opacity: 1,
+            y: "-50%",
+            x: "0%",
+            duration: 0.5,
+            ease: "hyperBounce",
+            stagger: 0.05
+        })
+
+        timeline.to(".reviews .reviews-wrapper .review .name", {
+            delay: -1,
+            y: "0%", 
+            rotate: 0,
+            duration: 0.5,
+            ease: "hyperBounce",
             stagger: 0.05
         })
 
@@ -117,10 +138,10 @@ const Reviews = () => {
     return (
         <section className="reviews">
             <div className="cursor-container" data-index="1" data-cursor-container ref={el => cursorContainersRef.current[0] = el}>
-                <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Mon image" width={444} height={444} />
             </div>
             <div className="cursor-container" data-index="2" data-cursor-container ref={el => cursorContainersRef.current[1] = el}>
-                <Image className='fit-cover' src="/Images/layer-2.png" alt="Mon image" width={1150} height={520} />
+                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Mon image" width={666} height={666} />
             </div>
             <div className="cursor-container" data-index="3" data-cursor-container ref={el => cursorContainersRef.current[2] = el}>
                 <Image className='fit-cover' src="/Images/layer-3.png" alt="Mon image" width={1150} height={520} />
@@ -132,63 +153,62 @@ const Reviews = () => {
                     </span>
                 </h2>
                 <div className='reviews-wrapper'>
-                    <div className='review' data-index='1' ref={el => reviewsRef.current[0] = el}>
-                        <div className='name'>
-                            Emma Stone
-                        </div>
-                        <div className='right-content'>
-                            <div className='quote'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et urna et velit fermentum congue eget luctus nisi. Nam velit lectus, tincidunt in magna sed, mattis lacinia lectus.
-                            </div>
-                            <div className='arrow'>
-                                <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
-                                <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
+                    <a href='https://www.linkedin.com/in/killian-le-bras/' target='_blank' className='review' data-index='1' ref={el => reviewsRef.current[0] = el}>
+                        <div className='name-wrapper'>
+                            <div className='name'>
+                                Killian Lebras
                             </div>
                         </div>
-                        <span className='line'></span>
-                    </div>
-                    <div className='review' data-index='2' ref={el => reviewsRef.current[1] = el}>
-                        <div className='name'>
-                            Ewen Tortelier
+                        <div className='quote'>
+                        Great collaboration with Marin on a WordPress project. Professional, meticulous, and responsive, I highly recommend him!
                         </div>
-                        <div className='right-content'>
-                            <div className='quote'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et urna et velit fermentum congue eget luctus nisi. Nam velit lectus, tincidunt in magna sed, mattis lacinia lectus.
-                            </div>
-                            <div className='arrow'>
-                                <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
-                                <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
-                            </div>
+                        <div className='arrow'>
+                            <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
+                            <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
                         </div>
                         <span className='line'></span>
-                    </div>
-                    <div className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
-                        <div className='name'>
-                            Elizabeth Moraes
+                    </a>
+                    <a href='https://www.linkedin.com/in/zo%C3%A9-ringenbach-directrice-artistique/' target='_blank' className='review' data-index='2' ref={el => reviewsRef.current[1] = el}>
+                        <div className='name-wrapper'>
+                            <div className='name'>
+                                Zoé Ringenbach 
+                            </div>
                         </div>
-                        <div className='right-content'>
-                            <div className='quote'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et urna et velit fermentum congue eget luctus nisi. Nam velit lectus, tincidunt in magna sed, mattis lacinia lectus.
+                        <div className='quote'>
+                        Marin perfectly understood my needs and expectations for my photography portfolio. Professional, creative, and meticulous, I highly recommend him.
+                        </div>
+                        <div className='arrow'>
+                            <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
+                            <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
+                        </div> 
+                        <span className='line'></span>
+                    </a>
+                    <a href='http://muriellepariscreations.fr/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
+                        <div className='name-wrapper'>
+                            <div className='name'>
+                                Murielle Paris
                             </div>
-                            <div className='arrow'>
-                                <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
-                                <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
-                                    <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
-                                </svg>
-                            </div>
+                        </div>
+                        <div className='quote'>
+Working with him was a seamless experience. He perfectly captured the essence of Murielle Paris Creations, creating a website that showcases her handcrafted work. Professional, attentive, and highly skilled.                        </div>
+                        <div className='arrow'>
+                            <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
+                            <svg className='second' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
+                                <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
+                            </svg>
                         </div>
                         <span className='line'></span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>

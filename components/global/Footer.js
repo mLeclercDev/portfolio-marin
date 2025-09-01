@@ -6,75 +6,77 @@ import Matter from 'matter-js';
 
 const currentYear = new Date().getFullYear();
 
-const Footer = () => {
+const Footer = ({ triggerSelector }) => {
     const [isRendered, setIsRendered] = useState(false);
+    const [marqueeDuration, setMarqueeDuration] = useState(130); // Initial value for marquee duration
     const canvasRef = useRef(null);
     const footerRef = useRef(null);
 
     useEffect(() => {
 
-        var timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".reviews",
-                markers: false,
-                start: 'bottom 100%',
-                scrub: true,
-                once: true
-            }
-        });
-      
-        timeline.to("footer span.line", {
-            width: "100%",
-            ease: "cubic-bezier(0.4,0,0.2,1)",
-        })
+    var timeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: triggerSelector,
+            markers: false,
+            start: 'bottom 100%',
+            scrub: true,
+            once: true
+        }
+    });
+    
+    timeline.to("footer span.line", {
+        width: "100%",
+        ease: "cubic-bezier(0.4,0,0.2,1)",
+    })
+/*     console.clear(); */
 
-        console.clear();
+    
+    // =============================
+    gsap.set('.wrapper',{xPercent:-50,yPercent:-50})
 
-gsap.set('.wrapper',{xPercent:-50,yPercent:-50})
-
-var boxWidth = 1680,
+    var boxWidth = 1680,
     totalWidth = boxWidth * 14,  //  * n of boxes
     no01 = document.querySelectorAll("#no01 .box"),
     dirFromLeft = "+=" + totalWidth;
 
-var mod = gsap.utils.wrap(0, totalWidth);
+    var mod = gsap.utils.wrap(0, totalWidth);
 
-function marquee(which, time, direction){
-  gsap.set(which, {
-    x:function(i) {
-      return i * boxWidth;
+    function marquee(which, time, direction){
+    gsap.set(which, {
+        x:function(i) {
+        return i * boxWidth;
+        }
+    });
+    var action = gsap.timeline()
+    .to(which,  {
+    x: direction,
+    modifiers: {
+        x: x => mod(parseFloat(x)) + "px"
+    },
+        duration:time, ease:'none',
+        repeat:-1,
+    });
+    return action
     }
-  });
-  var action = gsap.timeline()
-  .to(which,  {
-  x: direction,
-  modifiers: {
-    x: x => mod(parseFloat(x)) + "px"
-  },
-    duration:time, ease:'none',
-    repeat:-1,
-  });
-  return action
-}
 
-var master = gsap.timeline({paused:true})
-.add(marquee(no01, 130, dirFromLeft))
+    var master = gsap.timeline({paused:true})
+    .add(marquee(no01, marqueeDuration, dirFromLeft))
 
-// =============================
+    // =============================
 
-ScrollTrigger.create({
-  trigger: ".reviews",
-  start: 'bottom 80%',
-  onEnter: isActive => master.play(),
-  //onLeave: isActive => master.pause(),
-  //onLeaveBack: isActive => master.pause(),
-  onEnterBack: isActive => master.play(),
-  markers:false,
-  onUpdate: self => {
-    //var speed = self.progress.toFixed(2)*2
-    //master.timeScale(speed)
-  } 
-})
+    ScrollTrigger.create({
+    trigger: triggerSelector,
+    start: 'bottom 80%',
+    onEnter: isActive => master.play(),
+    //onLeave: isActive => master.pause(),
+    //onLeaveBack: isActive => master.pause(),
+    onEnterBack: isActive => master.play(),
+    markers:false,
+    onUpdate: self => {
+        //var speed = self.progress.toFixed(2)*2
+        //master.timeScale(speed)
+    } 
+    })
 
     }, [])
 
@@ -112,9 +114,21 @@ ScrollTrigger.create({
         const screenHeight = hauteur;
         const wallThickness = 30;
 
-        const bottomWall = Matter.Bodies.rectangle(screenWidth / 2, screenHeight, screenWidth, wallThickness, { isStatic: true });
-        const rightWall = Matter.Bodies.rectangle(screenWidth, screenHeight / 2, wallThickness, screenHeight, { isStatic: true });
-        const leftWall = Matter.Bodies.rectangle(0, screenHeight / 2, wallThickness, screenHeight, { isStatic: true });
+        // Définir une couleur transparente
+        const transparentColor = 'rgba(0, 0, 0, 0)';
+
+        const bottomWall = Matter.Bodies.rectangle(screenWidth / 2, screenHeight, screenWidth, wallThickness, { isStatic: true, render: {
+            fillStyle: transparentColor, // Utiliser la couleur transparente
+            strokeStyle: transparentColor // Utiliser la couleur transparente pour les contours
+        } });
+        const rightWall = Matter.Bodies.rectangle(screenWidth, screenHeight / 2, wallThickness, screenHeight, { isStatic: true, render: {
+            fillStyle: transparentColor, // Utiliser la couleur transparente
+            strokeStyle: transparentColor // Utiliser la couleur transparente pour les contours
+        } });
+        const leftWall = Matter.Bodies.rectangle(0, screenHeight / 2, wallThickness, screenHeight, { isStatic: true, render: {
+            fillStyle: transparentColor, // Utiliser la couleur transparente
+            strokeStyle: transparentColor // Utiliser la couleur transparente pour les contours
+        } });
 
         Matter.World.add(world, [bottomWall, rightWall, leftWall]);
 
@@ -175,8 +189,8 @@ ScrollTrigger.create({
     gsap.registerPlugin(ScrollTrigger);
     var timeline = gsap.timeline({
         scrollTrigger: {
-        trigger: ".reviews", // Sélecteur pour le déclencheur
-        start: 'bottom 40%', // Déclenche le défilement lorsque le déclencheur atteint le milieu de la fenêtre
+        trigger: triggerSelector, // Sélecteur pour le déclencheur
+        start: 'bottom 60%', // Déclenche le défilement lorsque le déclencheur atteint le milieu de la fenêtre
         onEnter: () => {
             startObjectFall(); // Appelle la fonction pour démarrer la chute des objets
         },
@@ -193,7 +207,7 @@ ScrollTrigger.create({
     
         var timeline = gsap.timeline({
           scrollTrigger: {
-              trigger: ".reviews",
+              trigger: triggerSelector,
               markers: true,
               toggleClass: 'active',
               start: 'bottom 40%',
@@ -215,22 +229,22 @@ ScrollTrigger.create({
       
   return (
     <footer ref={footerRef}>
-        <div id="no01" class="wrapper">
-            <div class="boxes">
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
-                <div class="box">Contact me - </div>
+        <div id="no01" className="wrapper">
+            <div className="boxes">
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
+                <div className="box">Contact me - </div>
             </div>
         </div>
         <div className='canvas-wrapper'>
@@ -243,11 +257,8 @@ ScrollTrigger.create({
                 @{currentYear} concept by Marin Leclerc
                 </div>
                 <div className='socials'>
-                    <a href='eurosport.fr'>
+                    <a href='https://www.linkedin.com/in/marin-leclerc/'>
                         Linkedin
-                    </a>
-                    <a href='eurosport.fr'>
-                        Instagram
                     </a>
                 </div>
             </div>

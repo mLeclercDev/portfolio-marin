@@ -1,0 +1,73 @@
+.mockups-second {
+  opacity: 0;
+  margin-top: 100px;
+  //background-color: var(--color2);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 30px;
+  .horizontal-wrapper {
+    width: 100%;
+    max-width: 1340px;
+    margin: 0 auto;
+    .horizontal-spacer {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      column-gap: 20px;
+      margin-right: 40px;
+      .mockup-section {
+        width: 80%;
+        min-width: 80%;
+        aspect-ratio: 1366 / 768;
+        max-height: 80vh;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+    }
+  }
+  .progress-wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 2px;
+    span {
+      display: block;
+      position: absolute;
+      height: 100%;
+      background-color: var(--color1);
+      transition: none;
+      &:first-child {
+        opacity: 0.3;
+        width: 100%;
+      }
+      &:nth-child(2) {
+        width: 0%;
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    height: auto;
+    flex-direction: column;
+    opacity: 1;
+    .horizontal-wrapper {
+      .horizontal-spacer {
+        display: flex;
+        flex-direction: column;
+        row-gap: 45px;
+        margin-right: 0;
+        .mockup-section {
+          width: 100%;
+          max-height: inherit;
+        }
+      }
+    }
+    .progress-wrapper {
+      display: none;
+    }
+  }
+}

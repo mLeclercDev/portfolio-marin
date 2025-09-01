@@ -4,19 +4,68 @@ header {
     left: 0;
     width: 100%;
     padding: 15px 0;
+    mix-blend-mode: difference;
+    z-index: 1111;
+    background-color: black;
     nav {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        position: relative;
         .logo {
             font-family: var(--font2);
-            font-weight: 400;
+            font-weight: 700;
             font-size: 22px;
+            color: var(--color1);
+            &.no-interaction {
+                pointer-events: none;
+            }
+            span {
+                display: inline-block;
+                transition: transform 0.1s linear;
+            }
+            &.hover-this:hover ~ .cursor {
+                transform: translate(-50%, -50%) scale(8);
+                cursor: auto;
+            }
         }
         .contact-link {
-            font-family: var(--font2);
-            font-weight: 700;
-            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            span {
+                display: inline-block;
+                font-family: var(--font2);
+                font-weight: 700;
+                text-transform: uppercase;
+                color: var(--color1);
+                transition: transform 0.1s linear;
+                font-size: 16px;
+            }
+            &.hover-this:hover ~ .cursor {
+                transform: translate(-50%, -50%) scale(8);
+                cursor: auto;
+            }
         }
+        .cursor {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            mix-blend-mode: difference;
+            background-color: #fff;
+            padding: 3px;
+            display: none;
+            transition: transform 0.3s ease;
+            &.hovering-header {
+                display: block;
+            }
+            /* Dans votre fichier CSS (par exemple, cursor.scss) */
+            @media (max-width: 992px) {
+                display: none !important;
+                &.cursor-presentation {
+                display: none !important;
+                }
+            }
+        }    
     }
 }
