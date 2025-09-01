@@ -38,9 +38,9 @@ const Navbar = () => {
       "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
     );
 
-    gsap.to("nav .logo", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
-    gsap.to("nav .contact-link", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
-    gsap.set("nav", { delay: 2, overflow: "visible" })
+    gsap.to("nav .logo", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
+    gsap.to("nav .contact-link", { y: "0%", delay: 3.2, duration: 0.8, ease: "hyperBounce" })
+    gsap.set("nav", { delay: 4, overflow: "visible" })
 
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -91,7 +91,9 @@ const Navbar = () => {
     <header>
       <div className='container'>
         <nav>
-          <div className={`logo hover-this ${pathname === '/' ? 'no-interaction' : ''}`} onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} onClick={() => layersIn(`/`)}>
+          <div className={`logo hover-this ${pathname === '/' ? 'no-interaction' : ''}`} onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} onClick={() => layersIn(`/`)}
+          style={{ transform: 'translateY(100%)' }}
+          >
             <span>marin.</span></div>
           <a className='contact-link hover-this' onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} href='mailto:marin.leclerc.dev@gmail.com'>
             <span>Contact</span>
