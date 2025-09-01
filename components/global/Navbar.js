@@ -79,7 +79,7 @@ const Navbar = () => {
     <header>
       <div className='container'>
         <nav>
-          <div className={`logo hover-this ${pathname === '/' ? 'no-interaction' : ''}`} onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} onClick={() => layersIn(`http://localhost:3000/`)}>
+          <div className={`logo hover-this ${pathname === '/' ? 'no-interaction' : ''}`} onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} onClick={() => layersIn(`/`)}>
             <span>marin.</span></div>
           <a className='contact-link hover-this' onMouseMove={handleLinkHover} onMouseLeave={handleLinkHover} href='mailto:marin.leclerc.dev@gmail.com'>
             <span>Contact</span>

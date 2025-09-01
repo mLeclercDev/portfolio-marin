@@ -76,8 +76,8 @@ const Separator = () => {
     const linesFirst = textRefFirst.current.querySelectorAll(".line");
     gsap.set(linesFirst, {  y: "100%", rotate: 0});
   
-      timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1, delay: -0.3  });
-    }, 555);
+    timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1  });
+    }, 1500);
 
 
     timeline.to(".presentation .second img", { className: "fit-cover view" });
@@ -93,6 +93,7 @@ const Separator = () => {
   return (
     <section className="presentation">
         <div className='container'>
+          <div className='presentation-wrapper'>
           <div className='images-wrapper'>
             <div className='img-wrapper first'>
               <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
@@ -131,6 +132,7 @@ const Separator = () => {
                 <svg className="second" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 3.33333H14.31L0.143334 17.5L2.5 19.8567L16.6667 5.69V20H20V0H0V3.33333Z" fill="black"></path></svg>
               </div>
             </div>
+        </div>
         </div>
     </section>
   );

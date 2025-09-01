@@ -6,6 +6,10 @@
     }
     .container {
         position: relative;
+        .presentation-wrapper {
+            width: 100%;
+            position: relative;
+        }
         .toggler {
             cursor: pointer;
         }
@@ -45,7 +49,7 @@
         span.spacer {
             display: inline-block;
             width: 300px;
-        }
+        } 
         .line-wrapper:first-child .line .word:first-child {
             opacity: 0;
         }
@@ -72,10 +76,10 @@
             //opacity: 0;
         }
         &.second {
-            position: absolute;
+/*             position: absolute;
             top: 0;
-            left: 2rem;
-            width: calc(100% - 4rem);
+            left: 0;
+            width: 100%; */
         }
     }
     .arrow-link  {
