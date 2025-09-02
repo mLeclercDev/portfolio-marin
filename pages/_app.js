@@ -38,12 +38,12 @@ export default function App({ Component, pageProps }) {
         {/* Navbar avec delay seulement si premier chargement */}
         <Navbar delay={isFirstVisit ? 5 : 0} />
         {/* Component avec delayHero passé via props */}
-        <Component 
-          {...pageProps} 
-          delayHero={showLoader ? loaderDuration / 1000 : 0} 
-          isFirstVisit={isFirstVisit} 
-          showLoader={showLoader} 
-          delayPresentation={isFirstVisit ? 6000 : 1000}
+        <Component
+          {...pageProps}
+          delayHero={showLoader ? loaderDuration / 1000 : 0}
+          isFirstVisit={isFirstVisit}
+          showLoader={showLoader}
+          delayPresentation={showLoader ? loaderDuration + 1000 : 1000}
         />
         <Cursor />
       </ScrollProvider>

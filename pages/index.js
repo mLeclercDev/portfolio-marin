@@ -27,7 +27,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, delayHero = 0, delayPresentation }) {
+export default function Home({ projects, delayHero = 0, delayPresentation = 1000 }) {
   return (
     <>
       <Head>
