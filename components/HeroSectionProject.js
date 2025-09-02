@@ -7,19 +7,19 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/hero-section-project.scss'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase); // Enregistrez ScrollTrigger
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const HeroSectionProject = ({title, image}) => {
     const [isRendered, setIsRendered] = useState(false);
     const textRef = useRef(null);
 
   useEffect(() => {
     if (!isRendered) return;
-    gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
-    gsap.registerPlugin(CustomEase);
-
-    CustomEase.create(
-      "hyperBounce",
-      "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-    );
 
     gsap.to(".hero-section-project .transform", { y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1 });
 

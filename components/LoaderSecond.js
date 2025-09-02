@@ -3,19 +3,20 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import '../styles/components/loader-second.scss'
 
+gsap.registerPlugin(CustomEase);
+
+// Hyper bounce custom
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const LoaderSecond = () => {
   const linesRef = useRef([]);
 
   useEffect(() => {
     linesRef.current = linesRef.current.slice(0, 3);
-      const banners = document.querySelectorAll(".layers__items")
-
-    // Hyper bounce custom
-    CustomEase.create(
-      "hyperBounce",
-      "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-    );
-
+    const banners = document.querySelectorAll(".layers__items")
     const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "hyperBounce" } });
 
 /*      tl.set("nav", { overflow: "hidden" })

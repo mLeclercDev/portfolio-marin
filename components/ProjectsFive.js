@@ -7,7 +7,12 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import "../styles/components/projects-five.scss";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
 
 function formatToUrl(title) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
@@ -17,11 +22,6 @@ const ProjectsFourth = ({ projects }) => {
   const wrappersRef = useRef([]);
   const router = useRouter();
   const pathname = usePathname();
-
-  CustomEase.create(
-    "hyperBounce",
-    "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-  );
 
   const layersIn = (href) => {
     if (pathname !== href) {

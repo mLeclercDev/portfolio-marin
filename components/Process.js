@@ -8,13 +8,15 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/process.scss'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const Process = ({ process }) => {
-      CustomEase.create(
-        "hyperBounce",
-        "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-      );
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
 
         var titleAnimation = gsap.timeline({
             scrollTrigger: {
@@ -22,7 +24,7 @@ const Process = ({ process }) => {
                 markers: false,
                 start: 'top 90%',
                 end: '700px 90%',
-                scrub: 1
+                scrub: 1 
             }
         });
 

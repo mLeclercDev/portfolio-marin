@@ -7,19 +7,19 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/brief.scss';
 
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const Brief = ({ brief }) => {
   const [isRendered, setIsRendered] = useState(false);
   const textRef = useRef(null);
 
   useLayoutEffect(() => {
     if (!isRendered) return;
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(CustomEase);
-
-        CustomEase.create(
-      "hyperBounce",
-      "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
-    );
 
     const timeline = gsap.timeline({
       scrollTrigger: {

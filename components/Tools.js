@@ -6,12 +6,17 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/tools.scss'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const Separator = ({content}) => {
   const [isRendered, setIsRendered] = useState(false);
-  CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
     const mainElement = document.querySelector("main");
     const toolsSection = document.querySelector(".tools");
     const firstItem = document.querySelector('.item:first-child');
@@ -64,7 +69,7 @@ const Separator = ({content}) => {
         trigger: ".tools",
         start: "top center", // Démarrer le trigger quand le haut de la section atteint le centre de la fenêtre
         end: "bottom center", // Arrêter le trigger quand le bas de la section atteint le centre de la fenêtre
-        markers: false,
+        markers: true,
         onEnter: () => {
             gsap.to(mainElement, { backgroundColor: "#110F09", duration: 0.55, ease: "hyperBounce" });
         },
@@ -116,7 +121,6 @@ const Separator = ({content}) => {
   }, []);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const mainElement = document.querySelector("main");
     const toolsSection = document.querySelector(".tools");
     const firstItem = document.querySelector('.item:first-child');

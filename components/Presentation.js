@@ -14,9 +14,8 @@ const Separator = ({delayPresentation}) => {
   const textRefSecond = useRef(null);
   const togglerRef = useRef(null); // Ref pour le bouton toggler
   const animationState = useRef(1); // Variable de référence pour l'état d'animation
-    const [isFontReady, setIsFontReady] = useState(false);
+  const [isFontReady, setIsFontReady] = useState(false);
 
-    gsap.registerPlugin(CustomEase);
 
   CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
@@ -97,7 +96,7 @@ const Separator = ({delayPresentation}) => {
     const linesFirst = textRefFirst.current.querySelectorAll(".line");
     gsap.set(linesFirst, {  y: "100%", rotate: 0});
   
-    timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1  });
+    timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1, stagger: 0.033  });
     }, delayPresentation);
 
     timeline.to(".presentation .second img", { className: "fit-cover view" });

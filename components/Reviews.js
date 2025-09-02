@@ -8,18 +8,23 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/reviews.scss'
 import '../styles/components/global/cursor.scss'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+CustomEase.create(
+  "hyperBounce",
+  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+);
+
 const Reviews = () => {
     const cursorContainersRef = useRef([]);
     const reviewsRef = useRef([]);
     const [mounted, setMounted] = useState(false); // pour gérer visibilité initiale
-    CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
     useEffect(() => {
         setMounted(true); // le composant est monté, on peut montrer les cursor-container
     }, []);
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
 
         const titleAnimation = gsap.timeline({
             scrollTrigger: {
