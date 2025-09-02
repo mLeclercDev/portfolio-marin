@@ -26,12 +26,12 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-three-fiber": "^6.0.13",
-    "sass": "^1.72.0",
     "three": "^0.162.0"
   },
   "devDependencies": {
     "css-loader": "^6.10.0",
-    "sass-loader": "^14.1.1",
+    "sass": "^1.91.0",
+    "sass-loader": "^16.0.5",
     "style-loader": "^3.3.4"
   }
 }

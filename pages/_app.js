@@ -43,6 +43,7 @@ export default function App({ Component, pageProps }) {
           delayHero={showLoader ? loaderDuration / 1000 : 0} 
           isFirstVisit={isFirstVisit} 
           showLoader={showLoader} 
+          delayPresentation={isFirstVisit ? 5000 : 1000}
         />
         <Cursor />
       </ScrollProvider>

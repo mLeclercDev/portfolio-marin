@@ -8,13 +8,16 @@ import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/presentation.scss';
 
-const Separator = () => {
+const Separator = ({delayPresentation}) => {
   const [isRendered, setIsRendered] = useState(false);
   const textRefFirst = useRef(null);
   const textRefSecond = useRef(null);
   const togglerRef = useRef(null); // Ref pour le bouton toggler
   const animationState = useRef(1); // Variable de référence pour l'état d'animation
     const [isFontReady, setIsFontReady] = useState(false);
+
+    gsap.registerPlugin(CustomEase);
+
   CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
     const animateFirst = () => {
@@ -76,6 +79,7 @@ const Separator = () => {
     console.log("useEffect !")
   if (!isFontReady || !textRefFirst.current || !textRefSecond.current) return;
       console.log("condition ok !")
+      console.log("delayPresentation : ", delayPresentation)
     gsap.registerPlugin(ScrollTrigger);
 
     const timeline = gsap.timeline({
@@ -94,14 +98,13 @@ const Separator = () => {
     gsap.set(linesFirst, {  y: "100%", rotate: 0});
   
     timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1  });
-    }, 1500);
-
+    }, delayPresentation);
 
     timeline.to(".presentation .second img", { className: "fit-cover view" });
 
     return () => clearTimeout(timer);
 
-  }, [isFontReady]);
+  }, [isFontReady, delayPresentation]);
 
   return (
     <section className="presentation">
@@ -115,8 +118,8 @@ const Separator = () => {
               <Image className='fit-cover' src="/Images/layer-2.png" alt="Mon image" width={1150} height={520} />
             </div>
           </div>
-            <div className='text-wrapper first'                   ref={textRefFirst}>
-                          {isFontReady && (
+            <div className='text-wrapper first' ref={textRefFirst}>
+                {isFontReady && (
                 <SplitText
                   LineWrapper={({ children }) =><span className="line-wrapper"><span className="line">{children}</span></span>}
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
@@ -125,10 +128,10 @@ const Separator = () => {
                 Spacersp I&apos;m 28 years old and passionate about sports, always up for a session, no matter the field. I also love enjoying Rennes terraces with friends, chatting about everything over a drink, and making the most of the moment.
 
                 </SplitText> 
-                            )}
+                )}
             </div>
-            <div className='text-wrapper second'      ref={textRefSecond}>
-                                {isFontReady && (
+            <div className='text-wrapper second' ref={textRefSecond}>
+                {isFontReady && (
                 <SplitText
                   LineWrapper={({ children }) =><span className="line-wrapper"><span className="line">{children}</span></span>}
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
@@ -137,7 +140,7 @@ const Separator = () => {
                 >
                 Spacersp I&apos;m a 28-year-old front-end developer with agency experience, now working as a freelancer. I help my clients design and build websites that perfectly meet their needs and expectations, combining technical expertise with attention to detail.
                 </SplitText> 
-                         )}
+                )}
             </div>
             <div onClick={() => handleClick()} className='arrow-link cs-scale'>
               <span className='arrow-span'>

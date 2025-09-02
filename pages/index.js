@@ -27,7 +27,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, delayHero = 0 }) {
+export default function Home({ projects, delayHero = 0, delayPresentation }) {
   return (
     <>
       <Head>
@@ -41,7 +41,7 @@ export default function Home({ projects, delayHero = 0 }) {
         {/* HeroSecond prend un delayHero pour gérer l'animation */}
         <HeroSecond delay={delayHero} />
         <TextSeparator content=" Who I am - " />
-        <Presentation />
+        <Presentation delayPresentation={delayPresentation} />
         <Tools />
         <Achievements />
         <ProjectsFive projects={projects} />
