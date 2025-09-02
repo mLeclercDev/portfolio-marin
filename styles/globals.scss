@@ -123,6 +123,9 @@ h1,
     font-size: var(--fs-1-sm);
     letter-spacing: -2px;
   }
+  @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+    line-height: 0.9;
+  }
 }
 
 h2,

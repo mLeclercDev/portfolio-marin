@@ -7,6 +7,7 @@ header {
     mix-blend-mode: difference;
     z-index: 1111;
     background-color: black;
+    isolation: isolate;
     nav {
         width: 100%;
         display: flex;
@@ -33,7 +34,7 @@ header {
                 transition: transform 0.1s linear;
             }
             &.hover-this:hover ~ .cursor {
-                transform: translate(-50%, -50%) scale(8);
+                transform: translate(-50%, -50%) scale(0.4);
                 cursor: auto;
             }
         }
@@ -48,9 +49,10 @@ header {
                 color: var(--color1);
                 transition: transform 0.1s linear;
                 font-size: 16px;
+                line-height: 1.5;
             }
             &.hover-this:hover ~ .cursor {
-                transform: translate(-50%, -50%) scale(8);
+                transform: translate(-50%, -50%) scale(0.4);
                 cursor: auto;
             }
         }
@@ -62,7 +64,10 @@ header {
             background-color: #fff;
             padding: 3px;
             display: none;
-            transition: transform 0.3s ease;
+            width: 140px;
+            height: 140px;
+            transform: translate(-50%, -50%) scale(0.04);
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
             &.hovering-header {
                 display: block;
             }
