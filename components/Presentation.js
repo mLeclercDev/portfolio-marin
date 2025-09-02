@@ -115,14 +115,18 @@ const Separator = ({delayPresentation}) => {
               src="/Images/layer-1.png"
               alt="Mon image"
               width={250}
-              height={320} />
+              height={320} 
+              priority
+              />
             </div>
             <div className='img-wrapper second'>
               <Image className='fit-cover'
               src="/Images/layer-2.png"
               alt="Mon image"
               width={250}
-              height={320} />
+              height={320} 
+              priority
+              />
             </div>
           </div>
             <div className='text-wrapper first' ref={textRefFirst}>
