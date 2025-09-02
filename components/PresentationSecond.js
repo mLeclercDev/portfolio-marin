@@ -37,7 +37,7 @@ useEffect(() => {
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".presentation-second",
-        markers: true,
+        markers: false,
         toggleClass: 'active',
         start: 'top 80%',
         end: 'bottom 80%',
@@ -49,7 +49,7 @@ useEffect(() => {
       duration: 1,
       ease: "hyperBounce",
       stagger: 0.05,
-      marker: true
+      marker: false
     });
   }, 1500); // essaie 50ms → ajuste si besoin (100-200ms max)
 

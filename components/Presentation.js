@@ -111,10 +111,18 @@ const Separator = ({delayPresentation}) => {
           <div className='presentation-wrapper'>
           <div className='images-wrapper'>
             <div className='img-wrapper first'>
-              <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+              <Image className='fit-cover'
+              src="/Images/layer-1.png"
+              alt="Mon image"
+              width={250}
+              height={320} />
             </div>
             <div className='img-wrapper second'>
-              <Image className='fit-cover' src="/Images/layer-2.png" alt="Mon image" width={1150} height={520} />
+              <Image className='fit-cover'
+              src="/Images/layer-2.png"
+              alt="Mon image"
+              width={250}
+              height={320} />
             </div>
           </div>
             <div className='text-wrapper first' ref={textRefFirst}>

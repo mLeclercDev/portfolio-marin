@@ -200,28 +200,6 @@ const Footer = ({ triggerSelector }) => {
     });
 
     }, []); 
-
-/*     useEffect(() => {
-        if (!isRendered) return;
-        gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
-    
-        var timeline = gsap.timeline({
-          scrollTrigger: {
-              trigger: triggerSelector,
-              markers: true,
-              toggleClass: 'active',
-              start: 'bottom 40%',
-              end: 'bottom 0%',
-              scrub: true
-          }
-        });
-    
-        timeline.to("footer .cta", {
-            transform: "translateX(-780px)",
-            ease: "cubic-bezier(0.4,0,0.2,1)"
-        })
-    
-      }, [isRendered]); */
     
       useEffect(() => {
         setIsRendered(true);
