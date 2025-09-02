@@ -35,9 +35,9 @@
           img {
             position: absolute;
             left: -20px !important;
-            top: -20px !important;
+            top: 0px !important;
             object-fit: cover;
-            width: calc(100% + 40px) !important;
+            width: calc(100% + 40px) !important; 
             height: calc(100% + 40px) !important;
             will-change: transform;
           }

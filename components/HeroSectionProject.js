@@ -16,13 +16,25 @@ const HeroSectionProject = ({title, image}) => {
     gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
     gsap.registerPlugin(CustomEase);
 
-        CustomEase.create(
+    CustomEase.create(
       "hyperBounce",
       "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
     );
 
-    gsap.to(".hero-section-project .transform", {y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1 
-     });
+    gsap.to(".hero-section-project .transform", { y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1 });
+
+    var titleAnimation = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".hero-section-project .container:nth-child(2)",
+            markers: false,
+            start: '0% 100%',
+            end: 'bottom 0%',
+            scrub: 1
+        }
+    })
+    titleAnimation.to(".hero-section-project .wrapper-image img", {
+        y: "-40",
+    })
 
   });
 
@@ -47,7 +59,7 @@ const HeroSectionProject = ({title, image}) => {
         </div>
         <div className='container'>
             <div className="wrapper-image">
-                <Image className='fit-cover view' src={`https:${image}`} alt="Mon image" width={1920} height={1080} quality={80} />
+                <Image src={`https:${image}`} alt="Mon image" width={1920} height={1080} quality={80} />
             </div>
         </div>
     </section>
