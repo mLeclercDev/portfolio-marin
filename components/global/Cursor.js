@@ -6,8 +6,6 @@ const Cursor = () => {
   const router = useRouter();
   const cursorRef = useRef(null);
   const cursorContainersRef = useRef([]);
-  const animationState = useRef(1);
-
   const [hoverStates, setHoverStates] = useState({
     header: false,
     scale: false,
@@ -25,7 +23,6 @@ const Cursor = () => {
     };
   }, [router]);
 
-  // Cursor movement & hover listeners
   useEffect(() => {
     const moveCursors = (e) => {
       const { clientX: x, clientY: y } = e;
@@ -51,100 +48,88 @@ const Cursor = () => {
       }
     };
 
-    // Mouse move
     window.addEventListener("mousemove", moveCursors);
 
-    // Header hover
-    const header = document.querySelector("header");
-    if (header) {
-      header.addEventListener("mouseenter", (e) => handleHover(e, "header", true));
-      header.addEventListener("mouseleave", (e) => handleHover(e, "header", false));
-    }
+    // Fonction pour binder les hover listeners
+    const bindHoverListeners = () => {
+      const header = document.querySelector("header");
+      if (header) {
+        header.onmouseenter = (e) => handleHover(e, "header", true);
+        header.onmouseleave = (e) => handleHover(e, "header", false);
+      }
 
-    // cs-scale / cs-scale-xl hover
-    const csScaleEls = document.querySelectorAll(".cs-scale");
-    csScaleEls.forEach((el) => {
-      el.addEventListener("mouseenter", (e) => handleHover(e, "scale", true));
-      el.addEventListener("mouseleave", (e) => handleHover(e, "scale", false));
+      document.querySelectorAll(".cs-scale").forEach((el) => {
+        el.onmouseenter = (e) => handleHover(e, "scale", true);
+        el.onmouseleave = (e) => handleHover(e, "scale", false);
+      });
+
+      document.querySelectorAll(".cs-scale-xl").forEach((el) => {
+        el.onmouseenter = (e) => handleHover(e, "scaleXl", true);
+        el.onmouseleave = (e) => handleHover(e, "scaleXl", false);
+      });
+
+      document.querySelectorAll(".review").forEach((el) => {
+        el.onmouseenter = (e) => handleHover(e, "review", true);
+        el.onmouseleave = (e) => handleHover(e, "review", false);
+      });
+    };
+
+    // Bind une première fois
+    bindHoverListeners();
+
+    // Observer le DOM pour re-binder quand Next.js change la page
+    const observer = new MutationObserver(() => {
+      bindHoverListeners();
     });
 
-    const csScaleXlEls = document.querySelectorAll(".cs-scale-xl");
-    csScaleXlEls.forEach((el) => {
-      el.addEventListener("mouseenter", (e) => handleHover(e, "scaleXl", true));
-      el.addEventListener("mouseleave", (e) => handleHover(e, "scaleXl", false));
-    });
-
-    // Review hover
-    const reviewEls = document.querySelectorAll(".review");
-    reviewEls.forEach((el) => {
-      el.addEventListener("mouseenter", (e) => handleHover(e, "review", true));
-      el.addEventListener("mouseleave", (e) => handleHover(e, "review", false));
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
 
     return () => {
       window.removeEventListener("mousemove", moveCursors);
-
-      if (header) {
-        header.removeEventListener("mouseenter", (e) => handleHover(e, "header", true));
-        header.removeEventListener("mouseleave", (e) => handleHover(e, "header", false));
-      }
-
-      csScaleEls.forEach((el) => {
-        el.removeEventListener("mouseenter", (e) => handleHover(e, "scale", true));
-        el.removeEventListener("mouseleave", (e) => handleHover(e, "scale", false));
-      });
-
-      csScaleXlEls.forEach((el) => {
-        el.removeEventListener("mouseenter", (e) => handleHover(e, "scaleXl", true));
-        el.removeEventListener("mouseleave", (e) => handleHover(e, "scaleXl", false));
-      });
-
-      reviewEls.forEach((el) => {
-        el.removeEventListener("mouseenter", (e) => handleHover(e, "review", true));
-        el.removeEventListener("mouseleave", (e) => handleHover(e, "review", false));
-      });
+      observer.disconnect();
     };
   }, []);
 
   return (
-    <>
-      <div
-        ref={cursorRef}
-        className={`cursor-presentation 
-          ${hoverStates.header ? "hovering-header" : ""} 
-          ${hoverStates.scale ? "hovering-scale" : ""} 
-          ${hoverStates.scaleXl ? "hovering-scale-xl" : ""}`}
-      >
-        <div className="arrow">
-          <svg
-            className="first"
-            width="35"
-            height="35"
-            viewBox="0 0 35 35"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
-              fill="black"
-            />
-          </svg>
-          <svg
-            className="second"
-            width="35"
-            height="35"
-            viewBox="0 0 35 35"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
-              fill="black"
-            />
-          </svg>
-        </div>
+    <div
+      ref={cursorRef}
+      className={`cursor-presentation 
+        ${hoverStates.header ? "hovering-header" : ""} 
+        ${hoverStates.scale ? "hovering-scale" : ""} 
+        ${hoverStates.scaleXl ? "hovering-scale-xl" : ""}`}
+    >
+      <div className="arrow">
+        <svg
+          className="first"
+          width="35"
+          height="35"
+          viewBox="0 0 35 35"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
+            fill="black"
+          />
+        </svg>
+        <svg
+          className="second"
+          width="35"
+          height="35"
+          viewBox="0 0 35 35"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 5.83333H25.0425L0.250835 30.625L4.375 34.7492L29.1667 9.9575V35H35V0H0V5.83333Z"
+            fill="black"
+          />
+        </svg>
       </div>
-    </>
+    </div>
   );
 };
 

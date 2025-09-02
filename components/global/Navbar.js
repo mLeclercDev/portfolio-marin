@@ -46,6 +46,9 @@ const Navbar = ({ delay = 0 }) => {
     gsap.to("nav .logo", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
     gsap.to("nav .contact-link", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
 
+    gsap.set("nav", { delay: delay + 3, overflow: "visible" })
+
+
     window.addEventListener('mousemove', handleMouseMove);
 
     const headerElement = document.querySelector('header');
