@@ -77,7 +77,7 @@ const Separator = ({content}) => {
 
     var timeline = gsap.timeline({
         scrollTrigger: {
-            trigger: ".tools h2",
+            trigger: ".tools",
             markers: false,
             start: 'top 50%',
             once: true // L'animation ne se déclenche qu'une seule fois

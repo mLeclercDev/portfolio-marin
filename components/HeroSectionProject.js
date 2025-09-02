@@ -24,16 +24,6 @@ const HeroSectionProject = ({title, image}) => {
     gsap.to(".hero-section-project .transform", {y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1 
      });
 
-    const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero-section-project .wrapper-image",
-          markers: false,
-          start: 'top 90%',
-        }
-    });
-
-    timeline.to(".hero-section-project .wrapper-image img", { className: "fit-cover view" });
-
   });
 
   useEffect(() => {
@@ -57,7 +47,7 @@ const HeroSectionProject = ({title, image}) => {
         </div>
         <div className='container'>
             <div className="wrapper-image">
-                <Image className='fit-cover' src={`https:${image}`} alt="Mon image" width={1920} height={1080} quality={80} />
+                <Image className='fit-cover view' src={`https:${image}`} alt="Mon image" width={1920} height={1080} quality={80} />
             </div>
         </div>
     </section>
