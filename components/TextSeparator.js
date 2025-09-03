@@ -27,6 +27,25 @@ const Separator = ({content}) => {
       ease: "cubic-bezier(0.4,0,0.2,1)"
   })
 
+
+        // Animation spécifique pour mobile (<992px)
+  const mm = gsap.matchMedia();
+
+  mm.add("(max-width: 991px)", () => {
+    // Exemple : faire apparaître le titre avec un scale léger
+    gsap.from(".text-separator", {
+      opacity: 0,
+      x: 60,
+      duration: 0.6,
+      stagger: 0.05,
+      delay: 0.65,
+      ease: "power2.out"
+    });
+
+    return () => mobileTimeline.kill(); // nettoyer si media change
+
+    });
+
   }, [isRendered]);
 
   useEffect(() => {

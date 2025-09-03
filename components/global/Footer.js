@@ -37,7 +37,7 @@ const Footer = ({ triggerSelector }) => {
     let boxWidth;
 
     // Définir boxWidth selon la taille de l’écran
-    if (window.innerWidth < 992) {
+    if (window.innerWidth < 468) {
         boxWidth = 740; // smartphone
         setMarqueeDuration(80);  // animation plus rapide sur mobile
         

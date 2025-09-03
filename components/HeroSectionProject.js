@@ -36,6 +36,25 @@ const HeroSectionProject = ({title, image}) => {
         y: "-40",
     })
 
+      // Animation spécifique pour mobile (<992px)
+  const mm = gsap.matchMedia();
+
+  mm.add("(max-width: 991px)", () => {
+    // Exemple : faire apparaître le titre avec un scale léger
+    gsap.from(".hero-section-project .wrapper-image", {
+      opacity: 0,
+      scale: 0.95,
+      y: 20,
+      duration: 0.6,
+      stagger: 0.05,
+      delay: 0.5,
+      ease: "hyperBounce"
+    });
+
+    return () => mobileTimeline.kill(); // nettoyer si media change
+
+    });
+
   });
 
   useEffect(() => {
