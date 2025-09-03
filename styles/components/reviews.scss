@@ -133,6 +133,9 @@
     @media (max-width: 992px) {
         .reviews-wrapper {
             margin-top: 60px;
+            .review .quote {
+                opacity: 1;
+            }
         }
     }
     @media (max-width: 468px) {
@@ -143,7 +146,6 @@
                 .quote {
                     min-width: inherit;
                     transform: none;
-                    opacity: 1;
                     margin-top: 30px;
                     margin-right: 0;
                 }

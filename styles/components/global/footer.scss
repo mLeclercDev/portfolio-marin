@@ -73,6 +73,7 @@ footer {
         }
         div:not(.socials), .socials a {
             opacity: 0.7;
+            font-size: 16px;
         }
         .socials {
             display: flex;
@@ -93,13 +94,13 @@ footer {
         }
         .wrapper{ 
             top: 156px;
-            height:100px;
+            height:125px;
             .boxes {
-                left:-660px;
-                height: 100px;
+                left:-740px;
+                height: 125px;
                 .box {
-                    width: 660px;
-                    height:100px;
+                    width: 740px;
+                    height:125px;
                     font-size:100px;
                     text-align:center;
                 }

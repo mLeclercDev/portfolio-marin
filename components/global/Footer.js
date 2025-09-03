@@ -34,10 +34,21 @@ const Footer = ({ triggerSelector }) => {
     // =============================
     gsap.set('.wrapper',{xPercent:-50,yPercent:-50})
 
-    var boxWidth = 1970,
-    totalWidth = boxWidth * 14,  //  * n of boxes
-    no01 = document.querySelectorAll("#no01 .box"),
-    dirFromLeft = "+=" + totalWidth;
+    let boxWidth;
+
+    // Définir boxWidth selon la taille de l’écran
+    if (window.innerWidth < 992) {
+        boxWidth = 740; // smartphone
+        setMarqueeDuration(80);  // animation plus rapide sur mobile
+        
+    } else {
+        boxWidth = 1970; // desktop
+    }
+
+    // Déclarer totalWidth et autres variables
+    const no01 = document.querySelectorAll("#no01 .box");
+    const totalWidth = boxWidth * no01.length;  // utiliser le nombre réel de boxes
+    const dirFromLeft = "+=" + totalWidth;
 
     var mod = gsap.utils.wrap(0, totalWidth);
 
@@ -78,7 +89,7 @@ const Footer = ({ triggerSelector }) => {
     } 
     })
 
-    }, [])
+    }, [marqueeDuration])
 
     useEffect(() => {
         const divTest = document.querySelector('.canvas-wrapper');

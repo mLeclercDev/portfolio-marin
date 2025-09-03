@@ -72,6 +72,36 @@ const Reviews = () => {
             stagger: 0.05
         });
 
+        gsap.matchMedia().add("(max-width: 991px)", () => {
+
+                        // Exemple d'animation : faire apparaître les avatars avec un petit scale
+            gsap.set(".reviews .quote", {
+                opacity: 0
+            });
+
+            // Timeline spécifique pour mobile/tablette
+            const mobileTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".reviews",
+                    markers: false,
+                    start: 'top 45%',
+                }
+            });
+
+            // Exemple d'animation : faire apparaître les avatars avec un petit scale
+            mobileTimeline.to(".reviews .quote", {
+                opacity: 1,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "hyperBounce"
+            });
+
+            // Retourne la timeline pour référence (optionnel)
+            return () => {
+                mobileTimeline.kill();
+            };
+        });
+
         const cursorContainers = cursorContainersRef.current;
         const reviews = reviewsRef.current;
 
