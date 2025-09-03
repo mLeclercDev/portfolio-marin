@@ -38,10 +38,6 @@ useEffect(() => {
   ScrollTrigger.refresh();
 }, [isLayoutReady]);
 
-
-
-
-
   useEffect(() => {
     const mainElement = document.querySelector("main");
     const toolsSection = document.querySelector(".tools");

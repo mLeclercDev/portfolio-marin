@@ -8,7 +8,7 @@ import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/presentation.scss';
 
-const Separator = ({delayPresentation}) => {
+const Presentation = ({delayPresentation}) => {
   const [isRendered, setIsRendered] = useState(false);
   const textRefFirst = useRef(null);
   const textRefSecond = useRef(null);
@@ -168,4 +168,4 @@ const Separator = ({delayPresentation}) => {
   );
 };
 
-export default Separator;
+export default Presentation;

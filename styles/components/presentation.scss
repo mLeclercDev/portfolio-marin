@@ -39,10 +39,13 @@
 
     div.text-wrapper {
         font-family: Inter;
-        font-size: 60px;
+        font-size: 56px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+          @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+        font-size: 56px;
+          }
     }
 
     div:not(.arrow-span) {
