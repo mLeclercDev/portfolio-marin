@@ -22,6 +22,9 @@ footer {
         top: 156px;
         height:312px;
         overflow:hidden;
+        @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+            transform: translate(-50%, -50%) !important;
+        }
         .boxes {
             position:relative;
             left:-1680px;
