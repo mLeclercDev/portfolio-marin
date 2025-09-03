@@ -50,7 +50,7 @@ const Brief = ({ brief }) => {
       console.log("lines : ", linesSecond);
   
       timeline.from(linesSecond, { y: "100%", rotate: 5, ease: "hyperBounce", duration: 1 });
-    }, 555);
+    }, 556);
 
     return () => clearTimeout(timer);
 
@@ -73,7 +73,7 @@ const Brief = ({ brief }) => {
                 >
                 {brief}
                 </SplitText> 
-                  )}
+                    )}
             </span>
         </div>
     </section>
