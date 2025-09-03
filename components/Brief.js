@@ -10,13 +10,28 @@ import '../styles/components/brief.scss';
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 CustomEase.create(
-  "hyperBounce",
+  "hyperBounce", 
   "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
 );
 
 const Brief = ({ brief }) => {
   const [isRendered, setIsRendered] = useState(false);
   const textRef = useRef(null);
+  const [isFontReady, setIsFontReady] = useState(false);
+
+  // 1. Attendre que la font soit bien chargée
+  useEffect(() => {
+    const font = new FontFaceObserver("Inter");
+
+    font.load().then(() => {
+      console.log("Font Inter loaded ✅");
+      setIsFontReady(true);
+    }).catch(() => {
+      console.warn("Font failed to load, proceeding anyway");
+      setIsFontReady(true);
+    });
+  }, []);
+
 
   useLayoutEffect(() => {
     if (!isRendered) return;
@@ -49,6 +64,7 @@ const Brief = ({ brief }) => {
     <section className="brief">
         <div className='container'>
             <span className='text-wrapper second'>
+                  {isFontReady && (
                 <SplitText
                   LineWrapper={({ children }) =><span className="line-wrapper"><span className="line">{children}</span></span>}
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
@@ -57,6 +73,7 @@ const Brief = ({ brief }) => {
                 >
                 {brief}
                 </SplitText> 
+                  )}
             </span>
         </div>
     </section>
