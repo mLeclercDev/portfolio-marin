@@ -16,4 +16,10 @@
         column-gap: 70px;
         transform: translateX(-160px);
     }
+    @media (max-width: 468px) {
+        font-size: 6rem;
+        .inner {
+            column-gap: 40px;
+        }
+    }
 }

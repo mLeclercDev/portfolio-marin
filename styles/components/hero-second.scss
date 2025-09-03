@@ -12,7 +12,7 @@
     row-gap: 0;
     .name {
       width: 100%; 
-      font-size: 11rem;
+      font-size: 9rem;
       //font-style: italic;
       letter-spacing: -5.4px;
       margin-bottom: 2rem;
@@ -44,7 +44,7 @@
       &.ghost-word.second {
         text-align: right;
         top: calc(50% + 220px);
-        right: 45px;
+        right: 2rem;
       }
       &.ghost-word.first {
         span:not(:nth-child(9)):not(
@@ -130,7 +130,8 @@
   @media (max-width: 468px) {
     .container {
       .name {
-        font-size: 6.5rem;
+        font-size: 5rem;
+        letter-spacing: -1.4px;
         &:first-child,
         &.ghost-word.first {
           left: 2rem;

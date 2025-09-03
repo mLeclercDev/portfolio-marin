@@ -28,9 +28,18 @@
     }
   }
   @media (max-width: 992px) {
+    min-height: inherit;
+    padding-bottom: 10rem;
+    .quotes-icon svg {
+      width: 70px;
+      height: auto;
+    }
     .container .testimonial-content {
       width: 100%;
-      margin-top: 45px;
+      margin-top: 30px;
+        > div {
+        font-size: 36px;
+        }
     }
   }
   @media (max-width: 468px) {

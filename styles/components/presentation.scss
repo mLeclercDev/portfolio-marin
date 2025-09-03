@@ -142,12 +142,6 @@
         }
     }
     @media (max-width: 468px) {
-        .container {
-            padding-top: 255px;
-        }
-        .text-wrapper.second {
-            top: 255px;
-        }
         span:not(.arrow-span) {
             font-size: 30px;
         }
@@ -157,12 +151,24 @@
             }
         }
         .images-wrapper {
-            position: absolute;
+            position: relative;
             top: 0;
             .img-wrapper {
-                width: 170px;
+                height: 210px;
                 transform: none;
+                &.first {
+                    position: relative;
+                }
             }
+        }
+        .text-wrapper.second {
+            top: 210px;
+        }
+        div:not(.arrow-span) .line-wrapper:first-child .line .word:first-child {
+            display: none;
+        }
+        .arrow-link.cs-scale {
+            margin: 45px 0 0 auto;
         }
     }
 }
