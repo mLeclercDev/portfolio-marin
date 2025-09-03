@@ -45,18 +45,19 @@
         font-size: var(--fs-3);
       }
       @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
-      transform-origin: 51% calc(40.6% - var(--progress1) * 0%); 
+        transform-origin: 51% calc(40.1% - var(--progress1) * 0%); 
+        transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 110));
         @media (min-width: 1480px) {
-          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 130));
-        }
-        @media (max-width: 1200px) {
           transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 150));
         }
+        @media (max-width: 1200px) {
+          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 180));
+        }
         @media (max-width: 992px) {
-          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 190));
+          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 230));
         }
         @media (max-width: 468px) {
-          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 460));
+          transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 860));
           font-size: var(--fs-3);
         }
       }
