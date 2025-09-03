@@ -232,7 +232,7 @@ const Footer = ({ triggerSelector }) => {
             <div className='flex-wrapper'>
                 <span className='line'></span>
                 <div>
-                @{currentYear} concept by Marin Leclerc
+                {currentYear} – Développé et imaginé par Marin Leclerc
                 </div>
                 <div className='socials'>
                     <a href='https://www.linkedin.com/in/marin-leclerc/'>
