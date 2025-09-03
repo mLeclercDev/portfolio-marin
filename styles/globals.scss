@@ -78,6 +78,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   line-height: 1.25;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  transform: none !important; /* éviter les contextes 3D foireux */
+
 }
 
 // CONTAINER

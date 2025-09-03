@@ -15,6 +15,32 @@ CustomEase.create(
 
 const Separator = ({content}) => {
   const [isRendered, setIsRendered] = useState(false);
+  const [isLayoutReady, setIsLayoutReady] = useState(false);
+
+useEffect(() => {
+  const checkLayout = () => {
+    const lines = document.querySelectorAll('.presentation-wrapper span.line');
+    if (lines.length) setIsLayoutReady(true);
+  };
+
+  const observer = new MutationObserver(checkLayout);
+  observer.observe(document.querySelector('.presentation-wrapper'), { childList: true, subtree: true });
+
+  checkLayout(); // check direct au cas où c’est déjà monté
+
+  return () => observer.disconnect();
+}, []);
+
+useEffect(() => {
+  if (!isLayoutReady) return;
+
+  console.log("Layout ready, refresh ScrollTrigger");
+  ScrollTrigger.refresh();
+}, [isLayoutReady]);
+
+
+
+
 
   useEffect(() => {
     const mainElement = document.querySelector("main");
@@ -69,7 +95,7 @@ const Separator = ({content}) => {
         trigger: ".tools",
         start: "top center", // Démarrer le trigger quand le haut de la section atteint le centre de la fenêtre
         end: "bottom center", // Arrêter le trigger quand le bas de la section atteint le centre de la fenêtre
-        markers: false,
+        markers: true,
         onEnter: () => {
             gsap.to(mainElement, { backgroundColor: "#110F09", duration: 0.55, ease: "hyperBounce" });
         },
