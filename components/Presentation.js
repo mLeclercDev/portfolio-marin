@@ -136,9 +136,7 @@ const Presentation = ({delayPresentation}) => {
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
                   LetterWrapper={({ children }) => <>{children}</>}
                 >
-                Spacersp I&apos;m 28 years old and passionate about sports, always up for a session, no matter the field. I also love enjoying Rennes terraces with friends, chatting about everything over a drink, and making the most of the moment.
-
-                </SplitText> 
+                Spacersp J’ai 28 ans et je suis passionné de sport, toujours partant pour une séance, quel que soit le domaine. J’aime profiter des terrasses de Rennes avec mes amis, discuter de tout autour d’un verre et savourer chaque instant pleinement.                </SplitText> 
                 )}
             </div>
             <div className='text-wrapper second' ref={textRefSecond}>
@@ -149,13 +147,12 @@ const Presentation = ({delayPresentation}) => {
                   LetterWrapper={({ children }) => <>{children}</>}
              
                 >
-                Spacersp I&apos;m a 28-year-old front-end developer with agency experience, now working as a freelancer. I help my clients design and build websites that perfectly meet their needs and expectations, combining technical expertise with attention to detail.
-                </SplitText> 
+                Spacersp Je suis développeur de 28 ans, avec une expérience en agence, et je travaille aujourd’hui en freelance. J’accompagne mes clients dans la création et la réalisation de sites internet qui répondent parfaitement à leurs besoins et attentes.                </SplitText> 
                 )}
             </div>
             <div onClick={() => handleClick()} className='arrow-link cs-scale'>
               <span className='arrow-span'>
-               View Alt Version
+               Voir variante
               </span>
               <div className="arrow">
                 <svg className="first" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 3.33333H14.31L0.143334 17.5L2.5 19.8567L16.6667 5.69V20H20V0H0V3.33333Z" fill="black"></path></svg>

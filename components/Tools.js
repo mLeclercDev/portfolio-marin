@@ -209,7 +209,7 @@ useEffect(() => {
                 </div> 
                 <h2>
                     <span className='word-wrapper'>
-                    Tools
+                    Outils
                     </span>
                 </h2>
             </div>
@@ -232,7 +232,8 @@ useEffect(() => {
                     </div>
                     <div className='item-content'>
                         <span>
-HubSpot CMS enables seamless integration of content, marketing, and CRM tools. I build HubSpot websites that combine brand visuals with user-friendly editing, allowing clients to manage content independently while supporting marketing growth.                        </span>
+                          Le CMS HubSpot permet une intégration fluide des contenus, des outils marketing et du CRM. Je crée des sites HubSpot qui allient l’identité visuelle de la marque à une édition intuitive, permettant aux clients de gérer leur contenu en toute autonomie tout en soutenant leur croissance marketing.                        
+                        </span>
                     </div>
                     <span className='line'></span>
                 </div>
@@ -254,7 +255,8 @@ HubSpot CMS enables seamless integration of content, marketing, and CRM tools. I
                     </div>
                     <div className='item-content'>
                         <span>
-Webflow offers visual website design with full control over interactions and responsive layouts. I craft Webflow sites that reflect your brand identity, with clean, editable structures, empowering clients to update content effortlessly.                        </span>                   
+Webflow permet de concevoir visuellement des sites internet tout en gardant un contrôle total sur les interactions et les mises en page responsives. Je crée des sites Webflow qui reflètent votre identité de marque, avec des structures claires et éditables, permettant aux clients de mettre à jour leur contenu facilement.
+                        </span>                   
                     </div>
                     <span className='line'></span>
                 </div>
@@ -275,8 +277,9 @@ Webflow offers visual website design with full control over interactions and res
                         </div>
                     </div>
                     <div className='item-content'>
-                        <span>
-WordPress allows you to manage your website content easily while providing flexibility for custom features. I develop tailored WordPress sites, creating intuitive backends and responsive designs to ensure performance and smooth content management.                        </span>                   
+                      <span>
+WordPress permet de gérer facilement le contenu de votre site tout en offrant une grande flexibilité pour des fonctionnalités sur mesure. Je développe des sites WordPress personnalisés, avec des backends intuitifs et des designs responsives, garantissant performance et gestion de contenu fluide.
+                      </span>                    
                     </div>
                     <span className='line'></span>
                 </div>

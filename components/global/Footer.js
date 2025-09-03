@@ -34,7 +34,7 @@ const Footer = ({ triggerSelector }) => {
     // =============================
     gsap.set('.wrapper',{xPercent:-50,yPercent:-50})
 
-    var boxWidth = 1680,
+    var boxWidth = 1970,
     totalWidth = boxWidth * 14,  //  * n of boxes
     no01 = document.querySelectorAll("#no01 .box"),
     dirFromLeft = "+=" + totalWidth;
@@ -209,20 +209,20 @@ const Footer = ({ triggerSelector }) => {
     <footer ref={footerRef}>
         <div id="no01" className="wrapper">
             <div className="boxes">
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
-                <div className="box">Contact me - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
+                <div className="box">On échange ? - </div>
             </div>
         </div>
         <div className='canvas-wrapper'>

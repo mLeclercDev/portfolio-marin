@@ -129,10 +129,10 @@ const HeroSection = ({ delay }) => {
     <section className="hero-second">
       <div className="container">
         <div className="name">
-          <div className="word-wrapper first">Website</div>
+          <div className="word-wrapper first">{/* Website */}Développeur</div>
         </div>
         <div className="name">
-          <div className="word-wrapper second">developer</div>
+          <div className="word-wrapper second">{/* developer */}Front-end</div>
         </div>
         <div className="middle-wrapper">
           <div className="video-wrapper" ref={videoWrapperRef}>
@@ -152,17 +152,13 @@ const HeroSection = ({ delay }) => {
         </div>
         <div className="name ghost-word first">
           <div className="word-wrapper first">
-            <span>W</span>
+{/*             <span>W</span>
             <span>E</span>
             <span>B</span>
             <span>S</span>
             <span>I</span>
             <span>T</span>
-            <span>E</span>
-          </div>
-        </div>
-        <div className="name ghost-word second">
-          <div className="word-wrapper second">
+            <span>E</span> */}
             <span>D</span>
             <span>E</span>
             <span>V</span>
@@ -170,16 +166,40 @@ const HeroSection = ({ delay }) => {
             <span>L</span>
             <span>O</span>
             <span>P</span>
+            <span>P</span>
             <span>E</span>
+            <span>U</span>
             <span>R</span>
+          </div>
+        </div>
+        <div className="name ghost-word second">
+          <div className="word-wrapper second">
+{/*             <span>D</span>
+            <span>E</span>
+            <span>V</span>
+            <span>E</span>
+            <span>L</span>
+            <span>O</span>
+            <span>P</span>
+            <span>E</span>
+            <span>R</span> */}
+            <span>F</span>
+            <span>R</span>
+            <span>O</span>
+            <span>N</span>
+            <span>T</span>
+            <span>-</span>
+            <span>E</span>
+            <span>N</span>
+            <span>D</span>
           </div>
         </div>
         <div className="catchline">
           <div className="line-wrapper">
-            <span className="line">Smart front-end development</span>
+            <span className="line">Développement intelligent</span>
           </div>
           <div className="line-wrapper">
-            <span className="line">High-impact websites</span>
+            <span className="line">Sites impactants</span>
           </div>
         </div>
         <div className="catchline">

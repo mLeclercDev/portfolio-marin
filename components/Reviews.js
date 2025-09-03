@@ -171,12 +171,12 @@ const Reviews = () => {
 
             <div className='container'>
                 <h2>
-                    <span className='word-wrapper'>Reviews</span>
+                    <span className='word-wrapper'>Avis</span>
                 </h2>
                 <div className='reviews-wrapper'>
                     <a href='https://www.linkedin.com/in/killian-le-bras/' target='_blank' className='review' data-index='1' ref={el => reviewsRef.current[0] = el}>
                         <div className='name-wrapper'><div className='name'>Killian Lebras</div></div>
-                        <div className='quote'>Great collaboration with Marin on a WordPress project. Professional, meticulous, and responsive, I highly recommend him!</div>
+                        <div className='quote'>Excellente collaboration avec Marin sur un projet WordPress. Professionnel, minutieux et réactif, je le recommande vivement !</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
@@ -189,7 +189,7 @@ const Reviews = () => {
                     </a>
                     <a href='https://www.linkedin.com/in/zo%C3%A9-ringenbach-directrice-artistique/' target='_blank' className='review' data-index='2' ref={el => reviewsRef.current[1] = el}>
                         <div className='name-wrapper'><div className='name'>Zoé Ringenbach</div></div>
-                        <div className='quote'>Marin perfectly understood my needs and expectations for my photography portfolio. Professional, creative, and meticulous, I highly recommend him.</div>
+                        <div className='quote'>Marin a parfaitement compris mes besoins et attentes pour mon portfolio photo. Professionnel, créatif et minutieux, je le recommande vivement.</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
@@ -202,7 +202,7 @@ const Reviews = () => {
                     </a>
                     <a href='http://muriellepariscreations.fr/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
                         <div className='name-wrapper'><div className='name'>Murielle Paris</div></div>
-                        <div className='quote'>Working with him was a seamless experience. He perfectly captured the essence of Murielle Paris Creations, creating a website that showcases her handcrafted work. Professional, attentive, and highly skilled.</div>
+                        <div className='quote'>Travailler avec lui a été une expérience fluide et agréable. Il a parfaitement capté l’essence de Murielle Paris Créations, créant un site qui met en valeur son travail artisanal. Professionnel, attentif et très compétent.</div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>

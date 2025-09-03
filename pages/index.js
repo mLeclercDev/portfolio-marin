@@ -40,7 +40,7 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
       <main>
         {/* HeroSecond prend un delayHero pour gérer l'animation */}
         <HeroSecond delay={delayHero} />
-        <TextSeparator content=" Who I am - " />
+        <TextSeparator content=" Qui je suis - " />
         <Presentation delayPresentation={delayPresentation} />
         <Tools />
         <Achievements />
