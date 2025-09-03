@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
+import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/brief.scss';
 
@@ -50,7 +51,7 @@ const Brief = ({ brief }) => {
       console.log("lines : ", linesSecond);
   
       timeline.from(linesSecond, { y: "100%", rotate: 5, ease: "hyperBounce", duration: 1 });
-    }, 556);
+    }, 555);
 
     return () => clearTimeout(timer);
 
