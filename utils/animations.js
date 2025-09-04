@@ -13,8 +13,8 @@ export const animatePageIn = () => {
   // Mobile
   mm.add("(max-width: 991px)", () => {
   const tl = gsap.timeline();
-  tl.set("footer", { opacity: 0 })
-    .to("footer", { opacity: 1, duration: 0.3 }, "+=1"); // "+=1" = après 1s
+    tl.set("footer", { opacity: 0 })
+    tl.to("footer", { opacity: 1, duration: 0.3 }, "+=1"); // "+=1" = après 1s
     return () => {};
   });
 };
