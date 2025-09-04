@@ -21,7 +21,7 @@ const HeroSectionProject = ({title, image}) => {
   useEffect(() => {
     if (!isRendered) return;
 
-    gsap.to(".hero-section-project .transform", { y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1 });
+    gsap.to(".hero-section-project .transform", { y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1, force3D: true,   // <— clé pour Safari });
 
     var titleAnimation = gsap.timeline({
         scrollTrigger: {

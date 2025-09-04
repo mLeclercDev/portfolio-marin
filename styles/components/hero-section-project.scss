@@ -25,7 +25,7 @@
         .transform {
           display: block;
           transform-origin: left;
-          transform: translateY(100%);
+          transform: translateY(100%) translateZ(0);
           will-change: transform;
           backface-visibility: hidden;
           -webkit-font-smoothing: antialiased;
