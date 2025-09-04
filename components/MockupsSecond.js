@@ -116,16 +116,6 @@ const MockupsSecond = ({ videos }) => {
 
     }, [isLargeScreen]);
 
-    useEffect(() => {
-  if (!isLargeScreen) {
-    console.log("ça marche pourtant")
-    const videos = document.querySelectorAll(".mockup-video");
-    videos.forEach(video => {
-      video.play().catch(() => {}); // ignore si le navigateur bloque
-    });
-  }
-}, [isLargeScreen]);
-
     return (
         <section className="mockups-second">
             <div className='horizontal-wrapper'>
