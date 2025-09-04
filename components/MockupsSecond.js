@@ -115,17 +115,17 @@ const MockupsSecond = ({ videos }) => {
         });
 
         // Ajouter des écouteurs d'événements pour jouer/mettre en pause la vidéo
-        const videos = document.querySelectorAll(".mockup-video");
+/*         const videos = document.querySelectorAll(".mockup-video");
         videos.forEach(video => {
             video.addEventListener("mouseenter", () => video.play());
             video.addEventListener("mouseleave", () => video.pause());
             // Supprimez l'attribut autoplay si l'écran est large
             video.removeAttribute('autoplay');
-        });
+        }); */
 
     }, [isLargeScreen]);
 
-    useEffect(() => {
+/*     useEffect(() => {
         if (!isLargeScreen) {
             const videos = document.querySelectorAll(".mockup-video");
             videos.forEach(video => {
@@ -133,7 +133,7 @@ const MockupsSecond = ({ videos }) => {
                 video.setAttribute('autoplay', 'true');
             });
         }
-    }, [isLargeScreen]);
+    }, [isLargeScreen]); */
 
     return (
         <section className="mockups-second">
@@ -148,6 +148,7 @@ const MockupsSecond = ({ videos }) => {
                                 height="810"
                                 muted
                                 loop
+                                autoPlay
                             />
                         </div>
                     ))}
