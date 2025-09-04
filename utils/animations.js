@@ -57,7 +57,7 @@ export const animatePageOut = (href, router) => {
 
   // Mobile
   mm.add("(max-width: 992px)", () => {
-    gsap.set(["main"], { opacity: 0 });
+    gsap.set("footer", { opacity: 0 });
     gsap.to("main > * , footer", {
       opacity: 0,
       y: 20,
