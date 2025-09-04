@@ -14,10 +14,9 @@ export const animatePageOut = (href, router) => {
     gsap.set("main", { opacity: 0, delay: 1 })
     //gsap.set(".hero-project img",{ className: "fit-cover", delay: 0.5 })
 
-    gsap.to(".projects-second", {ease: "cubic-bezier(0.4,0,0.2,1)", opacity: 0.5, duration: 1})
     tl.to([banners], {
       duration: 1, stagger: 0.1, className: "layers__items in", onComplete: () => {
-        gsap.delayedCall(0.25, () => { router.push(href) })
+        gsap.delayedCall(0.75, () => { router.push(href) })
       },})
   }
 } 
