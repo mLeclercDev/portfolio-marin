@@ -12,13 +12,10 @@ const Mockups = ({ images }) => {
     const isMobile = window.matchMedia("(max-width: 992px)").matches;
 
     if (isMobile) {
-    // Directement appliquer la classe en mobile
-    const smartphones = document.querySelector(".mockups .smartphone");
-
-      if (smartphones) {
-        smartphones.classList.add("view");
-      }
-      return; // on sort, pas besoin d'animations
+      // Directement appliquer la classe en mobile à tous les smartphones
+      const smartphones = document.querySelectorAll(".mockups .smartphone");
+      smartphones.forEach(phone => phone.classList.add("view"));
+      return; // on sort, pas besoin d'animations scroll
     }
 
     gsap.registerPlugin(ScrollTrigger);
