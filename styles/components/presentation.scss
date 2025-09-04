@@ -159,6 +159,10 @@
             .img-wrapper {
                 height: 210px;
                 transform: none;
+                img.view {
+                    clip-path: none;
+                    transform: none;
+                }
                 &.first {
                     position: relative;
                 }
