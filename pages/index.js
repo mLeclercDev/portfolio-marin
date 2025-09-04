@@ -10,6 +10,7 @@ import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
 import Reviews from '../components/Reviews';
 import Footer from '../components/global/Footer';
+import LoaderSecond from '../components/LoaderSecond';
 import '../styles/globals.scss';
 
 export async function getStaticProps() {
@@ -27,7 +28,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({ projects, delayHero = 0, delayPresentation = 1000 }) {
+export default function Home({ projects, delayHero = 0, delayPresentation = 1000, showLoader }) {
   return (
     <>
       <Head>
@@ -37,6 +38,7 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {showLoader && <LoaderSecond />}
       <main>
         {/* HeroSecond prend un delayHero pour gérer l'animation */}
         <HeroSecond delay={delayHero} />

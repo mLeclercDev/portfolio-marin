@@ -18,10 +18,11 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const isHome = window.location.pathname === "/"; // true si on est sur la homepage
       const firstVisit = !sessionStorage.getItem('isFirstVisit');
       setIsFirstVisit(firstVisit);
 
-      if (firstVisit) {
+      if (firstVisit && isHome) {
         sessionStorage.setItem('isFirstVisit', 'false');
         setShowLoader(true);
 
@@ -52,9 +53,8 @@ export default function App({ Component, pageProps }) {
     <SmoothScrolling lenisRef={lenisRef}>
       <ScrollProvider lenisRef={lenisRef}>
         {/* Loader global */}
-        {showLoader && <LoaderSecond />}
         {/* Navbar avec delay seulement si premier chargement */}
-        <Navbar delay={isFirstVisit ? 5 : 0} />
+        <Navbar delay={showLoader ? 5 : 0} />
         {/* Component avec delayHero passé via props */}
         <Component
           {...pageProps}
