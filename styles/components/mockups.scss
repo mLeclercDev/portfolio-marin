@@ -62,10 +62,6 @@
     margin-top: 0;
     .row .smartphone {
       width: calc(50% - 15px);
-      clip-path: none;
-      &.view {
-        clip-path: none;
-      }
       &.empty {
         display: none;
       }
