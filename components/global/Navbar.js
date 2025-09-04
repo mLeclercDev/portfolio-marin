@@ -22,6 +22,16 @@ const Navbar = ({ delay = 0 }) => {
 
   useEffect(() => {
     if (delay == null) return;
+
+    // GSAP matchMedia pour détecter desktop
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+      setIsDesktop(true);
+    });
+    mm.add("(max-width: 991px)", () => {
+      setIsDesktop(false);
+    });
+
     const handleMouseMove = (e) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
@@ -49,20 +59,22 @@ const Navbar = ({ delay = 0 }) => {
     gsap.set("nav", { delay: delay + 3, overflow: "visible" })
 
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (window.innerWidth >= 992) {
+      window.addEventListener('mousemove', handleMouseMove);
 
-    const headerElement = document.querySelector('header');
-    if (headerElement) {
-      headerElement.addEventListener('mouseenter', handleMouseEnter);
-      headerElement.addEventListener('mouseleave', handleMouseLeave);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      const headerElement = document.querySelector('header');
       if (headerElement) {
-        headerElement.removeEventListener('mouseenter', handleMouseEnter);
-        headerElement.removeEventListener('mouseleave', handleMouseLeave);
+        headerElement.addEventListener('mouseenter', handleMouseEnter);
+        headerElement.addEventListener('mouseleave', handleMouseLeave);
       }
+
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        if (headerElement) {
+          headerElement.removeEventListener('mouseenter', handleMouseEnter);
+          headerElement.removeEventListener('mouseleave', handleMouseLeave);
+        }
+      };
     };
   }, [delay]);
 
