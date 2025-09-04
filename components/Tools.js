@@ -200,7 +200,7 @@ useEffect(() => {
 
   return (
     <section className="tools">
-        <div className='container'>
+        <div className='container'> 
             <div className='flex-wrapper'>
                 <div className='svg-wrapper'>
                     <svg width="322" height="200" viewBox="0 0 322 200" fill="none" xmlns="http://www.w3.org/2000/svg">

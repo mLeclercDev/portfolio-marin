@@ -7,6 +7,20 @@ import '../styles/components/global/cursor.scss';
 
 const Mockups = ({ images }) => {
   useEffect(() => {
+
+    // --- check mobile
+    const isMobile = window.matchMedia("(max-width: 992px)").matches;
+
+    if (isMobile) {
+    // Directement appliquer la classe en mobile
+    const img = document.querySelector(".mockups .smartphone img");
+
+      if (img) {
+        img.classList.add("view");
+      }
+      return; // on sort, pas besoin d'animations
+    }
+
     gsap.registerPlugin(ScrollTrigger);
 
     // Choisir l’offset selon la taille d’écran
