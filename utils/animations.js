@@ -12,14 +12,17 @@ export const animatePageIn = () => {
 
   // Mobile
   mm.add("(max-width: 991px)", () => {
-    gsap.set(
-      "footer",
-      { opacity: 1 }
-    );
     gsap.fromTo(
       "main > *",
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" }
+      { opacity: 1, y: 0, duration: 0.3, ease: "power1.out",
+                onComplete: () => {
+                  gsap.set(
+                    "footer",
+                    { opacity: 1 }
+                  );
+                },
+       }
     );
     return () => {};
   });
