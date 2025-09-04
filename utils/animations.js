@@ -12,6 +12,10 @@ export const animatePageIn = () => {
 
   // Mobile
   mm.add("(max-width: 991px)", () => {
+    gsap.set(
+      "footer",
+      { opacity: 0 }
+    );
     gsap.fromTo(
       "main > *",
       { opacity: 0, y: 20 },
