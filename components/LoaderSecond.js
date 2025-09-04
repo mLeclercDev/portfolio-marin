@@ -54,6 +54,7 @@ const LoaderSecond = () => {
 
          gsap.to("nav .logo", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
          gsap.to("nav .contact-link", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
+         gsap.set("footer", { opacity: 1 })
          gsap.set("nav", { delay: 2, overflow: "visible" })
 
         // 🔥 cacher le loader complètement
