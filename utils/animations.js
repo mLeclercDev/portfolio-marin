@@ -16,17 +16,9 @@ export const animatePageIn = () => {
       "footer",
       { opacity: 0 }
     );
-    gsap.fromTo(
-      "main > *",
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.3, ease: "power1.out",
-                onComplete: () => {
-                  gsap.set(
-                    "footer",
-                    { opacity: 1, delay: 2 }
-                  );
-                },
-       }
+    gsap.set(
+      "footer",
+      { opacity: 1, delay: 1 }
     );
     return () => {};
   });
@@ -64,7 +56,6 @@ export const animatePageOut = (href, router) => {
 
   // Mobile
   mm.add("(max-width: 992px)", () => {
-    gsap.set("footer", { opacity: 0 });
     gsap.to("main > * , footer", {
       opacity: 0,
       y: 20,

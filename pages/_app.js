@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 import SmoothScrolling from "../components/global/SmoothScrolling";
 import { ScrollProvider } from '../components/global/ScrollContext';
 import Navbar from '../components/global/Navbar';
 import Cursor from '../components/global/Cursor';
 import LoaderSecond from '../components/LoaderSecond';
+import { animatePageIn } from "../utils/animations";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const lenisRef = useRef(null);
   const [isFirstVisit, setIsFirstVisit] = useState(null); // null = pas encore déterminé
   const [showLoader, setShowLoader] = useState(false);
@@ -27,6 +30,21 @@ export default function App({ Component, pageProps }) {
       }
     }
   }, []);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      animatePageIn();
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // première entrée
+    animatePageIn();
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   if (isFirstVisit === null) return null; // Ne rien rendre tant qu'on ne sait pas
 
