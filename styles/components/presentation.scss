@@ -153,6 +153,9 @@
         .images-wrapper {
             position: relative;
             top: 0;
+            width: fit-content;
+            overflow: hidden;
+            margin-bottom: 15px;
             .img-wrapper {
                 height: 210px;
                 transform: none;
@@ -162,7 +165,7 @@
             }
         }
         .text-wrapper.second {
-            top: 210px;
+            top: 225px;
         }
         div:not(.arrow-span) .line-wrapper:first-child .line .word:first-child {
             display: none;
