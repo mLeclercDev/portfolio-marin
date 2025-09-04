@@ -60,8 +60,8 @@ const HeroSectionProject = ({ title, image }) => {
       gsap.from(".hero-section-project", {
         opacity: 0,
         y: 20,
-        duration: 0.6,
-        ease: "power2.out",
+        duration: 0.8,
+        ease: "power1.out",
       });
 
       return () => {}; // cleanup inutile ici
