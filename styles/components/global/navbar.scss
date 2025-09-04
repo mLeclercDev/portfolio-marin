@@ -74,6 +74,8 @@ header {
             /* Dans votre fichier CSS (par exemple, cursor.scss) */
             @media (max-width: 992px) {
                 display: none !important;
+                background-color: white;
+                mix-blend-mode: normal;
                 &.cursor-presentation {
                 display: none !important;
                 }
