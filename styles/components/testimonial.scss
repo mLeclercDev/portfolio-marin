@@ -39,7 +39,11 @@
       margin-top: 30px;
         > div {
         font-size: 36px;
+        .line-wrapper .line {
+           transform: translateY(0%) rotate(0);
+           will-change: opacity;
         }
+      }
     }
   }
   @media (max-width: 468px) {
