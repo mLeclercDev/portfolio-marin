@@ -129,10 +129,10 @@ const HeroSection = ({ delay }) => {
     <section className="hero-second">
       <div className="container">
         <div className="name">
-          <div className="word-wrapper first">{/* Website */}Développeur</div>
+          <div className="word-wrapper first">Développeur</div>
         </div>
         <div className="name">
-          <div className="word-wrapper second">{/* developer */}Front-end</div>
+          <div className="word-wrapper second">Front-end</div>
         </div>
         <div className="middle-wrapper">
           <div className="video-wrapper" ref={videoWrapperRef}>
@@ -152,13 +152,6 @@ const HeroSection = ({ delay }) => {
         </div>
         <div className="name ghost-word first">
           <div className="word-wrapper first">
-{/*             <span>W</span>
-            <span>E</span>
-            <span>B</span>
-            <span>S</span>
-            <span>I</span>
-            <span>T</span>
-            <span>E</span> */}
             <span>D</span>
             <span>E</span>
             <span>V</span>
@@ -174,15 +167,6 @@ const HeroSection = ({ delay }) => {
         </div>
         <div className="name ghost-word second">
           <div className="word-wrapper second">
-{/*             <span>D</span>
-            <span>E</span>
-            <span>V</span>
-            <span>E</span>
-            <span>L</span>
-            <span>O</span>
-            <span>P</span>
-            <span>E</span>
-            <span>R</span> */}
             <span>F</span>
             <span>R</span>
             <span>O</span>

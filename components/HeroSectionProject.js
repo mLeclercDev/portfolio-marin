@@ -57,17 +57,10 @@ const HeroSectionProject = ({ title, image }) => {
     // --- Mobile (< 992px) ---
     mm.add("(max-width: 992px)", () => {
       // Fade-in simple du titre
-      gsap.from(".hero-section-project h1", {
+      gsap.from(".hero-section-project", {
         opacity: 0,
+        y: 20,
         duration: 0.6,
-        ease: "power2.out",
-      });
-
-      // Fade-in image
-      gsap.from(".hero-section-project .wrapper-image", {
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.2,
         ease: "power2.out",
       });
 
