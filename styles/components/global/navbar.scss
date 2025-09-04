@@ -74,12 +74,19 @@ header {
             /* Dans votre fichier CSS (par exemple, cursor.scss) */
             @media (max-width: 992px) {
                 display: none !important;
-                background-color: white;
-                mix-blend-mode: normal;
                 &.cursor-presentation {
                 display: none !important;
                 }
             }
         }    
+    }
+    @media (max-width: 992px) {
+        background-color: var(--color1);
+        mix-blend-mode: normal;
+        nav {
+            .logo, .contact-link span {
+                color: var(--color2);
+            }
+        }
     }
 }
