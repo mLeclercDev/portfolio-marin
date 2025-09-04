@@ -75,10 +75,21 @@ const Presentation = ({delayPresentation}) => {
     }, []);
 
   useEffect(() => {
-    console.log("useEffect !")
   if (!isFontReady || !textRefFirst.current || !textRefSecond.current) return;
-      console.log("condition ok !")
-      console.log("delayPresentation : ", delayPresentation)
+
+    // --- check mobile
+    const isMobile = window.matchMedia("(max-width: 992px)").matches;
+
+    if (isMobile) {
+    // Directement appliquer la classe en mobile
+    const img = document.querySelector(".presentation .second img");
+
+      if (img) {
+        img.classList.add("view");
+      }
+      return; // on sort, pas besoin d'animations
+    }
+
     gsap.registerPlugin(ScrollTrigger);
 
     const timeline = gsap.timeline({
