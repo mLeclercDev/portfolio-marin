@@ -13,10 +13,10 @@ const Mockups = ({ images }) => {
 
     if (isMobile) {
     // Directement appliquer la classe en mobile
-    const img = document.querySelector(".mockups .smartphone img");
+    const smartphones = document.querySelector(".mockups .smartphone");
 
       if (img) {
-        img.classList.add("view");
+        smartphones.classList.add("view");
       }
       return; // on sort, pas besoin d'animations
     }
