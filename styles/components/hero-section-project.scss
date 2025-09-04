@@ -26,6 +26,9 @@
           display: block;
           transform-origin: left;
           transform: translateY(100%);
+          will-change: transform;
+          backface-visibility: hidden;
+          -webkit-font-smoothing: antialiased;
         }
       }
       div:not(.arrow-link) {
