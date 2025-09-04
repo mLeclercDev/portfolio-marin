@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import Router from "next/router";
 
 export const animatePageIn = () => {
   const mm = gsap.matchMedia();
@@ -6,7 +7,6 @@ export const animatePageIn = () => {
   // Desktop / Tablette
   mm.add("(min-width: 992px)", () => {
     const tl = gsap.timeline();
-    // Anim "in" si nécessaire
     return () => tl.kill();
   });
 
@@ -37,7 +37,11 @@ export const animatePageOut = (href, router) => {
         stagger: 0.1,
         className: "layers__items in",
         onComplete: () => {
-          window.scrollTo(0, 0);
+          const handle = () => {
+            window.scrollTo(0, 0);
+            Router.events.off("routeChangeComplete", handle);
+          };
+          Router.events.on("routeChangeComplete", handle);
           router.push(href);
         },
       });
@@ -47,15 +51,19 @@ export const animatePageOut = (href, router) => {
     return () => {};
   });
 
-  // Mobile (nouvelle approche)
+  // Mobile
   mm.add("(max-width: 992px)", () => {
     gsap.to("main > * , footer", {
       opacity: 0,
-      y: 20, // léger translateY pour un effet de mouvement
-      duration: 0.8, // rallongé pour que l'animation soit visible
+      y: 20,
+      duration: 0.8,
       ease: "power1.out",
       onComplete: () => {
-        window.scrollTo(0, 0);
+        const handle = () => {
+          window.scrollTo(0, 0);
+          Router.events.off("routeChangeComplete", handle);
+        };
+        Router.events.on("routeChangeComplete", handle);
         router.push(href);
       },
     });
