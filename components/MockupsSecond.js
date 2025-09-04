@@ -11,6 +11,7 @@ const MockupsSecond = ({ videos }) => {
     const cursorContainersRef = useRef([]);
     const reviewsRef = useRef([]);
     const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const videoRefs = useRef([]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(min-width: 992px)");
@@ -116,6 +117,21 @@ const MockupsSecond = ({ videos }) => {
 
     }, [isLargeScreen]);
 
+    // ──────────────── Force autoplay sur mobile ────────────────
+    useEffect(() => {
+        if (isLargeScreen) return;
+        videoRefs.current.forEach(video => {
+            if (!video) return;
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        });
+    }, [isLargeScreen, videos]);
+
     return (
         <section className="mockups-second">
             <div className='horizontal-wrapper'>
@@ -123,6 +139,7 @@ const MockupsSecond = ({ videos }) => {
                     {videos.map((video, i) => (
                         <div className='mockup-section' key={i}>
                             <video
+                                ref={el => videoRefs.current[i] = el}
                                 className='mockup-video fit-cover'
                                 src={video.fields.file.url.startsWith('http') ? video.fields.file.url : `https:${video.fields.file.url}`}
                                 width="1440"
