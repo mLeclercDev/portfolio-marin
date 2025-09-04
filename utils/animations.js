@@ -23,7 +23,7 @@ export const animatePageIn = () => {
                 onComplete: () => {
                   gsap.set(
                     "footer",
-                    { opacity: 1 }
+                    { opacity: 1, delay: 2 }
                   );
                 },
        }
