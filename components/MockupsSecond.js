@@ -118,6 +118,7 @@ const MockupsSecond = ({ videos }) => {
 
     useEffect(() => {
   if (!isLargeScreen) {
+    console.log("ça marche pourtant")
     const videos = document.querySelectorAll(".mockup-video");
     videos.forEach(video => {
       video.play().catch(() => {}); // ignore si le navigateur bloque
@@ -139,6 +140,7 @@ const MockupsSecond = ({ videos }) => {
                                 muted
                                 loop
                                 autoPlay
+                                playsInline
                             />
                         </div>
                     ))}
