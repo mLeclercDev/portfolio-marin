@@ -25,10 +25,8 @@
         .transform {
           display: block;
           transform-origin: left;
-          transform: translateY(100%) translateZ(0);
+          transform: translateY(100%);
           will-change: transform;
-          backface-visibility: hidden;
-          -webkit-font-smoothing: antialiased;
         }
       }
       div:not(.arrow-link) {
@@ -80,6 +78,10 @@
       transform: none;
       h1 > div {
         row-gap: 30px;
+      }
+      h1 .o-wrapper .transform {
+          transform: translateY(0%);
+          will-change: opacity;
       }
     }
   }

@@ -7,80 +7,107 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/hero-section-project.scss'
 
-gsap.registerPlugin(ScrollTrigger, CustomEase); // Enregistrez ScrollTrigger
+gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 CustomEase.create(
   "hyperBounce",
-  "0.4,0,0.2,1" // grosse extrapolation pour un effet très rebondissant
+  "0.4,0,0.2,1" // effet rebond
 );
 
-const HeroSectionProject = ({title, image}) => {
-    const [isRendered, setIsRendered] = useState(false);
-    const textRef = useRef(null);
+const HeroSectionProject = ({ title, image }) => {
+  const [isRendered, setIsRendered] = useState(false);
+  const textRef = useRef(null);
 
   useEffect(() => {
     if (!isRendered) return;
 
-    gsap.to(".hero-section-project .transform", { y: "0%", stagger: 0.075, duration: 0.8, ease: "hyperBounce", delay: 0.1, force3D: true });
+    const mm = gsap.matchMedia();
 
-    var titleAnimation = gsap.timeline({
+    // --- Desktop & tablettes (>= 992px) ---
+    mm.add("(min-width: 992px)", () => {
+      // Animation du titre (split)
+      gsap.to(".hero-section-project .transform", {
+        y: "0%",
+        stagger: 0.075,
+        duration: 0.8,
+        ease: "hyperBounce",
+        delay: 0.1,
+        force3D: true,
+      });
+
+      // Parallax image
+      const titleAnimation = gsap.timeline({
         scrollTrigger: {
-            trigger: ".hero-section-project .container:nth-child(2)",
-            markers: false,
-            start: '0% 100%',
-            end: 'bottom 0%',
-            scrub: 1
-        }
-    })
-    titleAnimation.to(".hero-section-project .wrapper-image img", {
+          trigger: ".hero-section-project .container:nth-child(2)",
+          markers: false,
+          start: "0% 100%",
+          end: "bottom 0%",
+          scrub: 1,
+        },
+      });
+      titleAnimation.to(".hero-section-project .wrapper-image img", {
         y: "-40",
-    })
+      });
 
-      // Animation spécifique pour mobile (<992px)
-  const mm = gsap.matchMedia();
-
-  mm.add("(max-width: 991px)", () => {
-    // Exemple : faire apparaître le titre avec un scale léger
-    gsap.from(".hero-section-project .wrapper-image", {
-      opacity: 0,
-      scale: 0.95,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.05,
-      delay: 0.5,
-      ease: "hyperBounce"
+      return () => {
+        titleAnimation.kill();
+      };
     });
 
-    return () => mobileTimeline.kill(); // nettoyer si media change
+    // --- Mobile (< 992px) ---
+    mm.add("(max-width: 992px)", () => {
+      // Fade-in simple du titre
+      gsap.from(".hero-section-project h1", {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
 
+      // Fade-in image
+      gsap.from(".hero-section-project .wrapper-image", {
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power2.out",
+      });
+
+      return () => {}; // cleanup inutile ici
     });
-
-  });
+  }, [isRendered]);
 
   useEffect(() => {
     setIsRendered(true);
-    console.log(" setIsRendered(true);")
   }, [textRef]);
 
   return (
     <section className="hero-section-project">
-        <div className='container'>
-            <h1>
-                <SplitText
-                  LineWrapper={({ children }) =><>{children}</>}
-                  WordWrapper={({ children }) => <div className='o-wrapper'><span className='transform'>{children}</span></div>}
-                  LetterWrapper={({ children }) => <>{children}</>}
-                  ref={textRef}
-                >
-                    {title}
-                </SplitText> 
-            </h1>
+      <div className="container">
+        <h1>
+          <SplitText
+            LineWrapper={({ children }) => <>{children}</>}
+            WordWrapper={({ children }) => (
+              <div className="o-wrapper">
+                <span className="transform">{children}</span>
+              </div>
+            )}
+            LetterWrapper={({ children }) => <>{children}</>}
+            ref={textRef}
+          >
+            {title}
+          </SplitText>
+        </h1>
+      </div>
+      <div className="container">
+        <div className="wrapper-image">
+          <Image
+            src={`https:${image}`}
+            alt="Mon image"
+            width={1920}
+            height={1080}
+            quality={80}
+          />
         </div>
-        <div className='container'>
-            <div className="wrapper-image">
-                <Image src={`https:${image}`} alt="Mon image" width={1920} height={1080} quality={80} />
-            </div>
-        </div>
+      </div>
     </section>
   );
 };
