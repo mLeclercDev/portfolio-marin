@@ -19,6 +19,7 @@ const Navbar = ({ delay = 0 }) => {
   const pathname = usePathname();
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHoveringHeader, setIsHoveringHeader] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     if (delay == null) return;
