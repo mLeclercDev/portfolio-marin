@@ -11,8 +11,8 @@ export const animatePageOut = (href, router) => {
   if (banners) {
     const tl = gsap.timeline()
 
-    gsap.set("main", { opacity: 0, delay: 1 })
-    gsap.set("footer", { opacity: 0, delay: 1 })
+    gsap.set("main", { opacity: 0, delay: 0.5 })
+    gsap.set("footer", { opacity: 0, delay: 0.5 })
     //gsap.set(".hero-project img",{ className: "fit-cover", delay: 0.5 })
 
     tl.to([banners], {
