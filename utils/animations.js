@@ -34,7 +34,7 @@ export const animatePageOut = (href, router) => {
     if (banners.length) {
       const tl = gsap.timeline();
 
-      gsap.set(["main", "footer"], { opacity: 0, delay: 1 });
+      gsap.set(["main"], { opacity: 0, delay: 1 });
 
       tl.to(banners, {
         duration: 1,
