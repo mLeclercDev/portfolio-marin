@@ -156,13 +156,10 @@
             width: fit-content;
             overflow: hidden;
             margin-bottom: 15px;
+            border-radius: 4px;
             .img-wrapper {
                 height: 210px;
                 transform: none;
-                img.view {
-                    clip-path: none;
-                    transform: none;
-                }
                 &.first {
                     position: relative;
                 }
