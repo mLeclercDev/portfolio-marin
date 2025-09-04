@@ -114,26 +114,16 @@ const MockupsSecond = ({ videos }) => {
             },
         });
 
-        // Ajouter des écouteurs d'événements pour jouer/mettre en pause la vidéo
-/*         const videos = document.querySelectorAll(".mockup-video");
-        videos.forEach(video => {
-            video.addEventListener("mouseenter", () => video.play());
-            video.addEventListener("mouseleave", () => video.pause());
-            // Supprimez l'attribut autoplay si l'écran est large
-            video.removeAttribute('autoplay');
-        }); */
-
     }, [isLargeScreen]);
 
-/*     useEffect(() => {
-        if (!isLargeScreen) {
-            const videos = document.querySelectorAll(".mockup-video");
-            videos.forEach(video => {
-                // Ajoutez l'attribut autoplay si l'écran est petit
-                video.setAttribute('autoplay', 'true');
-            });
-        }
-    }, [isLargeScreen]); */
+    useEffect(() => {
+  if (!isLargeScreen) {
+    const videos = document.querySelectorAll(".mockup-video");
+    videos.forEach(video => {
+      video.play().catch(() => {}); // ignore si le navigateur bloque
+    });
+  }
+}, [isLargeScreen]);
 
     return (
         <section className="mockups-second">
