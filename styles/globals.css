@@ -435,11 +435,6 @@ main.tools-active {
   overflow: hidden;
   margin: 4px 0 0 5px;
 }
-@supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
-  .arrow-link .arrow {
-    margin: 2px 0 0 5px;
-  }
-}
 .arrow-link .arrow svg {
   position: absolute;
   right: 0;
