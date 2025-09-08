@@ -16,7 +16,7 @@
       //font-style: italic;
       letter-spacing: -5.4px;
       margin-bottom: 2rem;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 0.9;
       font-family: var(--font2);
       overflow-wrap: break-word;
@@ -33,6 +33,16 @@
       span {
         position: relative;
         z-index: 11;
+      }
+      &:first-child span {
+        &:nth-child(9), &:nth-child(10), &:nth-child(11) {
+          opacity: 0;
+        }
+      }
+      &:nth-child(2) span {
+        &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9) {
+          opacity: 0;
+        }
       }
       &:first-child,
       &.ghost-word.first {

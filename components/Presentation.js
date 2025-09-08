@@ -132,7 +132,7 @@ const Presentation = ({delayPresentation}) => {
             </div>
             <div className='img-wrapper second'>
               <Image className='fit-cover'
-              src="/Images/layer-2.png"
+              src="/Images/marin-portfolio.png"
               alt="Mon image"
               width={250}
               height={320} 

@@ -17,7 +17,7 @@
   font-size: 9rem;
   letter-spacing: -5.4px;
   margin-bottom: 2rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 0.9;
   font-family: var(--font2);
   overflow-wrap: break-word;
@@ -35,6 +35,12 @@
 .hero-second .container .name span {
   position: relative;
   z-index: 11;
+}
+.hero-second .container .name:first-child span:nth-child(9), .hero-second .container .name:first-child span:nth-child(10), .hero-second .container .name:first-child span:nth-child(11) {
+  opacity: 0;
+}
+.hero-second .container .name:nth-child(2) span:nth-child(5), .hero-second .container .name:nth-child(2) span:nth-child(6), .hero-second .container .name:nth-child(2) span:nth-child(7), .hero-second .container .name:nth-child(2) span:nth-child(8), .hero-second .container .name:nth-child(2) span:nth-child(9) {
+  opacity: 0;
 }
 .hero-second .container .name:first-child, .hero-second .container .name.ghost-word.first {
   text-align: left;

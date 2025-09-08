@@ -129,10 +129,32 @@ const HeroSection = ({ delay }) => {
     <section className="hero-second">
       <div className="container">
         <div className="name">
-          <div className="word-wrapper first">Developpeur</div>
+          <div className="word-wrapper first">
+            <span>D</span>
+            <span>E</span>
+            <span>V</span>
+            <span>E</span>
+            <span>L</span>
+            <span>O</span>
+            <span>P</span>
+            <span>P</span>
+            <span>E</span>
+            <span>U</span>
+            <span>R</span>
+            </div>
         </div>
         <div className="name">
-          <div className="word-wrapper second">Front-end</div>
+          <div className="word-wrapper second">
+            <span>F</span>
+            <span>r</span>
+            <span>o</span>
+            <span>n</span>
+            <span>t</span>
+            <span>-</span>
+            <span>e</span>
+            <span>n</span>
+            <span>d</span>
+            </div>
         </div>
         <div className="middle-wrapper">
           <div className="video-wrapper" ref={videoWrapperRef}>
