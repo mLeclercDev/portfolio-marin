@@ -129,7 +129,7 @@ const HeroSection = ({ delay }) => {
     <section className="hero-second">
       <div className="container">
         <div className="name">
-          <div className="word-wrapper first">Développeur</div>
+          <div className="word-wrapper first">Developpeur</div>
         </div>
         <div className="name">
           <div className="word-wrapper second">Front-end</div>

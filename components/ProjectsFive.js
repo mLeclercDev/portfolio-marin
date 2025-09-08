@@ -81,7 +81,7 @@ const ProjectsFourth = ({ projects }) => {
             </div>
           </div>
           <div className="project-information">
-            {project.fields.title} • {project.fields.description}
+           <span>{project.fields.title}</span> • {project.fields.description}
           </div>
         </div>
       </div>

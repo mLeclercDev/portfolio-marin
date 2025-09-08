@@ -1,6 +1,6 @@
 footer {
     display: none;
-    //padding: 312px 0 30px;
+    //padding: 325px 0 30px;
     //transform: translateY(200px);
     padding: 0 0 30px;
     background-color: var(--color2);
@@ -20,7 +20,7 @@ footer {
         left: 50%;
         position: absolute;
         top: 156px;
-        height:312px;
+        height:325px;
         overflow:hidden;
         @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
             transform: translate(-50%, -50%) !important;
@@ -28,16 +28,17 @@ footer {
         .boxes {
             position:relative;
             left:-1970px;
-            height: 312px;
+            height: 325px;
             .box {
                 position:absolute;
                 width: 1970px;
-                height:312px;
-                font-family: var(--font2);
-                font-weight: 400;
+                height:325px;
+                font-family: var(--font4);
+                font-weight: 700;
                 color: var(--color1);
                 font-size:260px;
                 text-align:center;
+                line-height: 1.25;
             }
         }
       }

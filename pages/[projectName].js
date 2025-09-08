@@ -112,7 +112,7 @@ const ProjectDetailPage = ({projects}) => {
     {/*   <Navbar /> */}
       <main>
         <HeroSectionProject image={projectData.fields.featured_image.fields.file.url}  title={projectData.fields.titleH1} />
-        <TextSeparator content={" Client brief - "} />
+        <TextSeparator content={" Brief client - "} />
         <Brief brief={projectData.fields.brief} />
         <Process process={projectData.fields.process} />
         <MockupsSecond videos={projectData.fields.desktopMockups} />

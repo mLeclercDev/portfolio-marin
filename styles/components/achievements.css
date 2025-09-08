@@ -1,0 +1,90 @@
+.achievements {
+  height: 230vh;
+}
+.achievements .scroll-value {
+  position: fixed;
+  z-index: 1111;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  color: red;
+  font-size: 32px;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .achievements {
+    height: 200vh;
+  }
+}
+@media (max-width: 992px) {
+  .achievements {
+    height: 300vh;
+  }
+}
+.achievements .home-inner {
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.achievements .home-inner h2 {
+  font-size: var(--fs-1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--color1);
+  text-align: center;
+  transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 95));
+  transform-origin: 51% calc(55% - var(--progress1) * 0%);
+}
+@media (min-width: 1480px) {
+  .achievements .home-inner h2 {
+    transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 130));
+  }
+}
+@media (max-width: 1200px) {
+  .achievements .home-inner h2 {
+    transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 150));
+  }
+}
+@media (max-width: 992px) {
+  .achievements .home-inner h2 {
+    transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 230));
+  }
+}
+@media (max-width: 468px) {
+  .achievements .home-inner h2 {
+    transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 460));
+    font-size: var(--fs-3);
+  }
+}
+@supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+  .achievements .home-inner h2 {
+    transform-origin: 51% calc(40.1% - var(--progress1) * 0%);
+    transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 110));
+  }
+  @media (min-width: 1480px) {
+    .achievements .home-inner h2 {
+      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 150));
+    }
+  }
+  @media (max-width: 1200px) {
+    .achievements .home-inner h2 {
+      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 180));
+    }
+  }
+  @media (max-width: 992px) {
+    .achievements .home-inner h2 {
+      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 230));
+    }
+  }
+  @media (max-width: 468px) {
+    .achievements .home-inner h2 {
+      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 860));
+      font-size: var(--fs-3);
+    }
+  }
+}
+/*# sourceMappingURL=achievements.css.map */

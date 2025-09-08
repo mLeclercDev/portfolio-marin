@@ -9,7 +9,9 @@
 
     //FONTS
     --font1: 'Inter', sans-serif;
-    --font2: 'Anderson Grotesk', sans-serif;
+    --font3: 'Anderson Grotesk', sans-serif;
+    --font2: 'GeneralSans-Regular', sans-serif;
+    --font4: 'GeneralSans-Italic', sans-serif;
     //--font3: 'silkaitalic', sans-serif; 
 
     //SIZES BREAKPOINT
@@ -131,7 +133,7 @@ h1,
     letter-spacing: -2px;
   }
   @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
-    line-height: 0.9;
+    line-height: 0.95;
   }
 }
 
@@ -141,11 +143,11 @@ h2,
   font-size: var(--fs-0);
   margin-bottom: 2rem;
   letter-spacing: -6.4px;
-  line-height: 0.8;
+  line-height: 0.85;
   @media (max-width: 468px) {
     font-size: var(--fs-2-sm);
     letter-spacing: -2px;
-    line-height: 0.9;
+    line-height: 0.95;
   }
 }
 

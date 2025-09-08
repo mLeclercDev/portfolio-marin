@@ -29,8 +29,8 @@
       left: 50%;
       color: var(--color1);
       text-align: center;
-      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 80));
-      transform-origin: 51% calc(48.5% - var(--progress1) * 0%); 
+      transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 95));
+      transform-origin: 51% calc(55% - var(--progress1) * 0%); 
       @media (min-width: 1480px) {
         transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 130));
       }
@@ -38,7 +38,7 @@
         transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 150));
       }
       @media (max-width: 992px) {
-        transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 190));
+        transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 230));
       }
       @media (max-width: 468px) {
         transform: translate(-50%, -50%) scale(calc(1 + var(--progress1) * 460));
