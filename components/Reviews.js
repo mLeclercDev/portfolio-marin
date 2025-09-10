@@ -231,8 +231,10 @@ const Reviews = () => {
                         <span className='line'></span>
                     </a>
                     <a href='http://muriellepariscreations.fr/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
-                        <div className='name-wrapper'><div className='name'>Murielle Paris</div></div>
-                        <div className='quote'>Travailler avec lui a été une expérience fluide et agréable. Il a parfaitement capté l’essence de Murielle Paris Créations, créant un site qui met en valeur son travail artisanal. Professionnel, attentif et très compétent.</div>
+                        <div className='name-wrapper'><div className='name'>Benjamin Maigne</div></div>
+                        <div className='quote'>
+                            Travailler avec Marin sur le site Mavoie a été une expérience fluide et efficace. Il a parfaitement intégré nos maquettes sur Webflow, en respectant chaque détail avec professionnalisme. Fiable, précis et très compétent.
+                        </div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>

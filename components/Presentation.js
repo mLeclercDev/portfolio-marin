@@ -147,7 +147,7 @@ const Presentation = ({delayPresentation}) => {
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
                   LetterWrapper={({ children }) => <>{children}</>}
                 >
-                Spacersp J’ai 28 ans et je suis passionné de sport, toujours partant pour une séance, quel que soit le domaine. J’aime profiter des terrasses de Rennes avec mes amis, discuter de tout autour d’un verre et savourer chaque instant pleinement.                </SplitText> 
+                Spacersp Quand je ne code pas, je tape quelques balles de squash ou padel, je pars profiter d’une partie de pêche sur la côte bretonne ou voyager un peu partout. Et dès que possible, je retrouve mes amis sur les terrasses ou lors de festivals de musique pour rigoler et partager de bons moments.                </SplitText> 
                 )}
             </div>
             <div className='text-wrapper second' ref={textRefSecond}>
@@ -158,7 +158,7 @@ const Presentation = ({delayPresentation}) => {
                   LetterWrapper={({ children }) => <>{children}</>}
              
                 >
-                Spacersp Je suis développeur de 28 ans, avec une expérience en agence, et je travaille aujourd’hui en freelance. J’accompagne mes clients dans la création et la réalisation de sites internet qui répondent parfaitement à leurs besoins et attentes.                </SplitText> 
+                Spacersp Développeur front-end freelance, je crée des sites web sur mesure et intuitifs, pensés pour offrir une expérience utilisateur fluide et marquante. J’accompagne particuliers, entreprises et agences pour transformer leurs idées en expériences digitales sur mesure.                </SplitText> 
                 )}
             </div>
             <div onClick={() => handleClick()} className='arrow-link cs-scale'>
