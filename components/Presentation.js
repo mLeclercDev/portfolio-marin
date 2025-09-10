@@ -147,7 +147,7 @@ const Presentation = ({delayPresentation}) => {
                   WordWrapper={({ children }) => <span className='word'>{children}</span>}
                   LetterWrapper={({ children }) => <>{children}</>}
                 >
-                Spacersp Quand je ne code pas, je tape quelques balles de squash ou padel, je pars profiter d’une partie de pêche sur la côte bretonne ou voyager un peu partout. Et dès que possible, je retrouve mes amis sur les terrasses ou lors de festivals de musique pour rigoler et partager de bons moments.                </SplitText> 
+                Spacersp Hors écran, je tape quelques balles au squash ou padel, je tente ma chance à la pêche sur la côte bretonne ou je pars explorer le monde, et je termine souvent sur une terrasse ou à un festival avec mes amis.                </SplitText> 
                 )}
             </div>
             <div className='text-wrapper second' ref={textRefSecond}>
@@ -158,7 +158,7 @@ const Presentation = ({delayPresentation}) => {
                   LetterWrapper={({ children }) => <>{children}</>}
              
                 >
-                Spacersp Développeur front-end freelance, je crée des sites web sur mesure et intuitifs, pensés pour offrir une expérience utilisateur fluide et marquante. J’accompagne particuliers, entreprises et agences pour transformer leurs idées en expériences digitales sur mesure.                </SplitText> 
+                Spacersp Développeur front-end freelance, j’accompagne particuliers, entreprises et agences pour transformer leurs idées en sites sur mesure et intuitifs, centrés sur l’expérience utilisateur.                </SplitText> 
                 )}
             </div>
             <div onClick={() => handleClick()} className='arrow-link cs-scale'>
