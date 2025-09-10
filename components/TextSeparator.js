@@ -12,6 +12,16 @@ const Separator = ({content}) => {
     if (!isRendered) return;
     gsap.registerPlugin(ScrollTrigger); // Enregistrez ScrollTrigger
 
+    const screenWidth = window.innerWidth;
+    let translateXValue;
+
+    if (screenWidth > 992) {
+      // Desktop : si la largeur du contenu dépasse 660px, on adapte
+      translateXValue = -660; // 1000 px max par exemple
+    } else {
+      translateXValue = -330; // valeur par défaut pour tablettes et mobiles
+    }
+
     var timeline = gsap.timeline({
       scrollTrigger: {
           trigger: ".text-separator",
@@ -23,8 +33,8 @@ const Separator = ({content}) => {
     });
 
     timeline.to(".text-separator .inner", {
-      transform: "translateX(-660px)",
-      ease: "cubic-bezier(0.4,0,0.2,1)"
+      x: translateXValue,
+      ease: "linear"
   })
 
 
