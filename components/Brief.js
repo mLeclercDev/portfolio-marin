@@ -24,7 +24,6 @@ const Brief = ({ brief }) => {
     const font = new FontFaceObserver("Inter");
 
     font.load().then(() => {
-      console.log("Font Inter loaded ✅");
       setIsFontReady(true);
     }).catch(() => {
       console.warn("Font failed to load, proceeding anyway");
@@ -52,7 +51,6 @@ const Brief = ({ brief }) => {
         const linesSecond = textRef.current.querySelectorAll(
           ".brief .second .line"
         );
-        console.log("lines : ", linesSecond);
 
         timeline.from(linesSecond, {
           y: "100%",

@@ -5,41 +5,17 @@
         transform: translateX(-78px) rotate(90deg);
         mix-blend-mode: difference;
     }
-    .flex-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        .circles {
-            display: flex;
-            position: relative;
-            width: 322px;
-            height: 200px;
-            .circle {
-                width: 200px;
-                min-width: 200px;
-                height: 200px;
-                border-radius: 50%;
-                &.first {
-                    background-color: var(--color1);
-                }
-                &.second {
-                    border: 2px solid #FCFBF6;
-                    will-change: transform;
-                    transform: translateX(-200px) rotate(180deg);
-                    transition: 1.15s transform cubic-bezier(0.4,0,0.2,1) 0.35s, 1.15s mix-blend-mode cubic-bezier(0.4,0,0.2,1) 0.35s;
-                }
-            }
-        }
-        h2 {
-            color: var(--color1);
-            position: relative;
-            overflow: hidden;
-            span.word-wrapper {
-                display: block;
-                transform: translateY(100%) rotate(8deg);
-                transform-origin: left;
-            }
+    h2 {
+        color: var(--color1);
+        position: relative;
+        overflow: hidden;
+        display: block;
+        width: fit-content;
+        margin: 0 0 0 auto;
+        span.word-wrapper {
+            display: block;
+            transform: translateY(100%) rotate(8deg);
+            transform-origin: left;
         }
     }
     .dropdowns {

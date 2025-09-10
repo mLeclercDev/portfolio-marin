@@ -36,7 +36,6 @@ export async function getStaticPaths() {
   try {
     // Récupérez tous les projets depuis Contentful
     const projects = await client.getEntries({ content_type: 'project' });
-    console.log("projects : ", projects)
 
     // Générez les chemins dynamiques pour chaque projet
     const paths = projects.items.map((project) => ({
@@ -61,7 +60,6 @@ export async function getStaticProps() {
   try {
     // Récupérer les données depuis Contentful en utilisant différentes requêtes
     const projects = await client.getEntries({ content_type: 'project' });
-    console.log("projects : ", projects)
     // Ajoutez d'autres requêtes pour chaque content type nécessaire
 
     // Renvoyer les données récupérées en tant que props
@@ -87,7 +85,6 @@ const ProjectDetailPage = ({projects}) => {
   const router = useRouter();
   const { projectName } = router.query;
   const [projectData, setProjectData] = useState(null);
-  console.log("projectData : ", projectData)
 
   useEffect(() => { 
     const project = projects.find(project => formatToUrl(project.fields.title) === projectName);

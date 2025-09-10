@@ -5,39 +5,17 @@
   transform: translateX(-78px) rotate(90deg);
   mix-blend-mode: difference;
 }
-.tools .flex-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-.tools .flex-wrapper .circles {
-  display: flex;
-  position: relative;
-  width: 322px;
-  height: 200px;
-}
-.tools .flex-wrapper .circles .circle {
-  width: 200px;
-  min-width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-.tools .flex-wrapper .circles .circle.first {
-  background-color: var(--color1);
-}
-.tools .flex-wrapper .circles .circle.second {
-  border: 2px solid #FCFBF6;
-  will-change: transform;
-  transform: translateX(-200px) rotate(180deg);
-  transition: 1.15s transform cubic-bezier(0.4, 0, 0.2, 1) 0.35s, 1.15s mix-blend-mode cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
-}
-.tools .flex-wrapper h2 {
+.tools h2 {
   color: var(--color1);
   position: relative;
   overflow: hidden;
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 0 0 auto;
 }
-.tools .flex-wrapper h2 span.word-wrapper {
+.tools h2 span.word-wrapper {
   display: block;
   transform: translateY(100%) rotate(8deg);
   transform-origin: left;

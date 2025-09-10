@@ -42,8 +42,9 @@ const Separator = ({content}) => {
   const mm = gsap.matchMedia();
 
   mm.add("(max-width: 991px)", () => {
+    let mobileTimeline; // ← déclaration ici
     // Exemple : faire apparaître le titre avec un scale léger
-    gsap.from(".text-separator", {
+    mobileTimeline = gsap.from(".text-separator", {
       opacity: 0,
       x: 60,
       duration: 0.6,
@@ -52,8 +53,9 @@ const Separator = ({content}) => {
       ease: "linear"
     });
 
-    return () => mobileTimeline.kill(); // nettoyer si media change
-
+    return () => {
+      if (mobileTimeline) mobileTimeline.kill(); // safe kill
+    };
     });
 
   }, [isRendered]);

@@ -42,7 +42,7 @@ const Footer = ({ triggerSelector }) => {
         setMarqueeDuration(80);  // animation plus rapide sur mobile
         
     } else {
-        boxWidth = 1970; // desktop
+        boxWidth = 1840; // desktop
     }
 
     // Déclarer totalWidth et autres variables
@@ -166,9 +166,7 @@ const Footer = ({ triggerSelector }) => {
             const height = image.height * scaleFactor;
 
             const xScale = width / image.width;
-            console.log("xScale : ", xScale)
             const yScale = height / image.height;
-            console.log("yScale : ", yScale)
 
             const body = Matter.Bodies.rectangle(x, y, width, height, {
                 render: {

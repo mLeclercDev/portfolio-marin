@@ -14,7 +14,7 @@ function formatToUrl(title) {
 }
 
 const Navbar = ({ delay = 0 }) => {
-  console.log("delay : ", delay)
+  //console.log("delay : ", delay)
   const router = useRouter();
   const pathname = usePathname();
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -80,7 +80,6 @@ const Navbar = ({ delay = 0 }) => {
   const handleLinkHover = (e) => {
     if (!isDesktop) return; // 🚫 Désactivé si pas desktop
     const target = e.target.closest('.hover-this');
-    console.log("target : ", target)
     if (!target) return;
 
     const span = target.querySelector("span");
@@ -99,8 +98,6 @@ const Navbar = ({ delay = 0 }) => {
 
   // Fonction à exécuter au clic sur un élément de class layers__item
   const layersIn = (href) => {    
-    console.log("href : ", href) 
-    console.log("pathname : ", pathname)    
     if (pathname !== href) {
       animatePageOut(href, router)
     } 

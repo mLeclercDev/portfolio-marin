@@ -34,7 +34,6 @@ const Testimonial = ({ testimonial }) => {
         const linesSecond = textRef.current.querySelectorAll(
           ".testimonial .line"
         );
-        console.log("lines : ", linesSecond);
 
         timeline.to(linesSecond, {
           y: "0%",
