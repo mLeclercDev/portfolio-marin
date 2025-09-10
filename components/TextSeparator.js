@@ -19,7 +19,7 @@ const Separator = ({content}) => {
       // Desktop : si la largeur du contenu dépasse 660px, on adapte
       translateXValue = -660; // 1000 px max par exemple
     } else {
-      translateXValue = -115; // valeur par défaut pour tablettes et mobiles
+      translateXValue = -330; // valeur par défaut pour tablettes et mobiles
     }
 
     var timeline = gsap.timeline({

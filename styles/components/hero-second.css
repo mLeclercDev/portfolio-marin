@@ -58,6 +58,33 @@
 .hero-second .container .name.ghost-word.second span:not(:nth-child(5)):not(:nth-child(6)):not(:nth-child(7)):not(:nth-child(8)):not(:nth-child(9)) {
   opacity: 0;
 }
+@media (min-width: 1580px) {
+  .hero-second .container .name:first-child, .hero-second .container .name.ghost-word.first {
+    top: calc(50% - 250px);
+  }
+  .hero-second .container .name:nth-child(2), .hero-second .container .name.ghost-word.second {
+    text-align: right;
+    top: calc(50% + 240px);
+  }
+}
+@media (min-width: 1720px) {
+  .hero-second .container .name:first-child, .hero-second .container .name.ghost-word.first {
+    top: calc(50% - 270px);
+  }
+  .hero-second .container .name:nth-child(2), .hero-second .container .name.ghost-word.second {
+    text-align: right;
+    top: calc(50% + 260px);
+  }
+}
+@media (min-width: 1860px) {
+  .hero-second .container .name:first-child, .hero-second .container .name.ghost-word.first {
+    top: calc(50% - 290px);
+  }
+  .hero-second .container .name:nth-child(2), .hero-second .container .name.ghost-word.second {
+    text-align: right;
+    top: calc(50% + 280px);
+  }
+}
 .hero-second .container .middle-wrapper {
   display: flex;
   align-items: center;

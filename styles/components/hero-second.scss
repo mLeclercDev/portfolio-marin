@@ -13,7 +13,6 @@
     .name {
       width: 100%; 
       font-size: 9rem;
-      //font-style: italic;
       letter-spacing: -5.4px;
       margin-bottom: 2rem;
       font-weight: 500;
@@ -66,6 +65,39 @@
       &.ghost-word.second {
         span:not(:nth-child(5)):not(:nth-child(6)):not(:nth-child(7)):not(:nth-child(8)):not(:nth-child(9)) {
           opacity: 0;
+        }
+      }
+      @media (min-width: 1580px) {
+        &:first-child,
+        &.ghost-word.first {
+          top: calc(50% - 250px);
+        }
+        &:nth-child(2),
+        &.ghost-word.second {
+          text-align: right;
+          top: calc(50% + 240px);
+        }
+      }
+      @media (min-width: 1720px) {
+        &:first-child,
+        &.ghost-word.first {
+          top: calc(50% - 270px);
+        }
+        &:nth-child(2),
+        &.ghost-word.second {
+          text-align: right;
+          top: calc(50% + 260px);
+        }
+      }
+      @media (min-width: 1860px) {
+        &:first-child,
+        &.ghost-word.first {
+          top: calc(50% - 290px);
+        }
+        &:nth-child(2),
+        &.ghost-word.second {
+          text-align: right;
+          top: calc(50% + 280px);
         }
       }
     }
