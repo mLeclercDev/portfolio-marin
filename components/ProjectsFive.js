@@ -60,7 +60,7 @@ const ProjectsFourth = ({ projects }) => {
         trigger: ".projects-five",
         start: "top center", // Démarrer le trigger quand le haut de la section atteint le centre de la fenêtre
         end: "bottom center", // Arrêter le trigger quand le bas de la section atteint le centre de la fenêtre
-        markers: true,
+        markers: false,
         onEnter: () => {
             gsap.to(mainElement, { backgroundColor: "#FCFBF6", duration: 0.55, ease: "hyperBounce" });
         },

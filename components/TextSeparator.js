@@ -39,7 +39,7 @@ const Separator = ({content}) => {
       duration: 0.6,
       stagger: 0.05,
       delay: 0.65,
-      ease: "power2.out"
+      ease: "linear"
     });
 
     return () => mobileTimeline.kill(); // nettoyer si media change
