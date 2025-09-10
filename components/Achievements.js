@@ -16,7 +16,7 @@ useEffect(() => {
 
   const mm = gsap.matchMedia();
 
-  mm.add(
+/*   mm.add(
     {
       isMobile: "(max-width: 767px)",
       isTablet: "(min-width: 768px) and (max-width: 1199px)",
@@ -44,7 +44,7 @@ useEffect(() => {
         gsap.to(mainElement, { backgroundColor: "#110F09", duration: 0 });
       }
     }
-  );
+  ); */
 
   return () => mm.revert(); // nettoyage
 }, [scrollProgress]);

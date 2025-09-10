@@ -30,6 +30,7 @@ const ProjectsFourth = ({ projects }) => {
   };
 
   useEffect(() => {
+        const mainElement = document.querySelector("main");
     if (typeof window === "undefined") return;
 
     wrappersRef.current.forEach((wrapper, index) => {
@@ -53,6 +54,22 @@ const ProjectsFourth = ({ projects }) => {
       });
     });
 
+
+    // Créer le trigger pour la section avec la classe "tools"
+    ScrollTrigger.create({
+        trigger: ".projects-five",
+        start: "top center", // Démarrer le trigger quand le haut de la section atteint le centre de la fenêtre
+        end: "bottom center", // Arrêter le trigger quand le bas de la section atteint le centre de la fenêtre
+        markers: true,
+        onEnter: () => {
+            gsap.to(mainElement, { backgroundColor: "#FCFBF6", duration: 0.55, ease: "hyperBounce" });
+        },
+/*         onLeave: () => mainElement.classList.remove("tools-active"),
+        onEnterBack: () => mainElement.classList.add("tools-active"), */
+        onLeaveBack: () => {
+            gsap.to(mainElement, { backgroundColor: "#110F09", duration: 0.55, ease: "hyperBounce" });
+        },
+    });
 
   }, [projects]);
 

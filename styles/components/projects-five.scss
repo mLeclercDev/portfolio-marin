@@ -1,4 +1,6 @@
 .projects-five {
+  background-color: var(--color1);
+  margin-top: -13rem;
   .projects-wrapper {
     display: flex;
     justify-content: space-around;
@@ -70,15 +72,18 @@
   }
 }
 
-@media (max-width: 425px) {
-  .projects-five .projects-wrapper {
-    gap: 5.5rem;
-    padding: 0px 0%;
-    .column {
-      width: 100%;
-      &.right-column {
-        margin-top: 0;
-      }
+@media (max-width: 468px) {
+  .projects-five {
+    margin-top: -10rem;
+    .projects-wrapper {
+        gap: 5.5rem;
+        padding: 0px 0%;
+        .column {
+          width: 100%;
+          &.right-column {
+            margin-top: 0;
+          }
+        }
     }
-  }
+  } 
 }
