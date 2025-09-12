@@ -184,7 +184,7 @@ const Reviews = () => {
                 ref={el => cursorContainersRef.current[1] = el}
                 style={{ visibility: mounted ? 'visible' : 'hidden' }}
             >
-                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Zoé" width={666} height={666} />
+                <Image className='fit-cover' src="/Images/zoe-ringenbach.png" alt="Zoé" width={500} height={500} />
             </div>
                 )}
             {mounted && (
@@ -195,7 +195,7 @@ const Reviews = () => {
                 ref={el => cursorContainersRef.current[2] = el}
                 style={{ visibility: mounted ? 'visible' : 'hidden' }}
             >
-                <Image className='fit-cover' src="/Images/killian-lebras.webp" alt="Murielle" width={1150} height={520} />
+                <Image className='fit-cover' src="/Images/benjamin-maigne.jpeg" alt="Benjamin Maigne" width={1150} height={520} />
             </div>
             )}
 
