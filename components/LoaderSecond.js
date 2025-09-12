@@ -18,6 +18,8 @@ const LoaderSecond = () => {
     linesRef.current = linesRef.current.slice(0, 3);
     const banners = document.querySelectorAll(".layers__items")
     const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "hyperBounce" } });
+    gsap.set("#__next", { overflow: "hidden", height: "100vh" });
+
 
 /*      tl.set("nav", { overflow: "hidden" })
      tl.set("nav .logo", { y: "100%" })
@@ -56,6 +58,7 @@ const LoaderSecond = () => {
          gsap.to("nav .contact-link", { y: "0%", delay: 1.2, duration: 0.8, ease: "hyperBounce" })
          gsap.set("footer", { opacity: 1 })
          gsap.set("nav", { delay: 2, overflow: "visible" })
+         gsap.set("#__next", { overflow: "visible", height: "auto" });
 
         // 🔥 cacher le loader complètement
         const loader = document.querySelector(".loader-second");
