@@ -224,8 +224,7 @@ useEffect(() => {
                     </div>
                     <div className='item-content'>
                         <span>
-                          Le CMS HubSpot permet une intégration fluide des contenus, des outils marketing et du CRM. Je crée des sites HubSpot qui allient l’identité visuelle de la marque à une édition intuitive, permettant aux clients de gérer leur contenu en toute autonomie tout en soutenant leur croissance marketing.                        
-                        </span>
+HubSpot CMS relie contenu, marketing et CRM dans un même outil. J’y ai travaillé 4 ans comme développeur dans une agence certifiée Elite Partner, ce qui me permet aujourd’hui de créer des sites parfaitement intégrés à l’écosystème HubSpot.                        </span>
                     </div>
                     <span className='line'></span>
                 </div>
@@ -247,8 +246,7 @@ useEffect(() => {
                     </div>
                     <div className='item-content'>
                         <span>
-Webflow permet de concevoir visuellement des sites internet tout en gardant un contrôle total sur les interactions et les mises en page responsives. Je crée des sites Webflow qui reflètent votre identité de marque, avec des structures claires et éditables, permettant aux clients de mettre à jour leur contenu facilement.
-                        </span>                   
+Webflow facilite la création visuelle de sites modernes et dynamiques. J’ai mené plusieurs projets dessus, notamment avec des agences spécialisées, en combinant design impactant et gestion simple pour les clients.                        </span>                   
                     </div>
                     <span className='line'></span>
                 </div>
@@ -270,8 +268,7 @@ Webflow permet de concevoir visuellement des sites internet tout en gardant un c
                     </div>
                     <div className='item-content'>
                       <span>
-WordPress permet de gérer facilement le contenu de votre site tout en offrant une grande flexibilité pour des fonctionnalités sur mesure. Je développe des sites WordPress personnalisés, avec des backends intuitifs et des designs responsives, garantissant performance et gestion de contenu fluide.
-                      </span>                    
+WordPress reste la référence pour des sites flexibles et évolutifs. J’ai construit de nombreux projets avec, d’abord en agence puis en freelance, ce qui m’a donné une solide maîtrise de ses thèmes, plugins et développements sur mesure.                      </span>                    
                     </div>
                     <span className='line'></span>
                 </div>
