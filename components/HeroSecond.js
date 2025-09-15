@@ -63,7 +63,7 @@ const HeroSection = ({ delay }) => {
           delay: -0.725,
         }
       )
-      .to(
+      .to( 
         videoWrapperRef.current,
         {
           scale: 1,
@@ -165,6 +165,7 @@ const HeroSection = ({ delay }) => {
                 alt={`Mockup ${i + 1}`}
                 width={1000}
                 height={660}
+                priority
                 className={`fit-cover ${
                   i === activeIndex ? "opacity-100" : "opacity-0"
                 }`}
