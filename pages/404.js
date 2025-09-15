@@ -3,8 +3,15 @@ import Head from 'next/head';
 import Link from "next/link";
 import '../styles/globals.scss';
 import '../styles/components/global/404.scss';
+import { animatePageOut } from "../utils/animations"
 
 export default function Custom404() {
+    // Fonction à exécuter au clic sur un élément de class layers__item
+  const layersIn = (href) => {    
+    if (pathname !== href) {
+      animatePageOut(href, router)
+    } 
+  };
   return (
     <>
     <Head>
@@ -17,7 +24,7 @@ export default function Custom404() {
             <div className='error-wrapper'>
                 <div>Erreur</div>
                 <h1>404</h1>
-                <div onClick={() => handleClick()} className='arrow-link cs-scale'>
+                <div onClick={() => layersIn(`/`)} className='arrow-link cs-scale'>
                     <span className='arrow-span'>
                     Page d&apos;accueil
                     </span>
