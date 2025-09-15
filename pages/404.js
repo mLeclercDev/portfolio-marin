@@ -1,14 +1,23 @@
+"use client";
+
 // pages/404.tsx
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import Layer from '../components/global/Layer';
+import { useRouter } from "next/router";
 import Link from "next/link";
 import '../styles/globals.scss';
 import '../styles/components/global/404.scss';
 import { animatePageOut } from "../utils/animations"
 
 export default function Custom404() {
+const router = useRouter();
+const pathname = router.pathname;
     // Fonction à exécuter au clic sur un élément de class layers__item
   const layersIn = (href) => {    
+    console.log("CLique")
     if (pathname !== href) {
+      console.log("différent")
       animatePageOut(href, router)
     } 
   };
@@ -35,6 +44,7 @@ export default function Custom404() {
                 </div>
             </div>
         </main>
+              <Layer />
     </>
   );
 }
