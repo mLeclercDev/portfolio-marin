@@ -59,7 +59,7 @@ const Mockups = ({ images }) => {
               {pair.map((image, i) => (
                 <div
                   key={i}
-                  className={`smartphone ${i % 2 === 0 ? 'white' : 'black'}`}
+                  className={`smartphone white`}
                 >
                   <div className="inner">
                     <Image

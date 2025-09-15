@@ -1,0 +1,19 @@
+.main-404 {
+  .error-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color2);
+    div,
+    h1,
+    .arrow-link {
+      color: var(--color1);
+    }
+    h1 {
+      font-size: 18rem;
+    }
+  }
+}
