@@ -32,7 +32,7 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
   return (
     <>
       <Head>
-        <title>Mon Portfolio</title>
+        <title>Marin Leclerc – Développeur Web Freelance spécialisé WordPress, Webflow & HubSpot</title>
         <meta name="description" content="Portfolio" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico?v=2" />
