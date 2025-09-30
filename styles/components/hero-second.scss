@@ -133,6 +133,9 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      @media (min-width: 1780px) {
+      font-size: 18px;
+      }
       .line-wrapper {
         position: relative;
         overflow: hidden;

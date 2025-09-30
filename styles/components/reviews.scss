@@ -59,6 +59,10 @@
                 width: 100%;
                 transform-origin: left;
                 transform: translateY(100%) rotate(8deg);
+                font-family: var(--font2);
+                @media (min-width: 1780px) {
+                    font-size: 56px;
+                }
             }
             .quote {
                 position: relative;
@@ -74,6 +78,9 @@
                 font-weight: 500;
                 transform-origin: left;
                 transform: translateY(5px) rotate(2deg);
+                @media (min-width: 1780px) {
+                    font-size: 20px;
+                }
             }
             .arrow {
                 min-width: 47px;
@@ -96,6 +103,11 @@
                         transform: translateY(-50%);
                         transform: translateY(100%) translateX(-100%);
                     }
+                }
+                @media (min-width: 1780px) {
+                    min-width: 57px;
+                    width: 57px;
+                    height: 57px;
                 }
             }
             &:hover {

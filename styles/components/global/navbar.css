@@ -30,6 +30,11 @@ header nav .logo {
   font-size: 22px;
   color: var(--color1);
 }
+@media (min-width: 1780px) {
+  header nav .logo {
+    font-size: 26px;
+  }
+}
 header nav .logo.no-interaction {
   pointer-events: none;
 }
@@ -54,6 +59,11 @@ header nav .contact-link span {
   transition: transform 0.1s linear;
   font-size: 16px;
   line-height: 1.5;
+}
+@media (min-width: 1780px) {
+  header nav .contact-link span {
+    font-size: 20px;
+  }
 }
 header nav .contact-link.hover-this:hover ~ .cursor {
   transform: translate(-50%, -50%) scale(0.4);

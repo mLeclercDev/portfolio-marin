@@ -30,7 +30,7 @@
     --fs-2-sm: clamp(3.5rem,20000/(var(--sizeMax) - var(--sizeMin)) * 1vw + (var(--sizeMin) * 220 - var(--sizeMax) * 60)/(var(--sizeMin) - var(--sizeMax))/16 * 1rem,13.75rem);
     --fs-3-sm: clamp(1.125rem,1500/(var(--sizeMax) - var(--sizeMin)) * 1vw + (var(--sizeMin) * 120 - var(--sizeMax) * 50)/(var(--sizeMin) - var(--sizeMax))/16 * 1rem,7.5rem);
 
-
+    --sizexl: 1780px;
     --size0: 1380px;
     --size1: 1024px;
     --size2: 992px;
@@ -40,6 +40,9 @@
 
     font-size: 16px;
 
+    @media (min-width: 1780px) {
+    font-size: 20px;
+    }
     @media (max-width: 1024px) {
         font-size: 14px;
     }
@@ -241,6 +244,18 @@ main {
               right: 0;
               top: 50%;
               transform: translateY(-50%);
+          }
+      }
+  }
+  @media (min-width: 1780px) {
+      font-size: 20px;
+      .arrow {
+          width: 15px;
+          height: 15px;
+          margin: 5px 0 0 5px;
+          svg {
+            width: 15px;
+            height: 15px;
           }
       }
   }

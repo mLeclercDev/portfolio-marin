@@ -75,6 +75,9 @@ footer {
         div:not(.socials), .socials a {
             opacity: 0.7;
             font-size: 16px;
+             @media (min-width: 1780px) {
+   font-size: 20px;
+             }
         }
         .socials {
             display: flex;

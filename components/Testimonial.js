@@ -40,7 +40,7 @@ const Testimonial = ({ testimonial }) => {
           rotate: 0,
           ease: "hyperBounce",
           duration: 1,
-          stagger: 0.1,
+          stagger: 0.075,
           force3D: true,
         });
       }, 555);

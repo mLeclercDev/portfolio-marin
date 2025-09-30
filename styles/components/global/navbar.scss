@@ -25,6 +25,9 @@ header {
             font-family: var(--font2);
             font-weight: 500;
             font-size: 22px;
+            @media (min-width: 1780px) {
+                font-size: 26px;
+            }
             color: var(--color1);
             &.no-interaction {
                 pointer-events: none;
@@ -50,6 +53,9 @@ header {
                 transition: transform 0.1s linear;
                 font-size: 16px;
                 line-height: 1.5;
+                @media (min-width: 1780px) {
+                    font-size: 20px;
+                }
             }
             &.hover-this:hover ~ .cursor {
                 transform: translate(-50%, -50%) scale(0.4);

@@ -6,39 +6,6 @@ import '../styles/components/mockups.scss';
 import '../styles/components/global/cursor.scss';
 
 const Mockups = ({ images }) => {
-  useEffect(() => {
-
-    // --- check mobile
-    const isMobile = window.matchMedia("(max-width: 992px)").matches;
-
-    if (isMobile) {
-      // Directement appliquer la classe en mobile à tous les smartphones
-      const smartphones = document.querySelectorAll(".mockups .smartphone");
-      smartphones.forEach(phone => phone.classList.add("view"));
-      return; // on sort, pas besoin d'animations scroll
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Choisir l’offset selon la taille d’écran
-    const getOffset = () => {
-      if (window.innerWidth < 992) return 'top 95%';   // mobile
-      return 'top+=2020 75%';                               // desktop
-    };
-
-    gsap.utils.toArray(".mockups .smartphone").forEach((phone, i) => {
-      gsap.to(phone, {
-        scrollTrigger: {
-          trigger: phone,
-          start: getOffset(),
-          markers: false,
-          onEnter: () => phone?.classList.add("view"),
-        },
-        delay: i * 0.05,
-      });
-    });
-  }, []);
-
   // Grouper les images par 2 pour former des lignes
   const rows = [];
   for (let i = 0; i < images.length; i += 2) {

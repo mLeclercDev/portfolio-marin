@@ -1,7 +1,5 @@
-.projects-five {
-  background-color: var(--color1);
-  margin-top: -13rem;
-  .projects-wrapper {
+.responsive-mockups {
+  .mockups-wrapper {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -15,7 +13,7 @@
       &.right-column {
         margin-top: 11rem;
       }
-      .project-wrapper {
+      .mockup-wrapper {
         width: 100%;
         .image-wrapper {
           width: 100%;
@@ -39,54 +37,12 @@
             left: -20px !important;
             top: 0px !important;
             object-fit: cover;
-            width: calc(100% + 40px) !important; 
+            width: calc(100% + 40px) !important;
             height: calc(100% + 40px) !important;
             will-change: transform;
-          }
-        }
-        .project-information {
-          margin-top: 1.5rem;
-          font-weight: 400;
-          font-size: 24px;
-          span {
-            font-weight: 600;
-          }
-          @media (min-width: 1780px) {
-            font-size: 32px;
-          }
-        }
-        &:hover {
-          .image-wrapper {
-            transform: scale(0.97);
-            .image-inner {
-              transform: scale(1.1);
-            }
           }
         }
       }
     }
   }
-}
-
-@media (max-width: 992px) {
-  .projects-five .projects-wrapper {
-    gap: 5%;
-    padding: 0px 5%;
-  }
-}
-
-@media (max-width: 468px) {
-  .projects-five {
-    margin-top: -10rem;
-    .projects-wrapper {
-        gap: 5.5rem;
-        padding: 0px 0%;
-        .column {
-          width: 100%;
-          &.right-column {
-            margin-top: 0;
-          }
-        }
-    }
-  } 
 }

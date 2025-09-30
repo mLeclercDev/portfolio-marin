@@ -20,7 +20,7 @@ function formatToUrl(title) {
 
 const ProjectsFourth = ({ projects }) => {
   const wrappersRef = useRef([]);
-  const router = useRouter();
+  const router = useRouter(); 
   const pathname = usePathname();
 
   const layersIn = (href) => {

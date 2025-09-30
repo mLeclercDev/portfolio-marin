@@ -36,6 +36,10 @@
                 transform: scale(1);
             }
         }
+        @media (min-width: 1780px) {
+            width: 280px;
+            transform: translateY(-292px);
+        }
     }
 
     div.text-wrapper {
@@ -131,6 +135,11 @@
                 font-size: 20px;
                 z-index: 11;
             }
+        }
+    }
+    @media (min-width: 1780px) {
+        span:not(.arrow-span) {
+            font-size: 66px;
         }
     }
     @media (max-width: 992px) {

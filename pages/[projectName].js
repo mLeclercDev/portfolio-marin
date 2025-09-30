@@ -15,6 +15,9 @@ import TextSeparator from '../components/TextSeparator';
 import Mockups from '../components/Mockups';
 import Process from '../components/Process';
 import MockupsSecond from '../components/MockupsSecond';
+import MockupsThird from '../components/MockupsThird';
+import ResponsiveMockups from '../components/ResponsiveMockups';
+import NextProject from '../components/nextProject';
 import Footer from '../components/global/Footer';
 import '../styles/globals.scss'
 
@@ -94,6 +97,11 @@ const ProjectDetailPage = ({projects}) => {
 
   }, [projects]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    gsap.set(".layers__items", { className: "layers__items out" });
+  }, [router.asPath]);
+
   if (!projectData) {
     return <div>Loading...</div>; // Afficher un indicateur de chargement tant que les données sont en cours de récupération
   }
@@ -107,14 +115,16 @@ const ProjectDetailPage = ({projects}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     {/*   <Navbar /> */}
-      <main>
+      <main key={router.asPath}>
         <HeroSectionProject image={projectData.fields.featured_image.fields.file.url}  title={projectData.fields.titleH1} />
         <TextSeparator content={" Brief client - "} />
         <Brief brief={projectData.fields.brief} />
         <Process process={projectData.fields.process} />
-        <MockupsSecond videos={projectData.fields.desktopMockups} />
+        {/* <MockupsSecond videos={projectData.fields.desktopMockups} /> */}
+        <MockupsThird videos={projectData.fields.desktopMockups} />
         <Mockups images={projectData.fields.responsiveMockups} />
         <Testimonial testimonial={projectData.fields.testimonialClient} />
+        <NextProject projects={projects} />
       </main>
       <Footer triggerSelector=".testimonial"  />
       <Layer />

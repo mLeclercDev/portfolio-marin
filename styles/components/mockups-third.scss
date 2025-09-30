@@ -1,0 +1,17 @@
+.mockups-third {
+  padding: 10rem 0;
+  opacity: 0;
+  .mockup-section {
+    width: 80%;
+    min-width: 80%;
+    aspect-ratio: 1366 / 768;
+    max-height: 80vh;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+    + .mockup-section {
+      margin-top: 50px;
+    }
+  }
+}

@@ -125,6 +125,9 @@
                     will-change: opacity;
                     transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1);
                 }
+                @media (min-width: 1780px) {
+                    font-size: 24px;
+                }
             }
         }
     }

@@ -11,6 +11,9 @@
       > div {
         font-size: 46px;
         font-weight: 500;
+        @media (min-width: 1780px) {
+          font-size: 52px;
+        }
         .line-wrapper {
           position: relative;
           overflow: hidden;

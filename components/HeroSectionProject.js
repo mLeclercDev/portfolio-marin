@@ -1,90 +1,116 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from "react";
+// components/HeroSectionProject.js
+import React, { useEffect, useRef } from "react";
 import Image from 'next/image';
 import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
-import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
+import { CustomEase } from "gsap/dist/CustomEase";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/hero-section-project.scss'
+import '../styles/components/hero-section-project.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
-
-CustomEase.create(
-  "hyperBounce",
-  "0.4,0,0.2,1" // effet rebond
-);
+CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
 const HeroSectionProject = ({ title, image }) => {
-  const [isRendered, setIsRendered] = useState(false);
-  const textRef = useRef(null);
+  const rootRef = useRef(null);
+  const titleTlRef = useRef(null);
+  const imageTlRef = useRef(null);
 
   useEffect(() => {
-    if (!isRendered) return;
+    if (!rootRef.current) return;
+
+    // scope helper (ne sélectionne que dans ce composant)
+    const q = (sel) => rootRef.current.querySelectorAll(sel);
+
+    // kill previous tweens / timelines if any
+    if (titleTlRef.current) {
+      titleTlRef.current.kill();
+      titleTlRef.current = null;
+    }
+    if (imageTlRef.current) {
+      imageTlRef.current.kill();
+      imageTlRef.current = null;
+    }
+    // kill any leftover ScrollTrigger (defensive)
+    ScrollTrigger.getAll().forEach(st => st.kill());
 
     const mm = gsap.matchMedia();
 
-    // --- Desktop & tablettes (>= 992px) ---
     mm.add("(min-width: 992px)", () => {
-      // Animation du titre (split)
-      gsap.to(".hero-section-project .transform", {
-        y: "0%",
-        stagger: 0.075,
-        duration: 0.8,
-        ease: "hyperBounce",
-        delay: 0.1,
-        force3D: true,
-      });
+      const runAnim = (els) => {
+        // reset state
+        gsap.set(els, { y: "100%" });
+        // animate
+        titleTlRef.current = gsap.to(els, {
+          y: "0%",
+          stagger: 0.075,
+          duration: 0.8,
+          ease: "hyperBounce",
+          delay: 0.1,
+          force3D: true,
+        });
+      };
 
-      // Parallax image
-      const titleAnimation = gsap.timeline({
+      let transforms = Array.from(q(".transform"));
+
+      if (!transforms.length) {
+        // SplitText peut ne pas avoir rendu encore : attendre un frame
+        requestAnimationFrame(() => {
+          transforms = Array.from(q(".transform"));
+          if (transforms.length) runAnim(transforms);
+        });
+      } else {
+        runAnim(transforms);
+      }
+
+      // Parallax image (scoped)
+      const imgNode = rootRef.current.querySelector(".wrapper-image img");
+      imageTlRef.current = gsap.timeline({
         scrollTrigger: {
-          trigger: ".hero-section-project .container:nth-child(2)",
-          markers: false,
-          start: "0% 100%",
-          end: "bottom 0%",
+          trigger: rootRef.current.querySelector(".wrapper-image"),
+          start: "top bottom",
+          end: "bottom top",
           scrub: 1,
+          markers: false,
         },
       });
-      titleAnimation.to(".hero-section-project .wrapper-image img", {
-        y: "-40",
-      });
+      if (imgNode) imageTlRef.current.to(imgNode, { y: -40 });
 
       return () => {
-        titleAnimation.kill();
+        if (titleTlRef.current) titleTlRef.current.kill();
+        if (imageTlRef.current) imageTlRef.current.kill();
       };
     });
 
-    // --- Mobile (< 992px) ---
-    mm.add("(max-width: 992px)", () => {
-      // Fade-in simple du titre
-      gsap.from(".hero-section-project", {
+    mm.add("(max-width: 991px)", () => {
+      // mobile fallback simple
+      gsap.from(rootRef.current, {
         opacity: 0,
         y: 20,
         duration: 0.8,
         ease: "power1.out",
       });
-
-      return () => {}; // cleanup inutile ici
+      return () => {};
     });
-  }, [isRendered]);
 
-  useEffect(() => {
-    setIsRendered(true);
-  }, [textRef]);
+    return () => {
+      // cleanup matchMedia + ScrollTrigger
+      try { mm.revert(); } catch (e) { /* defensive */ }
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
+  }, [title]); // RE-run when title change
 
   return (
-    <section className="hero-section-project">
+    <section className="hero-section-project" ref={rootRef} key={title}>
       <div className="container">
         <h1>
           <SplitText
             LineWrapper={({ children }) => <>{children}</>}
             WordWrapper={({ children }) => (
-              <div className="o-wrapper">
+              <div className="o-wrapper" style={{ display: "inline-block", overflow: "hidden" }}>
                 <span className="transform">{children}</span>
               </div>
             )}
             LetterWrapper={({ children }) => <>{children}</>}
-            ref={textRef}
           >
             {title}
           </SplitText>
@@ -94,10 +120,11 @@ const HeroSectionProject = ({ title, image }) => {
         <div className="wrapper-image">
           <Image
             src={`https:${image}`}
-            alt="Mon image"
+            alt={title || "image projet"}
             width={1920}
             height={1080}
             quality={80}
+            priority={false}
           />
         </div>
       </div>

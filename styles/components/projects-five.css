@@ -57,6 +57,11 @@
 .projects-five .projects-wrapper .column .project-wrapper .project-information span {
   font-weight: 600;
 }
+@media (min-width: 1780px) {
+  .projects-five .projects-wrapper .column .project-wrapper .project-information {
+    font-size: 32px;
+  }
+}
 .projects-five .projects-wrapper .column .project-wrapper:hover .image-wrapper {
   transform: scale(0.97);
 }

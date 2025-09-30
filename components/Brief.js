@@ -1,96 +1,73 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
-import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
+import { CustomEase } from "gsap/dist/CustomEase";
 import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/brief.scss';
+import "../styles/components/brief.scss";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
-
-CustomEase.create(
-  "hyperBounce",
-  "0.4,0,0.2,1" // effet rebond
-);
+CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
 const Brief = ({ brief }) => {
-  const [isRendered, setIsRendered] = useState(false);
-  const textRef = useRef(null);
+  const rootRef = useRef(null);
   const [isFontReady, setIsFontReady] = useState(false);
 
   // Attendre que la font soit bien chargée
   useEffect(() => {
     const font = new FontFaceObserver("Inter");
-
-    font.load().then(() => {
-      setIsFontReady(true);
-    }).catch(() => {
-      console.warn("Font failed to load, proceeding anyway");
-      setIsFontReady(true);
-    });
+    font
+      .load()
+      .then(() => setIsFontReady(true))
+      .catch(() => {
+        console.warn("Font failed to load, proceeding anyway");
+        setIsFontReady(true);
+      });
   }, []);
-
-  useLayoutEffect(() => {
-    if (!isRendered) return;
-
-    const mm = gsap.matchMedia();
-
-    // --- Desktop & tablettes (>= 992px) ---
-    mm.add("(min-width: 992px)", () => {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".brief",
-          markers: false,
-          toggleClass: "active",
-          start: "top 80%",
-        },
-      });
-
-      const timer = setTimeout(() => {
-        const linesSecond = textRef.current.querySelectorAll(
-          ".brief .second .line"
-        );
-
-        timeline.from(linesSecond, {
-          y: "100%",
-          rotate: 5,
-          ease: "hyperBounce",
-          duration: 1,
-          stagger: 0.1,
-          force3D: true,
-        });
-      }, 555);
-
-      return () => {
-        clearTimeout(timer);
-        timeline.kill();
-      };
-    });
-
-    // --- Mobile (< 992px) ---
-    mm.add("(max-width: 991px)", () => {
-      gsap.from(".brief .second", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".brief",
-          start: "top 90%",
-        },
-      });
-
-      return () => {};
-    });
-  }, [isRendered]);
 
   useEffect(() => {
-    setIsRendered(true);
-  }, []);
+    if (!isFontReady || !rootRef.current) return;
+
+    let animationKilled = false;
+
+    const runAnim = () => {
+      if (animationKilled) return;
+      const lines = rootRef.current.querySelectorAll(".line");
+      if (!lines.length) {
+        // SplitText pas encore rendu → réessaie au prochain frame
+        requestAnimationFrame(runAnim);
+        return;
+      }
+
+      // Reset state initial
+      gsap.set(lines, { y: "100%", rotate: 5 });
+
+      // Animation
+      gsap.to(lines, {
+        y: "0%",
+        rotate: 0,
+        duration: 1,
+        ease: "hyperBounce",
+        stagger: 0.075,
+        force3D: true,
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top 85%",
+          markers: false,
+        },
+      });
+    };
+
+    runAnim();
+
+    return () => {
+      animationKilled = true;
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
+  }, [isFontReady, brief]);
 
   return (
-    <section className="brief">
+    <section className="brief" ref={rootRef}>
       <div className="container">
         <span className="text-wrapper second">
           {isFontReady && (
@@ -100,11 +77,8 @@ const Brief = ({ brief }) => {
                   <span className="line">{children}</span>
                 </span>
               )}
-              WordWrapper={({ children }) => (
-                <span className="word">{children}</span>
-              )}
+              WordWrapper={({ children }) => <span className="word">{children}</span>}
               LetterWrapper={({ children }) => <>{children}</>}
-              ref={textRef}
             >
               {brief}
             </SplitText>
