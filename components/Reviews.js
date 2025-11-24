@@ -230,7 +230,7 @@ const Reviews = () => {
                         </div>
                         <span className='line'></span>
                     </a>
-                    <a href='http://muriellepariscreations.fr/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
+                    <a href='https://www.linkedin.com/in/maignebenjamin/' target='_blank' className='review' data-index='3' ref={el => reviewsRef.current[2] = el}>
                         <div className='name-wrapper'><div className='name'>Benjamin Maigne</div></div>
                         <div className='quote'>
                             Travailler avec Marin sur le site Mavoie a été une expérience fluide et efficace. Il a parfaitement intégré nos maquettes sur Webflow.
