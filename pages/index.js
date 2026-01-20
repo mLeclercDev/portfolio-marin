@@ -33,7 +33,7 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
     <>
       <Head>
         <title>Marin Leclerc – Développeur Web Freelance spécialisé WordPress, Webflow & HubSpot</title>
-        <meta name="description" content="Portfolio" />
+        <meta name="description" content="J'accompagne particuliers, entreprises et agences pour transformer leurs idées en sites web sur mesure, intuitifs et modernes, réalisés avec WordPress, HubSpot et Webflow." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5ff730a5-9ee9-49bb-a24e-5773e82d776a"></script>
 
