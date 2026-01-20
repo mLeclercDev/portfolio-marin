@@ -1,5 +1,4 @@
-export default function handler(req, res) {
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.marinleclerc.fr/</loc>
@@ -31,9 +30,4 @@ export default function handler(req, res) {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-</urlset>`;
-
-  res.setHeader('Content-Type', 'text/xml');
-  res.write(sitemap);
-  res.end();
-}
+</urlset>
