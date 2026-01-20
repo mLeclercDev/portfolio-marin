@@ -1,44 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+export default function handler(req, res) {
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Page d'accueil -->
   <url>
     <loc>https://www.marinleclerc.fr/</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Projet Fellows Consulting -->
   <url>
     <loc>https://www.marinleclerc.fr/fellows-consulting</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Projet MaVoie -->
   <url>
     <loc>https://www.marinleclerc.fr/mavoie</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Projet Murielle Paris Créations -->
   <url>
     <loc>https://www.marinleclerc.fr/murielle-paris</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Projet Zoe Ringenbach -->
   <url>
     <loc>https://www.marinleclerc.fr/zoe-ringenbach</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+</urlset>`;
 
-</urlset>
+  res.setHeader('Content-Type', 'text/xml');
+  res.write(sitemap);
+  res.end();
+}
