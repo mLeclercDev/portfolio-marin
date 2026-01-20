@@ -25,10 +25,10 @@ header {
             font-family: var(--font2);
             font-weight: 500;
             font-size: 22px;
+            color: var(--color1);
             @media (min-width: 1780px) {
                 font-size: 26px;
             }
-            color: var(--color1);
             &.no-interaction {
                 pointer-events: none;
             }

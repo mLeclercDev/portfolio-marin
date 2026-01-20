@@ -1,0 +1,48 @@
+.goals {
+  .title-wrapper {
+    width: 320px;
+    max-width: 100%;
+    span {
+      opacity: 0.6;
+    }
+  }
+  .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    .card {
+      flex: 1;
+      border-radius: 8px;
+      padding: 32px;
+      .card-icon {
+        margin-bottom: 102px;
+      }
+      .card-title {
+        width: 200px;
+        max-width: 200px;
+        font-size: 37px;
+        letter-spacing: -1px;
+        line-height: 44px;
+        font-weight: 500;
+        margin-bottom: 16px;
+      }
+      .card-description {
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .goals .cards-wrapper .card {
+    flex: 1 1 calc(50% - 32px);
+  }
+}
+
+@media (max-width: 767px) {
+  .goals .cards-wrapper {
+    margin-top: 32px;
+    .card {
+      flex: 1;
+    }
+  }
+}

@@ -9,6 +9,8 @@ import Cursor from '../components/global/Cursor';
 import Navbar from '../components/global/Navbar';
 import Layer from '../components/global/Layer';
 import Brief from '../components/Brief';
+import Issues from '../components/Issues';
+import Goals from '../components/Goals';
 import Testimonial from '../components/Testimonial';
 import HeroSectionProject from '../components/HeroSectionProject';
 import TextSeparator from '../components/TextSeparator';
@@ -91,6 +93,7 @@ const ProjectDetailPage = ({projects}) => {
 
   useEffect(() => { 
     const project = projects.find(project => formatToUrl(project.fields.title) === projectName);
+    console.log("project : ", project)
     if (project) {
       setProjectData(project);
     }
@@ -122,6 +125,8 @@ const ProjectDetailPage = ({projects}) => {
         <HeroSectionProject image={projectData.fields.featured_image.fields.file.url}  title={projectData.fields.titleH1} />
         <TextSeparator content={" Brief client - "} />
         <Brief brief={projectData.fields.brief} />
+        <Issues problematicTitle={projectData.fields.problematicTitle.content[0].content[0].value} problematic_content={projectData.fields.problematic_content} />
+        <Goals goalsTitle={projectData.fields.goals_title.content[0].content[0].value} goals_content={projectData.fields.goals_content} />
         <Process process={projectData.fields.process} />
         {/* <MockupsSecond videos={projectData.fields.desktopMockups} /> */}
         <MockupsThird videos={projectData.fields.desktopMockups} />
