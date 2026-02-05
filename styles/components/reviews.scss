@@ -39,10 +39,6 @@
             }
             &:hover {
                 cursor: none;
-                .quote {
-                    opacity: 1; 
-                    transform: translateY(0) rotate(0);
-                }
             }
             .name-wrapper {
                 position: relative;
@@ -72,12 +68,12 @@
                 min-width: 470px;
                 margin-right: 70px;
                 font-size: 16px;
-                opacity: 0;
-                will-change: opacity;
-                transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1);
                 font-weight: 500;
-                transform-origin: left;
-                transform: translateY(5px) rotate(2deg);
+                
+                .line-child {
+                    will-change: transform;
+                }
+
                 @media (min-width: 1780px) {
                     font-size: 20px;
                 }
@@ -127,26 +123,19 @@
         }
     }
     @media (max-width: 992px) {
-        .reviews-wrapper .review {
-            flex-wrap: wrap;
-            .quote {
-                transform: none;
-                opacity: 1;
-                margin-top: 30px;
-            }
-            .arrow {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translateY(-50%);
-            }
-        }
-    }
-    @media (max-width: 992px) {
         .reviews-wrapper {
             margin-top: 60px;
-            .review .quote {
-                opacity: 1;
+            .review {
+                flex-wrap: wrap;
+                .quote {
+                    margin-top: 30px;
+                }
+                .arrow {
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                }
             }
         }
     }

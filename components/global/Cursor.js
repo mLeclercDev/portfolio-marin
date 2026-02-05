@@ -52,25 +52,46 @@ const Cursor = () => {
 
     // Fonction pour binder les hover listeners
     const bindHoverListeners = () => {
-      const header = document.querySelector("header");
-      if (header) {
-        header.onmouseenter = (e) => handleHover(e, "header", true);
-        header.onmouseleave = (e) => handleHover(e, "header", false);
-      }
+      // Désactivé pour permettre l'effet de grossissement sur les éléments de la navbar
+      // const header = document.querySelector("header");
+      // if (header) {
+      //   header.addEventListener('mouseenter', (e) => handleHover(e, "header", true));
+      //   header.addEventListener('mouseleave', (e) => handleHover(e, "header", false));
+      // }
 
       document.querySelectorAll(".cs-scale").forEach((el) => {
-        el.onmouseenter = (e) => handleHover(e, "scale", true);
-        el.onmouseleave = (e) => handleHover(e, "scale", false);
+        // Remove existing listeners to avoid duplicates
+        el.removeEventListener('mouseenter', el._scaleEnterHandler);
+        el.removeEventListener('mouseleave', el._scaleLeaveHandler);
+        
+        // Create and store handlers
+        el._scaleEnterHandler = (e) => handleHover(e, "scale", true);
+        el._scaleLeaveHandler = (e) => handleHover(e, "scale", false);
+        
+        el.addEventListener('mouseenter', el._scaleEnterHandler);
+        el.addEventListener('mouseleave', el._scaleLeaveHandler);
       });
 
       document.querySelectorAll(".cs-scale-xl").forEach((el) => {
-        el.onmouseenter = (e) => handleHover(e, "scaleXl", true);
-        el.onmouseleave = (e) => handleHover(e, "scaleXl", false);
+        el.removeEventListener('mouseenter', el._scaleXlEnterHandler);
+        el.removeEventListener('mouseleave', el._scaleXlLeaveHandler);
+        
+        el._scaleXlEnterHandler = (e) => handleHover(e, "scaleXl", true);
+        el._scaleXlLeaveHandler = (e) => handleHover(e, "scaleXl", false);
+        
+        el.addEventListener('mouseenter', el._scaleXlEnterHandler);
+        el.addEventListener('mouseleave', el._scaleXlLeaveHandler);
       });
 
       document.querySelectorAll(".review").forEach((el) => {
-        el.onmouseenter = (e) => handleHover(e, "review", true);
-        el.onmouseleave = (e) => handleHover(e, "review", false);
+        el.removeEventListener('mouseenter', el._reviewEnterHandler);
+        el.removeEventListener('mouseleave', el._reviewLeaveHandler);
+        
+        el._reviewEnterHandler = (e) => handleHover(e, "review", true);
+        el._reviewLeaveHandler = (e) => handleHover(e, "review", false);
+        
+        el.addEventListener('mouseenter', el._reviewEnterHandler);
+        el.addEventListener('mouseleave', el._reviewLeaveHandler);
       });
     };
 
@@ -78,8 +99,13 @@ const Cursor = () => {
     bindHoverListeners();
 
     // Observer le DOM pour re-binder quand Next.js change la page
+    let timeoutId;
     const observer = new MutationObserver(() => {
-      bindHoverListeners();
+      // Debounce pour éviter trop de re-bindings
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        bindHoverListeners();
+      }, 100);
     });
 
     observer.observe(document.body, {

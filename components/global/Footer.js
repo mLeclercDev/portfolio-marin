@@ -13,6 +13,8 @@ const Footer = ({ triggerSelector }) => {
     const footerRef = useRef(null);
 
     useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
 
     var timeline = gsap.timeline({
         scrollTrigger: {

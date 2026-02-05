@@ -4,10 +4,11 @@ header {
     left: 0;
     width: 100vw;
     padding: 15px 0;
-    mix-blend-mode: difference;
     z-index: 1111;
     background-color: black;
+    mix-blend-mode: difference;
     isolation: isolate;
+    transition: background-color 0.4s ease, mix-blend-mode 0.4s ease;
     nav {
         width: 100%;
         display: flex;
@@ -15,59 +16,178 @@ header {
         align-items: center;
         position: relative;
         overflow: hidden;
-        .logo,
-        .contact-link { /* ton élément à cacher */
-        transform: translateY(100%);
-        opacity: 0;
+        gap: 2rem;
+        .blend-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+        }   
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            
+            &.desktop-links {
+                @media (max-width: 992px) {
+                    display: none;
+                }
+            }
+        }
+        .logo .text-roller-mask,
+        .collaborer-link .text-roller-mask {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        .contact-link {
+            opacity: 0; // Juste caché par défaut, pas de transform
         }
         overflow: hidden;
+        
+        // Styles communs pour l'effet roller
+        .text-roller-mask {
+            position: relative;
+            overflow: hidden;
+            height: 1.15em; 
+            display: inline-block;
+            line-height: 1;
+            vertical-align: bottom;
+            
+            .text-roller-inner {
+                display: flex;
+                flex-direction: column;
+                will-change: transform;
+                // Transition CSS supprimée
+                span {
+                   display: block; 
+                   white-space: nowrap;
+                   height: 1.15em; // Hauteur fixe pour synchroniser
+                   display: flex;
+                   align-items: center;
+                }
+            }
+        }
+
         .logo {
             font-family: var(--font2);
             font-weight: 500;
             font-size: 22px;
             color: var(--color1);
+            mix-blend-mode: difference;
+            line-height: 1;
+            overflow: hidden;
+            cursor: pointer; // Assurer curseur pointer
+            transition: color 0.3s ease, mix-blend-mode 0.3s ease;
+            position: relative;
+            z-index: 1113;
+            
             @media (min-width: 1780px) {
                 font-size: 26px;
             }
             &.no-interaction {
                 pointer-events: none;
             }
-            span {
-                display: inline-block;
-                transition: transform 0.1s linear;
+            // Trigger hover effect géré par JS
+            
+            &.is-current {
+                pointer-events: none;
             }
-            &.hover-this:hover ~ .cursor {
-                transform: translate(-50%, -50%) scale(0.4);
-                cursor: auto;
+        }
+        .collaborer-link {
+            display: flex;
+            align-items: center;
+            cursor: none;
+            mix-blend-mode: difference;
+            overflow: hidden;
+            @media (max-width: 992px) {
+                cursor: pointer;
+            }
+            
+            &.is-current {
+                pointer-events: none;
+            }
+            
+            // Trigger hover effect géré par JS
+
+
+
+            // Styles du texte (appliqués aux spans internes)
+            span {
+                font-family: var(--font2);
+                font-weight: 500;
+                text-transform: uppercase;
+                color: var(--color1);
+                font-size: 16px;
+                line-height: 1;
+                @media (min-width: 1780px) {
+                    font-size: 20px;
+                }
             }
         }
         .contact-link {
             display: flex;
             align-items: center;
+            
+            // Styles spécifiques pour le bouton magnétique dans la navbar
+            .navbar-cta {
+                // Les styles de base sont dans magnetic-cta.scss
+                mix-blend-mode: normal; 
+            }
+
+        }
+
+        // Hamburger Button
+        .hamburger-btn {
+            display: none;
+            background: var(--color1);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0;
+            position: relative;
+            z-index: 1112;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
+
+            @media (max-width: 992px) {
+                display: flex;
+            }
+
             span {
-                display: inline-block;
-                font-family: var(--font2);
-                font-weight: 500;
-                text-transform: uppercase;
-                color: var(--color1);
-                transition: transform 0.1s linear;
-                font-size: 16px;
-                line-height: 1.5;
-                @media (min-width: 1780px) {
-                    font-size: 20px;
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: var(--color2);
+                transition: all 0.3s ease;
+                transform-origin: center;
+            }
+
+            &.open {
+                span:nth-child(1) {
+                    transform: translateY(7px) rotate(45deg);
+                }
+                span:nth-child(2) {
+                    opacity: 0;
+                }
+                span:nth-child(3) {
+                    transform: translateY(-7px) rotate(-45deg);
                 }
             }
-            &.hover-this:hover ~ .cursor {
-                transform: translate(-50%, -50%) scale(0.4);
-                cursor: auto;
-            }
         }
+
         .cursor {
             position: fixed;
             pointer-events: none;
             border-radius: 50%;
             mix-blend-mode: difference;
-            background-color: #fff;
+            background-color: black;
             padding: 3px;
             display: none;
             width: 140px;
@@ -76,6 +196,9 @@ header {
             transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
             &.hovering-header {
                 display: block;
+            }
+            &.hovering-link {
+                transform: translate(-50%, -50%) scale(0.4);
             }
             /* Dans votre fichier CSS (par exemple, cursor.scss) */
             @media (max-width: 992px) {
@@ -86,12 +209,124 @@ header {
             }
         }    
     }
+    .magnetic-cta {
+        background: var(--color1);
+        color: var(--color2);
+    }
+}
+
+// Mobile Menu - Outside header to avoid blend-mode conflicts
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color1);
+    z-index: 1110;
+    opacity: 0;
+    pointer-events: none;
+
     @media (max-width: 992px) {
-        background-color: var(--color1);
-        mix-blend-mode: normal;
-        nav {
-            .logo, .contact-link span {
+        display: block;
+    }
+
+    &.open {
+        pointer-events: all;
+    }
+
+    .mobile-menu-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 140px 20px 40px;
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            // overflow: hidden; // Plus nécessaire car on gère item par item
+
+            .nav-item-wrapper {
+                overflow: hidden;
+                display: block;
+            }
+
+            .mobile-nav-link {
+                display: block; // Important pour le transform
+                font-family: var(--font2);
+                font-size: 30px;
+                font-weight: 500;
                 color: var(--color2);
+                text-decoration: none;
+                line-height: 1;
+                will-change: transform;
+                text-transform: uppercase;
+                transform: translateY(100%); // État initial CSS (optionnel, géré par GSAP)
+
+                &:hover {
+                    opacity: 0.7;
+                }
+
+                &.active {
+                    opacity: 0.5;
+                }
+            }
+            
+            // Wrapper spécifique pour le CTA pour gérer ses marges
+            .cta-wrapper {
+                overflow: hidden;
+                margin-top: 1rem;
+                display: block; // Ou inline-block selon le besoin
+            }
+        }
+
+        .mobile-menu-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            // overflow: hidden;
+
+            .footer-item-wrapper {
+                overflow: hidden;
+                display: block;
+            }
+
+            a {
+                display: block;
+                will-change: transform;
+                // transform: translateY(100%);
+            }
+
+            .mobile-social-link {
+                font-family: var(--font2);
+                font-size: 20px;
+                font-weight: 600;
+                color: var(--color2);
+                text-decoration: none;
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+
+            .mobile-email-link {
+                font-family: var(--font2);
+                font-size: 16px;
+                font-weight: 400;
+                color: var(--color2);
+                text-decoration: none;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: 1;
+                }
             }
         }
     }

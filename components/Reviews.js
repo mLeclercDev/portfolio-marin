@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
-import { SplitText } from "@cyriacbr/react-split-text";
+// import { SplitText } from "@cyriacbr/react-split-text"; // REMOVED
+import { SplitText } from "gsap/dist/SplitText"; // ADDED
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/reviews.scss'
 import '../styles/components/global/cursor.scss'
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 
 CustomEase.create(
   "hyperBounce",
@@ -26,6 +27,23 @@ const Reviews = () => {
 
     useEffect(() => {
 
+        // 1. Splitting with GSAP (Reveal Mask)
+        const quotes = document.querySelectorAll('.reviews .quote');
+        const splits = [];
+        quotes.forEach(quote => {
+             const split = new SplitText(quote, { type: "lines", linesClass: "line-child" });
+             splits.push(split);
+             
+             // Wrap mask
+             split.lines.forEach(line => {
+                const wrapper = document.createElement('div');
+                wrapper.style.overflow = 'hidden';
+                wrapper.style.display = 'block';
+                line.parentNode.insertBefore(wrapper, line);
+                wrapper.appendChild(line);
+             });
+        });
+
         const titleAnimation = gsap.timeline({
             scrollTrigger: {
                 trigger: ".reviews h2",
@@ -37,6 +55,9 @@ const Reviews = () => {
         titleAnimation.to(".reviews h2 span.word-wrapper", {
             y: "0%", rotate: 0, duration: 1, ease: "hyperBounce"
         });
+
+        // Initialisation des lignes pour desktop
+        gsap.set(".reviews .quote .line-child", { y: "100%" });
 
         const timeline = gsap.timeline({
             scrollTrigger: {
@@ -74,11 +95,6 @@ const Reviews = () => {
 
         gsap.matchMedia().add("(max-width: 991px)", () => {
 
-                        // Exemple d'animation : faire apparaître les avatars avec un petit scale
-            gsap.set(".reviews .quote", {
-                opacity: 0
-            });
-
             // Timeline spécifique pour mobile/tablette
             const mobileTimeline = gsap.timeline({
                 scrollTrigger: {
@@ -88,15 +104,14 @@ const Reviews = () => {
                 }
             });
 
-            // Exemple d'animation : faire apparaître les avatars avec un petit scale
-            mobileTimeline.to(".reviews .quote", {
-                opacity: 1,
-                duration: 0.5,
-                stagger: 0.05,
-                ease: "hyperBounce"
+            // Apparition ligne par ligne sur mobile
+            mobileTimeline.to(".reviews .quote .line-child", {
+                y: 0,
+                duration: 1,
+                stagger: 0.07,
+                ease: "power3.out"
             });
 
-            // Retourne la timeline pour référence (optionnel)
             return () => {
                 mobileTimeline.kill();
             };
@@ -116,13 +131,26 @@ const Reviews = () => {
         };
 
         const handleMouseEnter = (e) => {
-            const index = e.target.getAttribute('data-index');
+            const index = e.currentTarget.getAttribute('data-index');
             const cursor = document.querySelector(`[data-cursor-container][data-index="${index}"]`);
             if (cursor) cursor.classList.add('active');
 
             reviews.forEach((review, i) => {
-                if (i + 1 === Number(index)) review.classList.add('active');
-                else review.classList.add('unactive');
+                if (i + 1 === Number(index)) {
+                     review.classList.add('active');
+                     
+                     // Animation d'entrée des lignes (Reveal Mask)
+                     const lines = review.querySelectorAll('.quote .line-child');
+                     gsap.to(lines, {
+                         y: 0,
+                         duration: 0.8,
+                         stagger: 0.05,
+                         ease: "power3.out",
+                         overwrite: true
+                     });
+                } else {
+                    review.classList.add('unactive');
+                }
             });
         };
 
@@ -133,6 +161,16 @@ const Reviews = () => {
 
             reviews.forEach(review => {
                 review.classList.remove('active', 'unactive');
+                
+                // Animation de sortie des lignes
+                const lines = review.querySelectorAll('.quote .line-child');
+                gsap.to(lines, {
+                    y: "100%",
+                    duration: 0.4,
+                    stagger: { from: "end", amount: 0.05 },
+                    ease: "power2.in",
+                    overwrite: true
+                });
             });
         };
 
@@ -159,6 +197,7 @@ const Reviews = () => {
         return () => {
             window.removeEventListener("mousemove", moveCursors);
             reviewObservers.forEach(observer => observer.disconnect());
+            splits.forEach(s => s.revert());
         };
     }, []);
 
@@ -206,7 +245,9 @@ const Reviews = () => {
                 <div className='reviews-wrapper'>
                     <a href='https://www.linkedin.com/in/killian-le-bras/' target='_blank' className='review' data-index='1' ref={el => reviewsRef.current[0] = el}>
                         <div className='name-wrapper'><div className='name'>Killian Lebras</div></div>
-                        <div className='quote'>Excellente collaboration avec Marin sur un projet WordPress. Professionnel, minutieux et réactif, je le recommande vivement !</div>
+                        <div className='quote'>
+                            Excellente collaboration avec Marin sur un projet WordPress. Professionnel, minutieux et réactif, je le recommande vivement !
+                        </div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>
@@ -219,7 +260,9 @@ const Reviews = () => {
                     </a>
                     <a href='https://www.linkedin.com/in/zo%C3%A9-ringenbach-directrice-artistique/' target='_blank' className='review' data-index='2' ref={el => reviewsRef.current[1] = el}>
                         <div className='name-wrapper'><div className='name'>Zoé Ringenbach</div></div>
-                        <div className='quote'>Marin a parfaitement compris mes besoins et attentes pour mon portfolio photo. Professionnel, créatif et minutieux, je le recommande vivement.</div>
+                        <div className='quote'>
+                            Marin a parfaitement compris mes besoins et attentes pour mon portfolio photo. Professionnel, créatif et minutieux, je le recommande vivement.
+                        </div>
                         <div className='arrow'>
                             <svg className='first' xmlns="http://www.w3.org/2000/svg" width="45" height="46" viewBox="0 0 45 46" fill="none">
                                 <path d="M0 8H32.1975L0.322502 39.875L5.625 45.1775L37.5 13.3025V45.5H45V0.5H0V8Z" fill="black"/>

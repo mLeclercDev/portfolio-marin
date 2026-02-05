@@ -36,7 +36,6 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
         <meta name="description" content="J'accompagne particuliers, entreprises et agences pour transformer leurs idées en sites web sur mesure, intuitifs et modernes, réalisés avec WordPress, HubSpot et Webflow." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5ff730a5-9ee9-49bb-a24e-5773e82d776a"></script>
-
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />

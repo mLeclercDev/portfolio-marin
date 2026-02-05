@@ -1,10 +1,5 @@
 .tools {
     padding: 7.5rem 0;
-    //background-color: var(--color2);
-    &.active .flex-wrapper .circles .circle.second {
-        transform: translateX(-78px) rotate(90deg);
-        mix-blend-mode: difference;
-    }
     h2 {
         color: var(--color1);
         position: relative;
@@ -51,12 +46,7 @@
                     transform: rotate(90deg) !important;
                     transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
                 }
-                .item-content {
-                    height: 0px;
-                    span {
-                        opacity: 1;
-                    } 
-                }
+
             }
             .flex-content {
                 display: flex;
@@ -116,14 +106,19 @@
                 font-size: 20px;
                 //height: 0px;
                 position: relative;
+                height: 0;
                 overflow: hidden;
                 will-change: height;
-                span {
+                width: 800px;
+                max-width: 100%;
+                .content-inner {
                     padding-top: 30px;
                     display: block;
-                    opacity: 0;
-                    will-change: opacity;
-                    transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1);
+                    // opacity géré par GSAP sur les mots
+
+                    .line-child {
+                        will-change: transform;
+                    }
                 }
                 @media (min-width: 1780px) {
                     font-size: 24px;

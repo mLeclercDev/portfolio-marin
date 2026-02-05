@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
-import { SplitText } from "@cyriacbr/react-split-text";
+// import { SplitText } from "@cyriacbr/react-split-text"; // REMOVED
+import { SplitText } from "gsap/dist/SplitText"; // ADDED
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/tools.scss'
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 
 CustomEase.create(
   "hyperBounce",
@@ -17,6 +18,37 @@ const Separator = ({content}) => {
   const [isRendered, setIsRendered] = useState(false);
   const [isLayoutReady, setIsLayoutReady] = useState(false);
 
+  // Initialisation GSAP SplitText
+  useEffect(() => {
+    // On cible les éléments contenant le texte à splitter
+    const targets = document.querySelectorAll('.item-content .content-inner');
+    const splits = [];
+
+    targets.forEach(target => {
+        // Validation que l'élément n'est pas vide pour éviter erreur GSAP
+        if (target && target.innerText.trim().length > 0) {
+            const split = new SplitText(target, { type: "lines", linesClass: "line-child" });
+            splits.push(split);
+
+            // Wrap mask
+            split.lines.forEach(line => {
+                 const wrapper = document.createElement('div');
+                 wrapper.style.overflow = 'hidden';
+                 wrapper.style.display = 'block';
+                 line.parentNode.insertBefore(wrapper, line);
+                 wrapper.appendChild(line);
+            });
+            
+            // État initial
+            gsap.set(split.lines, { y: "100%", opacity: 1 });
+        }
+    });
+
+    return () => {
+        splits.forEach(s => s.revert());
+    };
+  }, []);
+
 useEffect(() => {
   const checkLayout = () => {
     const lines = document.querySelectorAll('.presentation-wrapper span.line');
@@ -24,9 +56,12 @@ useEffect(() => {
   };
 
   const observer = new MutationObserver(checkLayout);
-  observer.observe(document.querySelector('.presentation-wrapper'), { childList: true, subtree: true });
+  const presentationWrapper = document.querySelector('.presentation-wrapper');
+  if (presentationWrapper) {
+      observer.observe(presentationWrapper, { childList: true, subtree: true });
+  }
 
-  checkLayout(); // check direct au cas où c’est déjà monté
+  checkLayout(); 
 
   return () => observer.disconnect();
 }, []);
@@ -45,31 +80,52 @@ useEffect(() => {
     const items = document.querySelectorAll('.item');
     items.forEach(item => {
       item.addEventListener('click', () => {
-        // Supprime la classe 'active' de tous les éléments .item 
-        items.forEach(item => {
-          item.classList.remove('active');
-          gsap.to(item.querySelector('.item-content'), {
+        // Supprime la classe 'active' de tous les éléments
+        items.forEach(otherItem => {
+          otherItem.classList.remove('active');
+          
+          // Animation fermeture des lignes
+          const otherLines = otherItem.querySelectorAll('.line-child');
+          if (otherLines.length) {
+              gsap.to(otherLines, {
+                  y: "100%",
+                  duration: 0.4,
+                  stagger: 0.05,
+                  ease: "power2.in"
+              });
+          }
+
+          gsap.to(otherItem.querySelector('.item-content'), {
             height: 0,
-            duration: 0.65, // Durée de l'animation
-            ease: "hyperBounce"
+            duration: 0.65, 
+            ease: "power3.inOut"
           });
         });
 
         // Ajoute la classe 'active' à l'élément cliqué
         item.classList.add('active');
 
-        // Sélection de l'élément .item-content dans l'élément cliqué
         const itemContent = item.querySelector('.item-content');
-
-        // Récupération de la hauteur du span dans l'élément .item-content
-        const spanHeight = itemContent.querySelector('span').offsetHeight;
-
-        // Application de la hauteur au contenu de l'élément .item-content avec l'easing spécifié
-        gsap.to(itemContent, {
-          height: spanHeight,
-          duration: 0.65, // Durée de l'animation
-          ease: "hyperBounce"
-        });
+        const contentInner = itemContent.querySelector('.content-inner');
+        
+        if (contentInner) {
+            const innerHeight = contentInner.offsetHeight;
+            
+            // Animation ouverture
+            gsap.to(itemContent, {
+              height: innerHeight,
+              duration: 0.65, 
+              ease: "power3.out"
+            });
+            
+            const lines = contentInner.querySelectorAll('.line-child');
+            if (lines.length) {
+                gsap.fromTo(lines, 
+                    { y: "100%" },
+                    { y: "0%", duration: 0.6, delay: 0.1, stagger: 0.1, ease: "power3.out" }
+                );
+            }
+        }
       });
     });
 
@@ -79,7 +135,7 @@ useEffect(() => {
             markers: false,
             start: 'top center',
         }
-    });
+    }); 
 
     titleAnimation.to(".tools h2 span.word-wrapper", {
         y: "0%", rotate: 0, duration: 1, ease: "hyperBounce"
@@ -136,7 +192,7 @@ useEffect(() => {
         stagger: 0.075,
     })
 
-    .call(() => firstItem.click(), null, "-=1") // Ajouté ici, 0.3s avant la fin de l’animation précédente
+    .call(() => { if(firstItem) firstItem.click() }, null, "-=1") 
 
 
   }, []);
@@ -169,15 +225,15 @@ useEffect(() => {
 
       if (e.type === 'mouseleave') {
         cross.style.transform = 'translate(0px, 0px)';
-        cursorPresentation.classList.remove('hovering-cross-wrapper');
+        if (cursorPresentation) cursorPresentation.classList.remove('hovering-cross-wrapper');
       } else {
-        cursorPresentation.classList.add('hovering-cross-wrapper');
+        if (cursorPresentation) cursorPresentation.classList.add('hovering-cross-wrapper');
       }
     };
 
     const handleMouseLeave = (e) => {
       if (!e.target.closest('.cross-wrapper')) {
-        cursorPresentation.classList.remove('hovering-cross-wrapper');
+        if (cursorPresentation) cursorPresentation.classList.remove('hovering-cross-wrapper');
       }
     };
 
@@ -223,8 +279,9 @@ useEffect(() => {
                         </div>
                     </div>
                     <div className='item-content'>
-                        <span>
-HubSpot CMS relie contenu, marketing et CRM dans un même outil. J’y ai travaillé 4 ans comme développeur dans une agence certifiée Elite Partner, ce qui me permet aujourd’hui de créer des sites parfaitement intégrés à l’écosystème HubSpot.                        </span>
+                        <div className="content-inner">
+                            HubSpot CMS relie contenu, marketing et CRM dans un même outil. J’y ai travaillé 4 ans comme développeur dans une agence certifiée Elite Partner, ce qui me permet aujourd’hui de créer des sites parfaitement intégrés à l’écosystème HubSpot.
+                        </div>
                     </div>
                     <span className='line'></span>
                 </div>
@@ -245,8 +302,9 @@ HubSpot CMS relie contenu, marketing et CRM dans un même outil. J’y ai travai
                         </div>
                     </div>
                     <div className='item-content'>
-                        <span>
-Webflow facilite la création visuelle de sites modernes et dynamiques. J’ai mené plusieurs projets dessus, notamment avec des agences spécialisées, en combinant design impactant et gestion simple pour les clients.                        </span>                   
+                         <div className="content-inner">
+                            Webflow facilite la création visuelle de sites modernes et dynamiques. J’ai mené plusieurs projets dessus, notamment avec des agences spécialisées, en combinant design impactant et gestion simple pour les clients.               
+                        </div>
                     </div>
                     <span className='line'></span>
                 </div>
@@ -267,8 +325,9 @@ Webflow facilite la création visuelle de sites modernes et dynamiques. J’ai m
                         </div>
                     </div>
                     <div className='item-content'>
-                      <span>
-WordPress reste la référence pour des sites flexibles et évolutifs. J’ai construit de nombreux projets avec, d’abord en agence puis en freelance, ce qui m’a donné une solide maîtrise de ses thèmes, plugins et développements sur mesure.                      </span>                    
+                        <div className="content-inner">
+                           WordPress reste la référence pour des sites flexibles et évolutifs. J’ai construit de nombreux projets avec, d’abord en agence puis en freelance, ce qui m’a donné une solide maîtrise de ses thèmes, plugins et développements sur mesure.
+                        </div>
                     </div>
                     <span className='line'></span>
                 </div>

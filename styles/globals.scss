@@ -1,4 +1,8 @@
 @use './fonts' as *;
+@import 'components/global/navbar';
+@import 'components/global/footer';
+@import 'components/global/cursor';
+@import 'components/global/magnetic-cta';
 
 :root {
     // COLORS
@@ -92,7 +96,10 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   transform: none !important; /* éviter les contextes 3D foireux */
+}
 
+p {
+  line-height: 1.25;
 }
 
 // CONTAINER
