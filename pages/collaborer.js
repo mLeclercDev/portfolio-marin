@@ -485,10 +485,11 @@ export default function Collaborer() {
         <section className="collaborer-full-image">
           <div className="image-container">
             <Image 
-              src="/images/collaborer-marin-2.avif" 
+              src="/Images/collaborer-marin-2.avif" 
               alt="Collaborer" 
               className="fit-cover" 
               fill
+              unoptimized
               style={{ objectFit: 'cover' }}
             />
             <div className="overlay"></div>
