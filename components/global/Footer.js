@@ -91,10 +91,12 @@ const Footer = ({ triggerSelector }) => {
     } 
     })
 
-    }, [marqueeDuration])
+    }, [marqueeDuration, triggerSelector])
 
     useEffect(() => {
         const divTest = document.querySelector('.canvas-wrapper');
+        if (!divTest) return; // Sécurité
+
         // Récupère la hauteur et la largeur
         const largeur = divTest.offsetWidth;
         const hauteur = divTest.offsetHeight;
@@ -198,8 +200,7 @@ const Footer = ({ triggerSelector }) => {
 
     // Initialisation de ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
-    var timeline = gsap.timeline({
-        scrollTrigger: {
+    const st = ScrollTrigger.create({
         trigger: triggerSelector, // Sélecteur pour le déclencheur
         start: 'bottom 60%', // Déclenche le défilement lorsque le déclencheur atteint le milieu de la fenêtre
         onEnter: () => {
@@ -207,10 +208,13 @@ const Footer = ({ triggerSelector }) => {
         },
         markers: false,
         once: true, // Déclenche l'événement une seule fois
-        }
     });
 
-    }, []); 
+    return () => {
+      st.kill();
+    }
+
+    }, [triggerSelector]); 
     
       useEffect(() => {
         setIsRendered(true);

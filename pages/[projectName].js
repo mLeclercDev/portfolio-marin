@@ -98,7 +98,7 @@ const ProjectDetailPage = ({projects}) => {
       setProjectData(project);
     }
 
-  }, [projects]);
+  }, [projects, projectName]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

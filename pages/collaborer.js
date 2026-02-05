@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -92,7 +93,7 @@ export default function Collaborer() {
   useEffect(() => {
     const mainElement = document.querySelector("main");
     // Créer le trigger pour la section avec la classe "tools"
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
         trigger: ".design",
         start: "top center", // Démarrer le trigger quand le haut de la section atteint le centre de la fenêtre
         end: "bottom center", // Arrêter le trigger quand le bas de la section atteint le centre de la fenêtre
@@ -100,13 +101,15 @@ export default function Collaborer() {
         onEnter: () => {
             gsap.to(mainElement, { backgroundColor: "#110F09", duration: 0.55, ease: "hyperBounce" });
         },
-/*      onLeave: () => mainElement.classList.remove("tools-active"),
-        onEnterBack: () => mainElement.classList.add("tools-active"), */
         onLeaveBack: () => {
             gsap.to(mainElement, { backgroundColor: "#FCFBF6", duration: 0.55, ease: "hyperBounce" });
         },
     });
-  })
+
+    return () => {
+      st.kill();
+    };
+  }, [])
 
   useEffect(() => {
     // Animation d'entrée pour le hero
@@ -481,7 +484,13 @@ export default function Collaborer() {
 
         <section className="collaborer-full-image">
           <div className="image-container">
-            <img src="/images/collaborer-marin-2.avif" alt="Collaborer" className="fit-cover" />
+            <Image 
+              src="/images/collaborer-marin-2.avif" 
+              alt="Collaborer" 
+              className="fit-cover" 
+              fill
+              style={{ objectFit: 'cover' }}
+            />
             <div className="overlay"></div>
           </div>
         </section>

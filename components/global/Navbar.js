@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { usePathname, useRouter } from "next/navigation"
+import Link from 'next/link';
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import '../../styles/components/global/navbar.scss';
@@ -31,6 +32,13 @@ const Navbar = ({ delay = 0 }) => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  // Fonction à exécuter au clic sur un élément de class layers__item (enveloppée dans useCallback pour être stable)
+  const layersIn = useCallback((href) => {    
+    if (pathname !== href) {
+      animatePageOut(href, router)
+    } 
+  }, [pathname, router]);
 
   useEffect(() => {
     if (delay == null) return;
@@ -168,7 +176,10 @@ const Navbar = ({ delay = 0 }) => {
         onComplete: () => {
           gsap.set('.mobile-menu', { display: 'none' }); 
           // Reset des positions
-          gsap.set('.mobile-nav-link, .mobile-menu-footer a', {
+          gsap.set('.mobile-nav-link', {
+            y: '100%'
+          });
+          gsap.set('.mobile-menu-footer a', {
             y: '100%'
           });
           gsap.set('.mobile-menu .navbar-cta', {
@@ -205,13 +216,6 @@ const Navbar = ({ delay = 0 }) => {
             ease: "cubic-bezier(0.4, 0, 0.2, 1)"
         });
     }
-  };
-
-  // Fonction à exécuter au clic sur un élément de class layers__item
-  const layersIn = (href) => {    
-    if (pathname !== href) {
-      animatePageOut(href, router)
-    } 
   };
 
   return (
@@ -277,7 +281,7 @@ const Navbar = ({ delay = 0 }) => {
         <div className="mobile-menu-content">
           <nav className="mobile-nav">
             <div className="nav-item-wrapper">
-                <a 
+                <Link 
                   href="/" 
                   className={`mobile-nav-link ${pathname === '/' ? 'active' : ''}`}
                   onClick={(e) => {
@@ -287,10 +291,10 @@ const Navbar = ({ delay = 0 }) => {
                   }}
                 >
                   Accueil
-                </a>
+                </Link>
             </div>
             <div className="nav-item-wrapper">
-                <a 
+                <Link 
                   href="/collaborer" 
                   className={`mobile-nav-link ${pathname === '/collaborer' ? 'active' : ''}`}
                   onClick={(e) => {
@@ -300,7 +304,7 @@ const Navbar = ({ delay = 0 }) => {
                   }}
                 >
                   Collaborer
-                </a>
+                </Link>
             </div>
             <div className="cta-wrapper">
                 <MagneticCTA 
