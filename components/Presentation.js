@@ -179,13 +179,13 @@ const Presentation = ({delayPresentation}) => {
             <div className='text-wrapper second' ref={textRefSecond}>
                 {isFontReady && (
                   <div>
-                    Spacersp Développeur front-end freelance, j'accompagne particuliers, entreprises et agences pour transformer leurs idées en sites sur mesure et intuitifs, centrés sur l'expérience utilisateur.
+                    Spacersp Développeur front-end freelance, j&apos;accompagne particuliers, entreprises et agences pour transformer leurs idées en sites sur mesure et intuitifs, centrés sur l&apos;expérience utilisateur.
                   </div>
                 )}
             </div>
             <div onClick={() => handleClick()} className='arrow-link cs-scale'>
               <span className='arrow-span'>
-               Découvrir l'autre facette
+               Découvrir l&apos;autre facette
               </span>
               <div className="arrow">
                 <svg className="first" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 3.33333H14.31L0.143334 17.5L2.5 19.8567L16.6667 5.69V20H20V0H0V3.33333Z" fill="black"></path></svg>
