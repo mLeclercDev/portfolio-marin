@@ -51,6 +51,12 @@
           @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
         font-size: 56px;
           }
+          @media (max-width: 992px) {
+            font-size: 40px;
+          }
+          @media (max-width: 468px) {
+            font-size: 30px;
+          }
     }
 
     div:not(.arrow-span) {

@@ -76,74 +76,108 @@ const Presentation = ({delayPresentation}) => {
     }, []);
 
   useEffect(() => {
-  if (!isFontReady || !textRefFirst.current || !textRefSecond.current) return;
+    if (!isFontReady || !textRefFirst.current || !textRefSecond.current) return;
 
-    // --- check mobile
-    const isMobile = window.matchMedia("(max-width: 992px)").matches;
+    const mm = gsap.matchMedia();
+    
+    // Fonction pour initialiser le split et le hack Spacersp
+    const setupSplit = () => {
+      const splitFirst = new SplitText(textRefFirst.current, { type: "lines", linesClass: "line-child" });
+      const splitSecond = new SplitText(textRefSecond.current, { type: "lines", linesClass: "line-child" });
 
-    if (isMobile) {
-    // Directement appliquer la classe en mobile
-    const img = document.querySelector(".presentation .second img");
+      const splits = [splitFirst, splitSecond];
 
-      if (img) {
-        img.classList.add("view");
-      }
-      return; // on sort, pas besoin d'animations
-    }
+      // Wrap mask pour les lignes et gérer le premier mot invisible
+      splits.forEach(split => {
+        split.lines.forEach((line, index) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'line-wrapper';
+          wrapper.style.overflow = 'hidden';
+          wrapper.style.display = 'block';
+          line.parentNode.insertBefore(wrapper, line);
+          wrapper.appendChild(line);
+          line.className = 'line';
 
-    // Initialisation GSAP SplitText
-    const splitFirst = new SplitText(textRefFirst.current, { type: "lines", linesClass: "line-child" });
-    const splitSecond = new SplitText(textRefSecond.current, { type: "lines", linesClass: "line-child" });
-
-    // Wrap mask pour les lignes et gérer le premier mot invisible
-    [splitFirst, splitSecond].forEach(split => {
-      split.lines.forEach((line, index) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'line-wrapper';
-        wrapper.style.overflow = 'hidden';
-        wrapper.style.display = 'block';
-        line.parentNode.insertBefore(wrapper, line);
-        wrapper.appendChild(line);
-        line.className = 'line';
-
-        // Pour la première ligne, wrapper le premier mot dans un span.word
-        if (index === 0) {
-          const text = line.textContent;
-          const firstSpaceIndex = text.indexOf(' ');
-          if (firstSpaceIndex > 0) {
-            const firstWord = text.substring(0, firstSpaceIndex);
-            const restOfText = text.substring(firstSpaceIndex);
-            line.innerHTML = `<span class="word">${firstWord}</span>${restOfText}`;
+          // Pour la première ligne, wrapper le premier mot "Spacersp" dans un span.word pour que le CSS le cache
+          if (index === 0) {
+            const text = line.textContent;
+            // On cherche "Spacersp" au début
+            if (text.trim().startsWith("Spacersp")) {
+              const firstSpaceIndex = text.indexOf(' ');
+              if (firstSpaceIndex > 0) {
+                 const firstWord = text.substring(0, firstSpaceIndex); // "Spacersp"
+                 const restOfText = text.substring(firstSpaceIndex);
+                 line.innerHTML = `<span class="word">${firstWord}</span>${restOfText}`;
+              }
+            }
           }
-        }
+        });
       });
+      
+      return splits; // Retourner les instances pour pouvoir les animer
+    };
+
+    // --- Configuration pour Desktop et Mobile (la structure se fait partout) ---
+    mm.add("(min-width: 0px)", (context) => {
+        const [splitFirst, splitSecond] = setupSplit();
+        
+        // --- Animation Desktop (min-width: 992px) ---
+        if (window.matchMedia("(min-width: 992px)").matches) {
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".presentation",
+                    markers: false,
+                    toggleClass: 'active',
+                    start: 'top 80%',
+                    end: 'bottom 80%',
+                }
+            }); 
+
+            const timer = setTimeout(() => {
+                const linesSecond = textRefSecond.current.querySelectorAll(".line");
+                const linesFirst = textRefFirst.current.querySelectorAll(".line"); // Pas animé mais set initialement
+                
+                // État initial caché
+                gsap.set(linesFirst, { y: "100%", rotate: 0 }); 
+                
+                timeline.from(linesSecond, { 
+                    y: "100%", 
+                    rotate: 0, 
+                    ease: "hyperBounce", 
+                    duration: 1, 
+                    stagger: 0.033 
+                });
+            }, delayPresentation);
+            
+            timeline.to(".presentation .second img", { className: "fit-cover view" });
+
+            return () => {
+                clearTimeout(timer);
+                // Le revert des splits se fait automatiquement par mm.add return
+                splitFirst.revert();
+                splitSecond.revert();
+            };
+        } 
+        else {
+            // --- Mobile (< 992px) ---
+            const img = document.querySelector(".presentation .second img");
+            if (img) img.classList.add("view");
+            
+            // INITIALISATION MOBILE CORRECTE :
+            // Le texte "Pro" (.second) doit être visible par défaut
+            gsap.set(splitSecond.lines, { y: "0%", rotate: 0, opacity: 1 });
+            
+            // Le texte "Perso" (.first) doit être caché par défaut (vers le bas, comme sur desktop)
+            gsap.set(splitFirst.lines, { y: "100%", rotate: 0, opacity: 1 });
+
+            return () => {
+                splitFirst.revert();
+                splitSecond.revert();
+            };
+        }
     });
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".presentation",
-        markers: false,
-        toggleClass: 'active',
-        start: 'top 80%',
-        end: 'bottom 80%',
-      }
-    }); 
-
-    const timer = setTimeout(() => {
-    const linesSecond = textRefSecond.current.querySelectorAll(".line");
-    const linesFirst = textRefFirst.current.querySelectorAll(".line");
-    gsap.set(linesFirst, {  y: "100%", rotate: 0});
-  
-    timeline.from(linesSecond, { y: "100%", rotate: 0, ease: "hyperBounce", duration: 1, stagger: 0.033  });
-    }, delayPresentation);
-
-    timeline.to(".presentation .second img", { className: "fit-cover view" });
-
-    return () => {
-      clearTimeout(timer);
-      splitFirst.revert();
-      splitSecond.revert();
-    };
+    return () => mm.revert();
 
   }, [isFontReady, delayPresentation]);
 
