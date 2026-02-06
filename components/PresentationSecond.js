@@ -1,16 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
-import { SplitText } from "@cyriacbr/react-split-text";
+import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import "../styles/components/presentation-second.scss";
 
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
+
+CustomEase.create("hyperBounce", "0.4,0,0.2,1");
+
 const PresentationSecond = () => {
   const wrapperRef = useRef(null);
+  const textRef = useRef(null);
   const [isFontReady, setIsFontReady] = useState(false);
-
-  CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
   // 1. Attendre que la font soit bien chargée
   useEffect(() => {
@@ -26,13 +29,26 @@ const PresentationSecond = () => {
   }, []);
 
 useEffect(() => {
-  if (!isFontReady || !wrapperRef.current) return;
+  if (!isFontReady || !wrapperRef.current || !textRef.current) return;
 
   console.log("Font + DOM ready, waiting a bit ⏳");
 
   const timer = setTimeout(() => {
     console.log("Anim starts 🚀");
-        gsap.registerPlugin(ScrollTrigger);
+
+    // Initialisation GSAP SplitText
+    const split = new SplitText(textRef.current, { type: "lines", linesClass: "line-child" });
+
+    // Wrap mask pour les lignes
+    split.lines.forEach(line => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'line-wrapper';
+      wrapper.style.overflow = 'hidden';
+      wrapper.style.display = 'block';
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+      line.className = 'line';
+    });
 
     const timeline = gsap.timeline({
       scrollTrigger: {
@@ -44,14 +60,18 @@ useEffect(() => {
       }
     }); 
 
-    timeline.from(wrapperRef.current.querySelectorAll(".line"), {
+    timeline.from(split.lines, {
       y: "100%",
       duration: 1,
       ease: "hyperBounce",
       stagger: 0.05,
       marker: false
     });
-  }, 1500); // essaie 50ms → ajuste si besoin (100-200ms max)
+
+    return () => {
+      split.revert();
+    };
+  }, 1500);
 
   return () => clearTimeout(timer);
 }, [isFontReady]);
@@ -63,22 +83,12 @@ useEffect(() => {
         <div className="presentation-wrapper">
           <div className="text-wrapper first" ref={wrapperRef}>
             {isFontReady && (
-              <SplitText
-                LineWrapper={({ children }) => (
-                  <span className="line-wrapper">
-                    <span className="line">{children}</span>
-                  </span>
-                )}
-                WordWrapper={({ children }) => (
-                  <span className="word">{children}</span>
-                )}
-                LetterWrapper={({ children }) => <>{children}</>}
-              >
-                Spacersp I&apos;m 28 years old and passionate about sports,
+              <div ref={textRef}>
+                I&apos;m 28 years old and passionate about sports,
                 always up for a session, no matter the field. I also love
                 enjoying Rennes terraces with friends, chatting about everything
                 over a drink, and making the most of the moment.
-              </SplitText>
+              </div>
             )}
           </div>
         </div>

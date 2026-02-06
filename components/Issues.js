@@ -1,7 +1,6 @@
 // components/HeroSectionProject.js
 import React, { useEffect, useRef } from "react";
 import Image from 'next/image';
-import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";

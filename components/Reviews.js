@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
-// import { SplitText } from "@cyriacbr/react-split-text"; // REMOVED
-import { SplitText } from "gsap/dist/SplitText"; // ADDED
+import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";

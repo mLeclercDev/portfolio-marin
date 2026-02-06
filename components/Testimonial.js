@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
-import { SplitText } from "@cyriacbr/react-split-text";
+import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/testimonial.scss';
 import '../styles/components/global/cursor.scss';
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
 const Testimonial = ({ testimonial }) => {
@@ -15,12 +15,29 @@ const Testimonial = ({ testimonial }) => {
   const textRef = useRef(null);
 
   useEffect(() => {
-    if (!isRendered) return;
+    if (!isRendered || !textRef.current) return;
 
     const mm = gsap.matchMedia();
 
     // --- Desktop & tablettes (>= 992px) ---
     mm.add("(min-width: 992px)", () => {
+      // Initialisation GSAP SplitText
+      const split = new SplitText(textRef.current, { type: "lines", linesClass: "line-child" });
+
+      // Wrap mask pour les lignes
+      split.lines.forEach(line => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'line-wrapper';
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.display = 'block';
+        line.parentNode.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
+        line.className = 'line';
+      });
+
+      // État initial
+      gsap.set(split.lines, { y: "100%", rotate: 5 });
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".testimonial",
@@ -31,11 +48,9 @@ const Testimonial = ({ testimonial }) => {
       });
 
       const timer = setTimeout(() => {
-        const linesSecond = textRef.current.querySelectorAll(
-          ".testimonial .line"
-        );
+        const lines = textRef.current.querySelectorAll(".line");
 
-        timeline.to(linesSecond, {
+        timeline.to(lines, {
           y: "0%",
           rotate: 0,
           ease: "hyperBounce",
@@ -48,6 +63,7 @@ const Testimonial = ({ testimonial }) => {
       return () => {
         clearTimeout(timer);
         timeline.kill();
+        split.revert();
       };
     });
 
@@ -66,6 +82,10 @@ const Testimonial = ({ testimonial }) => {
 
       return () => {};
     });
+
+    return () => {
+      mm.revert();
+    };
   }, [isRendered]);
 
   useEffect(() => {
@@ -95,21 +115,8 @@ const Testimonial = ({ testimonial }) => {
           </svg>
         </div>
         <div className="testimonial-content">
-          <div>
-            <SplitText
-              LineWrapper={({ children }) => (
-                <span className="line-wrapper">
-                  <span className="line">{children}</span>
-                </span>
-              )}
-              WordWrapper={({ children }) => (
-                <span className="word">{children}</span>
-              )}
-              LetterWrapper={({ children }) => <>{children}</>}
-              ref={textRef}
-            >
-              {testimonial[0].testimonial}
-            </SplitText>
+          <div ref={textRef}>
+            {testimonial[0].testimonial}
           </div>
           <a
             href={`${testimonial[0].linkedin}`}

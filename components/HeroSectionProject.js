@@ -1,22 +1,23 @@
 // components/HeroSectionProject.js
 import React, { useEffect, useRef } from "react";
 import Image from 'next/image';
-import { SplitText } from "@cyriacbr/react-split-text";
+import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/hero-section-project.scss';
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
 const HeroSectionProject = ({ title, image }) => {
   const rootRef = useRef(null);
+  const titleRef = useRef(null);
   const titleTlRef = useRef(null);
   const imageTlRef = useRef(null);
 
   useEffect(() => {
-    if (!rootRef.current) return;
+    if (!rootRef.current || !titleRef.current) return;
 
     // scope helper (ne sélectionne que dans ce composant)
     const q = (sel) => rootRef.current.querySelectorAll(sel);
@@ -36,6 +37,20 @@ const HeroSectionProject = ({ title, image }) => {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 992px)", () => {
+      // Initialisation GSAP SplitText
+      const split = new SplitText(titleRef.current, { type: "words", wordsClass: "word-child" });
+
+      // Wrap chaque mot dans un wrapper avec overflow hidden
+      split.words.forEach(word => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'o-wrapper';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.overflow = 'hidden';
+        word.parentNode.insertBefore(wrapper, word);
+        wrapper.appendChild(word);
+        word.className = 'transform';
+      });
+
       const runAnim = (els) => {
         // reset state
         gsap.set(els, { y: "100%" });
@@ -50,12 +65,12 @@ const HeroSectionProject = ({ title, image }) => {
         });
       };
 
-      let transforms = Array.from(q(".transform"));
+      const transforms = Array.from(q(".transform"));
 
       if (!transforms.length) {
         // SplitText peut ne pas avoir rendu encore : attendre un frame
         requestAnimationFrame(() => {
-          transforms = Array.from(q(".transform"));
+          const transforms = Array.from(q(".transform"));
           if (transforms.length) runAnim(transforms);
         });
       } else {
@@ -78,6 +93,7 @@ const HeroSectionProject = ({ title, image }) => {
       return () => {
         if (titleTlRef.current) titleTlRef.current.kill();
         if (imageTlRef.current) imageTlRef.current.kill();
+        split.revert();
       };
     });
 
@@ -102,18 +118,8 @@ const HeroSectionProject = ({ title, image }) => {
   return (
     <section className="hero-section-project" ref={rootRef} key={title}>
       <div className="container">
-        <h1>
-          <SplitText
-            LineWrapper={({ children }) => <>{children}</>}
-            WordWrapper={({ children }) => (
-              <div className="o-wrapper" style={{ display: "inline-block", overflow: "hidden" }}>
-                <span className="transform">{children}</span>
-              </div>
-            )}
-            LetterWrapper={({ children }) => <>{children}</>}
-          >
-            {title}
-          </SplitText>
+        <h1 ref={titleRef}>
+          {title}
         </h1>
       </div>
       <div className="container">

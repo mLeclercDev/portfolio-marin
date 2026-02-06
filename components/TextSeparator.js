@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
-import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/text-separator.scss'

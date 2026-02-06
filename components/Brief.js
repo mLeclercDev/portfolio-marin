@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SplitText } from "@cyriacbr/react-split-text";
+import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import "../styles/components/brief.scss";
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
 const Brief = ({ brief }) => {
   const rootRef = useRef(null);
+  const textRef = useRef(null);
   const [isFontReady, setIsFontReady] = useState(false);
 
   // Attendre que la font soit bien chargée
@@ -26,42 +27,42 @@ const Brief = ({ brief }) => {
   }, []);
 
   useEffect(() => {
-    if (!isFontReady || !rootRef.current) return;
+    if (!isFontReady || !textRef.current || !rootRef.current) return;
 
-    let animationKilled = false;
+    // Initialisation GSAP SplitText
+    const split = new SplitText(textRef.current, { type: "lines", linesClass: "line-child" });
 
-    const runAnim = () => {
-      if (animationKilled) return;
-      const lines = rootRef.current.querySelectorAll(".line");
-      if (!lines.length) {
-        // SplitText pas encore rendu → réessaie au prochain frame
-        requestAnimationFrame(runAnim);
-        return;
-      }
+    // Wrap mask pour les lignes
+    split.lines.forEach(line => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'line-wrapper';
+      wrapper.style.overflow = 'hidden';
+      wrapper.style.display = 'block';
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+      line.className = 'line';
+    });
 
-      // Reset state initial
-      gsap.set(lines, { y: "100%", rotate: 5 });
+    // État initial
+    gsap.set(split.lines, { y: "100%", rotate: 5 });
 
-      // Animation
-      gsap.to(lines, {
-        y: "0%",
-        rotate: 0,
-        duration: 1,
-        ease: "hyperBounce",
-        stagger: 0.075,
-        force3D: true,
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top 85%",
-          markers: false,
-        },
-      });
-    };
-
-    runAnim();
+    // Animation
+    gsap.to(split.lines, {
+      y: "0%",
+      rotate: 0,
+      duration: 1,
+      ease: "hyperBounce",
+      stagger: 0.075,
+      force3D: true,
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: "top 85%",
+        markers: false,
+      },
+    });
 
     return () => {
-      animationKilled = true;
+      split.revert();
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [isFontReady, brief]);
@@ -71,17 +72,9 @@ const Brief = ({ brief }) => {
       <div className="container">
         <span className="text-wrapper second">
           {isFontReady && (
-            <SplitText
-              LineWrapper={({ children }) => (
-                <span className="line-wrapper">
-                  <span className="line">{children}</span>
-                </span>
-              )}
-              WordWrapper={({ children }) => <span className="word">{children}</span>}
-              LetterWrapper={({ children }) => <>{children}</>}
-            >
+            <div ref={textRef}>
               {brief}
-            </SplitText>
+            </div>
           )}
         </span>
       </div>

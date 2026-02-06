@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
-import { SplitText } from "@cyriacbr/react-split-text";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import '../styles/components/hero-section.scss'
