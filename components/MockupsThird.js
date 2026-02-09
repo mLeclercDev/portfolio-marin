@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import "../styles/components/mockups-third.scss";
-import "../styles/components/global/cursor.scss";
 
 const MockupsThird = ({ videos }) => {
   const sectionRef = useRef(null);

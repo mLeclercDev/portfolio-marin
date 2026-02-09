@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-import "../styles/components/hero-second.scss";
 
 const HeroSection = ({ delay }) => {
   const videoWrapperRef = useRef(null);

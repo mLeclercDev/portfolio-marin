@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import "../styles/components/presentation-second.scss";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 

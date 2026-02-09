@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import '../styles/components/responsive-mockups.scss';
-import '../styles/components/global/cursor.scss';
 
 const ResponsiveMockups = ({ images }) => {
       const wrappersRef = useRef([]);

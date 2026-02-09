@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
-import '../styles/components/loader-second.scss'
 
 gsap.registerPlugin(CustomEase);
 

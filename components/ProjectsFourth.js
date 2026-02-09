@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { usePathname, useRouter } from "next/navigation";
 import { animatePageOut } from "../utils/animations";
 import gsap from "gsap";
-import "../styles/components/projects-fourth.scss";
 
 function formatToUrl(title) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");

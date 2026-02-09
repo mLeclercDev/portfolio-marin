@@ -4,7 +4,6 @@ import Image from 'next/image';
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/issues.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");

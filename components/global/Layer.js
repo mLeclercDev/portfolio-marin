@@ -1,6 +1,5 @@
 import React from "react";
 import Image from 'next/image';
-import '../../styles/components/global/layer.scss'
 
 const Layer = () => {
     return (

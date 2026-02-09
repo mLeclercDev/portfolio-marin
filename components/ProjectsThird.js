@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { animatePageOut } from "../utils/animations";
 import gsap from "gsap";
-import "../styles/components/projects-third.scss";
 
 function formatToUrl(title) {
   let url = title.toLowerCase().replace(/\s+/g, "-");

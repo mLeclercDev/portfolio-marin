@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/text-separator.scss'
 
 const Separator = ({content}) => {
   const [isRendered, setIsRendered] = useState(false);

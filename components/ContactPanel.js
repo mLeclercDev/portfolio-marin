@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { CustomEase } from "gsap/dist/CustomEase";
 import MagneticCTA from './global/MagneticCTA';
-import '../styles/components/contact-panel.scss';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create("panelEase", "0.76, 0, 0.24, 1");

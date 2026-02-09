@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/mockups-second.scss'
-import '../styles/components/global/cursor.scss'
 
 const MockupsSecond = ({ videos }) => {
     const cursorContainersRef = useRef([]);

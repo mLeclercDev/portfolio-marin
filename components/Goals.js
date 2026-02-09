@@ -5,7 +5,6 @@ import Image from 'next/image';
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/goals.scss'
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 

@@ -4,7 +4,6 @@ import { useScrollContext } from './global/ScrollContext';
 import Image from 'next/image';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/achievements.scss'
 
 const Achievements = () => {
   const [isRendered, setIsRendered] = useState(false);

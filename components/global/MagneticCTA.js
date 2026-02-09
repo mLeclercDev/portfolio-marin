@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import '../../styles/components/global/magnetic-cta.scss';
 
 const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, style = {}, ...props }) => {
   const magneticRef = useRef(null);

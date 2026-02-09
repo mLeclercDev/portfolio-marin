@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import Layer from '../components/global/Layer';
 import { useRouter } from "next/router";
 import Link from "next/link";
-import '../styles/components/global/404.scss';
 import { animatePageOut } from "../utils/animations"
 
 export default function Custom404() {

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { animatePageOut } from "../utils/animations"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/projects-second.scss';
 
 function formatToUrl(title) {
   // Convertir en minuscules et remplacer les espaces par des tirets

@@ -3,7 +3,6 @@ import { usePathname, useRouter } from "next/navigation"
 import Link from 'next/link';
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
-import '../../styles/components/global/navbar.scss';
 import { animatePageOut } from "../../utils/animations"
 import MagneticCTA from './MagneticCTA';
 import ContactPanel from '../ContactPanel';

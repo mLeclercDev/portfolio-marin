@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import "../../styles/components/global/cursor.scss";
 
 const Cursor = () => {
   const router = useRouter();

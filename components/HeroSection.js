@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/hero-section.scss'
 
 const HeroSection = ({delay}) => {
   const [isRendered, setIsRendered] = useState(false);

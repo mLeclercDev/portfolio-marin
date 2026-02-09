@@ -4,8 +4,6 @@ import { SplitText } from "gsap/dist/SplitText";
 import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/testimonial.scss';
-import '../styles/components/global/cursor.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");

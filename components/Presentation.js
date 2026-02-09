@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import FontFaceObserver from "fontfaceobserver";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import '../styles/components/presentation.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 

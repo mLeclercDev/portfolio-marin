@@ -9,7 +9,6 @@ import { SplitText } from "gsap/dist/SplitText";
 import MagneticCTA from '../components/global/MagneticCTA';
 import Layer from '../components/global/Layer';
 import Footer from '../components/global/Footer';
-import '../styles/components/collaborer.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
