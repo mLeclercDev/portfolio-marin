@@ -49,6 +49,7 @@ const HeroSection = ({ delay }) => {
       .to(".hero-second .word-wrapper.first", {
         y: "0%",
         rotate: 0,
+        opacity: 1,
         duration: 0.8,
         ease: "hyperBounce",
         delay: delay + 0.5,
@@ -58,6 +59,7 @@ const HeroSection = ({ delay }) => {
         {
           y: "0%",
           rotate: 0,
+          opacity: 1,
           duration: 0.8,
           ease: "hyperBounce",
           delay: -0.725,
@@ -68,6 +70,7 @@ const HeroSection = ({ delay }) => {
         {
           scale: 1,
           rotate: 0,
+          opacity: 1,
           duration: 0.85,
           ease: "hyperBounce",
           delay: -0.8,
@@ -129,7 +132,7 @@ const HeroSection = ({ delay }) => {
     <section className="hero-second">
       <div className="container">
         <div className="name">
-          <div className="word-wrapper first">
+          <div className="word-wrapper first" style={{ opacity: 0 }}>
             <span>D</span>
             <span>E</span>
             <span>V</span>
@@ -144,7 +147,7 @@ const HeroSection = ({ delay }) => {
             </div>
         </div>
         <div className="name">
-          <div className="word-wrapper second">
+          <div className="word-wrapper second" style={{ opacity: 0 }}>
             <span>F</span>
             <span>r</span>
             <span>o</span>
@@ -157,7 +160,7 @@ const HeroSection = ({ delay }) => {
             </div>
         </div>
         <div className="middle-wrapper">
-          <div className="video-wrapper" ref={videoWrapperRef}>
+          <div className="video-wrapper" ref={videoWrapperRef} style={{ opacity: 0 }}>
             {images.map((src, i) => (
               <Image
                 key={i}
@@ -174,7 +177,7 @@ const HeroSection = ({ delay }) => {
           </div>
         </div>
         <div className="name ghost-word first">
-          <div className="word-wrapper first">
+          <div className="word-wrapper first" style={{ opacity: 0 }}>
             <span>D</span>
             <span>E</span>
             <span>V</span>
@@ -189,7 +192,7 @@ const HeroSection = ({ delay }) => {
           </div>
         </div>
         <div className="name ghost-word second">
-          <div className="word-wrapper second">
+          <div className="word-wrapper second" style={{ opacity: 0 }}>
             <span>F</span>
             <span>R</span>
             <span>O</span>
@@ -203,21 +206,21 @@ const HeroSection = ({ delay }) => {
         </div>
         <div className="catchline">
           <div className="line-wrapper">
-            <span className="line">Développement intelligent</span>
+            <span className="line" style={{ opacity: 0 }}>Développement intelligent</span>
           </div>
           <div className="line-wrapper">
-            <span className="line">Sites impactants</span>
+            <span className="line" style={{ opacity: 0 }}>Sites impactants</span>
           </div>
         </div>
         <div className="catchline">
           <div className="line-wrapper">
-            <span className="line">HubSpot</span>
+            <span className="line" style={{ opacity: 0 }}>HubSpot</span>
           </div>
           <div className="line-wrapper">
-            <span className="line">Webflow</span>
+            <span className="line" style={{ opacity: 0 }}>Webflow</span>
           </div>
           <div className="line-wrapper">
-            <span className="line">Wordpress</span>
+            <span className="line" style={{ opacity: 0 }}>Wordpress</span>
           </div>
         </div>
       </div>
