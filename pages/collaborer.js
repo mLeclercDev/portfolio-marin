@@ -9,7 +9,6 @@ import { SplitText } from "gsap/dist/SplitText";
 import MagneticCTA from '../components/global/MagneticCTA';
 import Layer from '../components/global/Layer';
 import Footer from '../components/global/Footer';
-import '../styles/globals.scss';
 import '../styles/components/collaborer.scss';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);

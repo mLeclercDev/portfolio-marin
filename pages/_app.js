@@ -5,6 +5,7 @@ import { ScrollProvider } from '../components/global/ScrollContext';
 import Navbar from '../components/global/Navbar';
 import Cursor from '../components/global/Cursor';
 import { animatePageIn } from "../utils/animations";
+import '../styles/globals.scss';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();

@@ -10,7 +10,7 @@ import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
 import Reviews from '../components/Reviews';
 import Footer from '../components/global/Footer';
-import '../styles/globals.scss';
+
 
 export async function getStaticProps() {
   const client = createClient({

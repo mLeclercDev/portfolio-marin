@@ -21,7 +21,6 @@ import MockupsThird from '../components/MockupsThird';
 import ResponsiveMockups from '../components/ResponsiveMockups';
 import NextProject from '../components/nextProject';
 import Footer from '../components/global/Footer';
-import '../styles/globals.scss'
 
 function formatToUrl(title) {
   // Convertir en minuscules et remplacer les espaces par des tirets
