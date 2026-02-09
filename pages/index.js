@@ -10,7 +10,6 @@ import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
 import Reviews from '../components/Reviews';
 import Footer from '../components/global/Footer';
-import LoaderSecond from '../components/LoaderSecond';
 import '../styles/globals.scss';
 
 export async function getStaticProps() {
@@ -43,7 +42,6 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
         <link rel="manifest" href="/site.webmanifest" />  
       </Head>
 
-      {showLoader && <LoaderSecond />}
       <main>
         {/* HeroSecond prend un delayHero pour gérer l'animation */}
         <HeroSecond delay={delayHero} />

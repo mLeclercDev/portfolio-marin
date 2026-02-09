@@ -23,7 +23,7 @@ export default function Collaborer() {
     // Masquer les éléments du hero avant l'animation
     gsap.set('.collaborer-hero h1 .word-wrapper span', { y: '100%' });
     gsap.set('.collaborer-hero .collaborer-subtitle', { opacity: 0 });
-    gsap.set('.collaborer-step', { opacity: 0 });
+    gsap.set('.collaborer-step', { opacity: 0, y: 80 });
   }, []);
 
   useEffect(() => {
@@ -142,6 +142,11 @@ export default function Collaborer() {
              wrapper.appendChild(line);
         });
         gsap.set(splitSubtitle.lines, { y: "100%" });
+        // On rend le conteneur visible maintenant que les lignes sont cachées par overflow:hidden
+        gsap.set(subtitle, { opacity: 1 });
+    } else {
+        // Fallback si pas de split (ex: erreur), on s'assure que c'est visible pour l'animation ou on l'animera plus tard
+        // Ici on laisse opacity 0 car on l'animera dans la timeline si non splitté
     }
 
     tl.to(wordSpans, {
@@ -153,13 +158,14 @@ export default function Collaborer() {
     })
     .to(splitSubtitle ? splitSubtitle.lines : '.collaborer-hero p', {
       y: "0%",
+      opacity: 1, // Assure que l'élément (ou ses lignes) devient visible
       duration: 0.9, // Plus lent
       stagger: 0.08,
       ease: 'power3.out'
     }, '-=0.5')
-    .from('.collaborer-step', {
-      y: 80,
-      opacity: 0,
+    .to('.collaborer-step', { // Animation des étapes qui étaient opacity: 0
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       stagger: 0.1,
       ease: 'hyperBounce'
