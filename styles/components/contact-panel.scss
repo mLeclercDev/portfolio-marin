@@ -1,0 +1,361 @@
+.contact-panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+
+    &.open {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.contact-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 800px;
+    max-width: 100%;
+    height: 100vh;
+    background-color: #FCFBF6;
+    z-index: 9999;
+    padding: 60px 60px;
+    transform: translateX(100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #110F09;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        padding: 100px 20px 20px;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: none;
+        border: none;
+        color: #110F09;
+        font-family: var(--font1);
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 10;
+        
+        .close-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(17, 15, 9, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            
+            svg {
+                width: 14px;
+                height: 14px;
+                fill: #110F09;
+            }
+        }
+
+        &:hover .close-icon {
+            background-color: #110F09;
+            svg {
+                fill: #FCFBF6;
+            }
+        }
+    }
+
+    .panel-header {
+        margin-bottom: 50px;
+        
+        .step-indicator {
+            font-family: var(--font1);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            // opacity: 0.5; // Supprimé
+            color: rgba(17, 15, 9, 0.5); // Remplacé
+            margin-bottom: 15px;
+            font-weight: 500;
+            height: 1.2rem;
+            
+            /* Ajout styles roller */
+            display: flex;
+            align-items: center;
+            gap: 0.4em;
+
+            .step-count-mask {
+                height: 1.2em;
+                width: 0.7em; 
+                overflow: hidden;
+                display: inline-block;
+                position: relative;
+                vertical-align: text-bottom;
+                
+                span {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    line-height: 1;
+                    will-change: transform;
+
+                    &:nth-child(1) {
+                         transform: translateY(0%);
+                    }
+                    &:nth-child(2) {
+                        transform: translateY(100%);
+                    }
+                }
+            }
+        }
+
+        h2 {
+            font-size: clamp(40px, 5vw, 50px);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+            
+            .title-line {
+                display: block;
+                overflow: hidden;
+                
+                .title-line-inner {
+                    display: block;
+                    will-change: transform;
+                }
+            }
+        }
+        
+        p {
+            font-family: var(--font1);
+            // opacity: 0.7; // Transféré en couleur pour animation plus propre si besoin
+            color: rgba(17, 15, 9, 0.7);
+            max-width: 500px;
+            
+            .desc-line {
+                display: block;
+                overflow: hidden;
+                
+                .desc-line-inner {
+                    display: block;
+                    will-change: transform;
+                }
+            }
+        }
+    }
+
+    .contact-form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        
+        .steps-wrapper {
+            position: relative;
+            min-height: 300px;
+        }
+
+        .form-step {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .form-group {
+            position: relative;
+            
+            label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-family: var(--font1);
+                font-size: 16px;
+                color: rgba(17, 15, 9, 0.5);
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            input, textarea {
+                width: 100%;
+                background: none;
+                border: none;
+                border-bottom: 1px solid rgba(17, 15, 9, 0.2);
+                padding: 10px 0;
+                font-family: var(--font1);
+                font-size: 18px;
+                color: #110F09;
+                outline: none;
+                resize: none;
+                transition: border-color 0.3s ease;
+
+                // Hack Autofill
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover, 
+                &:-webkit-autofill:focus, 
+                &:-webkit-autofill:active {
+                    -webkit-box-shadow: 0 0 0 30px #FCFBF6 inset !important;
+                    -webkit-text-fill-color: #110F09 !important;
+                    transition: background-color 5000s ease-in-out 0s;
+                }
+
+                &:focus, &:valid, &.has-value {
+                    border-color: #110F09;
+                }
+
+                &:focus ~ label, &:valid ~ label, &.has-value ~ label {
+                    top: -20px;
+                    font-size: 12px;
+                    color: #110F09;
+                }
+            }
+
+            textarea {
+                min-height: 120px;
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            
+            .back-btn {
+                background: none;
+                border: none;
+                color: rgba(17, 15, 9, 0.5);
+                font-family: var(--font1);
+                font-size: 14px;
+                cursor: pointer;
+                padding: 10px 0;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                
+                &:hover {
+                    color: #110F09;
+                }
+                
+                &:disabled {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+            
+            .cta-container {
+                position: relative;
+                &.disabled {
+                    opacity: 0.3;
+                    pointer-events: none;
+                    filter: grayscale(100%);
+                }
+                transition: opacity 0.3s ease;
+                
+                .navbar-cta {
+                    background-color: #110F09;
+                    color: #FCFBF6;
+                    border: 1px solid #110F09; 
+                    
+                    .magnetic-text {
+                         color: #FCFBF6;
+                    }
+                    
+                    svg path {
+                        fill: #FCFBF6;
+                    }
+
+                    // &:hover styles supprimés pour garder le comportement standard du MagneticCTA
+                }
+            }
+
+            // .submit-btn supprimé (remplacé par MagneticCTA)
+        }
+    }
+
+    .success-view {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        opacity: 0;
+
+        h3 {
+            font-family: var(--font2);
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #110F09;
+            letter-spacing: -0.1rem;
+        }
+
+        p {
+            font-family: var(--font1);
+            font-size: 18px;
+            color: rgba(17, 15, 9, 0.7);
+            margin-bottom: 40px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        
+        // Réutilisation styles bouton si besoin
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(17, 15, 9, 0.1);
+        display: flex;
+        flex-direction: row; // En ligne
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            a {
+                font-family: var(--font1);
+                font-size: 14px;
+                text-transform: uppercase;
+                color: rgba(17, 15, 9, 0.6);
+                text-decoration: none;
+                transition: color 0.3s ease;
+                
+                &:hover {
+                    color: #110F09;
+                }
+            }
+        }
+        
+        .email-contact {
+            font-family: var(--font1);
+            color: #110F09;
+            text-decoration: none;
+            font-size: 16px;
+            opacity: 0.8;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

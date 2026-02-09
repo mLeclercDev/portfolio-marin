@@ -23,6 +23,7 @@
     "gsap": "^3.12.5",
     "matter-js": "^0.19.0",
     "next": "^14.1.4",
+    "nodemailer": "^8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-three-fiber": "^6.0.13",

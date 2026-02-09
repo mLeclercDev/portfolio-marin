@@ -6,6 +6,7 @@ import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import '../../styles/components/global/navbar.scss';
 import { animatePageOut } from "../../utils/animations"
 import MagneticCTA from './MagneticCTA';
+import ContactPanel from '../ContactPanel';
 
 function formatToUrl(title) {
   // Convertir en minuscules et remplacer les espaces par des tirets
@@ -24,6 +25,7 @@ const Navbar = ({ delay = 0 }) => {
   const [isHoveringLink, setIsHoveringLink] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -253,7 +255,8 @@ const Navbar = ({ delay = 0 }) => {
               </div>
               <div className="contact-link">
                 <MagneticCTA 
-                   href='mailto:contact@marinleclerc.dev'
+                   href='#'
+                   onClick={(e) => { e.preventDefault(); setIsContactOpen(true); }}
                    className='navbar-cta'
                 />
               </div>
@@ -308,7 +311,8 @@ const Navbar = ({ delay = 0 }) => {
             </div>
             <div className="cta-wrapper">
                 <MagneticCTA 
-                   href='mailto:contact@marinleclerc.dev'
+                   href='#'
+                   onClick={(e) => { e.preventDefault(); closeMobileMenu(); setIsContactOpen(true); }}
                    className='navbar-cta'
                    lg={true}
                 />
@@ -327,16 +331,19 @@ const Navbar = ({ delay = 0 }) => {
                 </a>
             </div>
             <div className="footer-item-wrapper">
-                <a 
-                  href="mailto:contact@marinleclerc.dev" 
+                <button 
+                   onClick={() => { closeMobileMenu(); setIsContactOpen(true); }}
                   className="mobile-email-link"
+                  style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
                 >
                   contact@marinleclerc.dev
-                </a>
+                </button>
             </div>
           </div>
         </div>
       </div>
+
+      <ContactPanel isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
   );
 };

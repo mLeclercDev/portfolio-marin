@@ -18,6 +18,14 @@ CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 export default function Collaborer() {
   const router = useRouter();
 
+  // Initialisation immédiate pour éviter le flash
+  useEffect(() => {
+    // Masquer les éléments du hero avant l'animation
+    gsap.set('.collaborer-hero h1 .word-wrapper span', { y: '100%' });
+    gsap.set('.collaborer-hero .collaborer-subtitle', { opacity: 0 });
+    gsap.set('.collaborer-step', { opacity: 0 });
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     gsap.set(".layers__items", { className: "layers__items out" });
@@ -398,11 +406,36 @@ export default function Collaborer() {
   return (
     <>
       <Head>
-        <title>Collaborer – Marin Leclerc</title>
-        <meta name="description" content="Découvrez ma méthodologie de travail en 5 étapes pour créer des sites web performants et sur mesure. De la découverte au lancement, je vous accompagne à chaque étape." />
+        {/* Primary Meta Tags */}
+        <title>Collaborer – Marin Leclerc | Développeur Web Freelance</title>
+        <meta name="title" content="Collaborer – Marin Leclerc | Développeur Web Freelance" />
+        <meta name="description" content="Méthodologie en 5 étapes pour créer des sites web performants. Intégration WordPress, Webflow, HubSpot. Collaboration agences & designers." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="développeur web freelance, intégration web, WordPress, Webflow, HubSpot, collaboration agence, développeur front-end" />
+        <meta name="author" content="Marin Leclerc" />
+        <link rel="canonical" href="https://marinleclerc.dev/collaborer" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://marinleclerc.dev/collaborer" />
+        <meta property="og:title" content="Collaborer – Marin Leclerc | Développeur Web Freelance" />
+        <meta property="og:description" content="Méthodologie en 5 étapes pour créer des sites web performants. Intégration WordPress, Webflow, HubSpot. Collaboration agences & designers." />
+        <meta property="og:image" content="https://marinleclerc.dev/Images/collaborer-marin-2.avif" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:site_name" content="Marin Leclerc - Développeur Web" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://marinleclerc.dev/collaborer" />
+        <meta name="twitter:title" content="Collaborer – Marin Leclerc | Développeur Web Freelance" />
+        <meta name="twitter:description" content="Méthodologie en 5 étapes pour créer des sites web performants. Intégration WordPress, Webflow, HubSpot. Collaboration agences & designers." />
+        <meta name="twitter:image" content="https://marinleclerc.dev/Images/collaborer-marin-2.avif" />
+        <meta name="twitter:creator" content="@marinleclerc" />
+
+        {/* Analytics */}
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5ff730a5-9ee9-49bb-a24e-5773e82d776a"></script>
 
+        {/* Favicons */}
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
