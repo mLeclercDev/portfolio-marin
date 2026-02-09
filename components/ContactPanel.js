@@ -356,7 +356,7 @@ const ContactPanel = ({ isOpen, onClose }) => {
                                 </>
                             ) : (
                                 <>
-                                    <span className="desc-line"><span className="desc-line-inner">J'ai hâte d'en savoir plus.</span></span>
+                                    <span className="desc-line"><span className="desc-line-inner">J&apos;ai hâte d&apos;en savoir plus.</span></span>
                                     <span className="desc-line"><span className="desc-line-inner">Quel est votre besoin ?</span></span>
                                 </>
                             )}
@@ -459,7 +459,7 @@ const ContactPanel = ({ isOpen, onClose }) => {
 
                    <div className="success-view" ref={successRef}>
                         <h3>Message bien reçu !</h3>
-                        <p>Merci de m'avoir contacté. Je reviens vers vous dans les plus brefs délais.</p>
+                        <p>Merci de m&apos;avoir contacté. Je reviens vers vous dans les plus brefs délais.</p>
                         
                         <div className="cta-container">
                              <MagneticCTA 
