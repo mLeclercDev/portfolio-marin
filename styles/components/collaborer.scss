@@ -516,26 +516,17 @@
 }
 
 // Animation pour les éléments au scroll
-@media (prefers-reduced-motion: no-preference) {
-  .collaborer-step {
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  @for $i from 1 through 6 {
-    .collaborer-step:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.1}s;
-    }
-  }
+// Masquage initial pour éviter le FOUC (JS prend le relais)
+.collaborer-hero h1 .word-wrapper span {
+  transform: translateY(100%);
+  display: inline-block;
+  will-change: transform;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.collaborer-hero .collaborer-subtitle {
+  opacity: 0;
+}
+
+.collaborer-step {
+  opacity: 0;
 }
