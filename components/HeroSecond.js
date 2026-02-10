@@ -168,9 +168,8 @@ const HeroSection = ({ delay }) => {
                 width={1000}
                 height={660}
                 priority
-                className={`fit-cover ${
-                  i === activeIndex ? "opacity-100" : "opacity-0"
-                }`}
+                className="fit-cover"
+                style={{ opacity: i === activeIndex ? 1 : 0 }}
               />
             ))}
           </div>
