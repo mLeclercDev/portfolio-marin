@@ -12,14 +12,14 @@ const HeroSection = ({ delay }) => {
   const [entryDone, setEntryDone] = useState(false);
 
   const images = [
-    "/Images/showreel/mockup-video-1.png",
-    "/Images/showreel/mockup-video-12.png",
-    "/Images/showreel/mockup-video-6.png",
-    "/Images/showreel/mockup-video-5.png",
-    "/Images/showreel/mockup-video-4.png",
-    "/Images/showreel/mockup-video-9.png",
-    "/Images/showreel/mockup-video-8.png",
-    "/Images/showreel/mockup-video-11.png",
+    "/Images/showreel/mockup-video-1.avif",
+    "/Images/showreel/mockup-video-12.avif",
+    "/Images/showreel/mockup-video-6.avif",
+    "/Images/showreel/mockup-video-5.avif",
+    "/Images/showreel/mockup-video-4.avif",
+    "/Images/showreel/mockup-video-9.avif",
+    "/Images/showreel/mockup-video-8.avif",
+    "/Images/showreel/mockup-video-11.avif",
   ];
 
   // 🔁 Slideshow auto
@@ -167,8 +167,8 @@ const HeroSection = ({ delay }) => {
                 alt={`Mockup ${i + 1}`}
                 width={1000}
                 height={660}
-                priority={i === 0}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={i <= 1}
+                sizes="(max-width: 480px) 100vw, (max-width: 992px) 70vw, 40vw"
                 className="fit-cover"
                 style={{ opacity: i === activeIndex ? 1 : 0 }}
               />

@@ -16,15 +16,12 @@ footer {
     z-index: 0;
     .wrapper{ 
         width:150%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         left: 50%;
         position: absolute;
         top: 156px;
         height:325px;
         overflow:hidden;
-        @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
-            transform: translate(-50%, -50%) !important;
-        }
         .boxes {
             position:relative;
             left:-1840px;

@@ -34,5 +34,10 @@
     "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
     "style-loader": "^3.3.4"
-  }
+  },
+  "browserslist": [
+    "> 0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
