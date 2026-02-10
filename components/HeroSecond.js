@@ -167,7 +167,7 @@ const HeroSection = ({ delay }) => {
                 alt={`Mockup ${i + 1}`}
                 width={1000}
                 height={660}
-                priority={i <= 1}
+                priority={i <= 2}
                 sizes="(max-width: 480px) 100vw, (max-width: 992px) 70vw, 40vw"
                 className="fit-cover"
                 style={{ opacity: i === activeIndex ? 1 : 0 }}

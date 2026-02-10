@@ -1,4 +1,5 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { createClient } from 'contentful';
 import Layer from '../components/global/Layer';
@@ -9,7 +10,8 @@ import Tools from '../components/Tools';
 import Achievements from '../components/Achievements';
 import ProjectsFive from '../components/ProjectsFive';
 import Reviews from '../components/Reviews';
-import Footer from '../components/global/Footer';
+
+const Footer = dynamic(() => import('../components/global/Footer'), { ssr: false });
 
 
 export async function getStaticProps() {
