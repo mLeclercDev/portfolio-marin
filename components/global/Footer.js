@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Matter from 'matter-js';
+
 
 const currentYear = new Date().getFullYear();
 
@@ -24,13 +24,11 @@ const Footer = ({ triggerSelector }) => {
             once: true
         }
     });
-    
+
     timeline.to("footer span.line", {
         width: "100%",
         ease: "cubic-bezier(0.4,0,0.2,1)",
     })
-/*     console.clear(); */
-
     
     // =============================
     gsap.set('.wrapper',{xPercent:-50,yPercent:-50})
@@ -101,11 +99,15 @@ const Footer = ({ triggerSelector }) => {
         const hauteur = divTest.offsetHeight;
 
     const canvas = canvasRef.current;
-    const engine = Matter.Engine.create();
-    const world = engine.world;
     
         // Fonction pour démarrer la chute des objets
-    const startObjectFall = () => {
+    const startObjectFall = async () => {
+        const MatterModule = await import('matter-js');
+        const Matter = MatterModule.default || MatterModule;
+
+        const engine = Matter.Engine.create();
+        const world = engine.world;
+        
         // Code pour démarrer la chute des objets
         const render = Matter.Render.create({
             canvas: canvas,
