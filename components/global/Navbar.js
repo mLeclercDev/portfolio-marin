@@ -239,16 +239,16 @@ const Navbar = ({ delay = 0 }) => {
 
             {/* Desktop Links */}
             <div className="links desktop-links">
-              <div className={`page-link hover-this cs-scale ${pathname === '/offre' ? 'active is-current' : ''}`} 
-                   onClick={() => layersIn(`/offre`)}
+              <div className={`page-link hover-this cs-scale ${pathname === '/services' ? 'active is-current' : ''}`} 
+                   onClick={() => layersIn(`/services`)}
                    onMouseMove={handleLinkHover} 
                    onMouseEnter={(e) => { handleLinkHover(e); handleRollerEnter(e); }}
                    onMouseLeave={handleLinkHover}
               >
                 <span className="text-roller-mask" style={{ transform: 'translateY(100%)', opacity: "0" }}>
                   <span className="text-roller-inner">
-                    <span>Offres</span>
-                    <span>Offres</span>
+                    <span>Services</span>
+                    <span>Services</span>
                   </span>
                 </span>
               </div>
@@ -310,12 +310,12 @@ const Navbar = ({ delay = 0 }) => {
             </div>
             <div className="nav-item-wrapper">
                 <Link 
-                  href="/offre" 
-                  className={`mobile-nav-link ${pathname === '/offre' ? 'active' : ''}`}
+                  href="/services" 
+                  className={`mobile-nav-link ${pathname === '/services' ? 'active' : ''}`}
                   onClick={(e) => {
                     e.preventDefault();
                     closeMobileMenu();
-                    layersIn('/offre');
+                    layersIn('/services');
                   }}
                 >
                   Services

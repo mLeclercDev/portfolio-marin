@@ -1,6 +1,6 @@
 
-// Offre Page Styles
-.offre-page {
+// Services Page Styles
+.services-page {
   background-color: var(--color1);
   min-height: 100vh;
   row-gap: 0;
@@ -10,7 +10,7 @@
   }
 
   // Mission Section (Style from Image)
-  .offre-mission {
+  .services-mission {
     background-color: #000;
     color: #fff;
     padding: 6rem 0;
@@ -65,7 +65,7 @@
   }
 
   // Hero Section - Similar to Collaborer
-  .offre-hero {
+  .services-hero {
     padding: 12rem 0 8rem;
     text-align: center;
     position: relative;
@@ -101,7 +101,7 @@
       }
     }
 
-    .offre-subtitle {
+    .services-subtitle {
        font-size: clamp(16px, 1.5vw, 1.25rem);
       line-height: 1.6;
       color: var(--color2);
@@ -118,7 +118,7 @@
 
 
   // LIST SUMMARY - ULTRA MINIMALIST
-  .offre-list-section {
+  .services-list-section {
     padding: 0 0 6rem;
     @media (max-width: 480px) {
       padding: 0 0 6rem;
@@ -427,7 +427,7 @@
   }
 
   // CTA BOTTOM - MATCHING COLLABORER
-  .offre-cta {
+  .services-cta {
     padding: 6rem 0;
     text-align: center;
 

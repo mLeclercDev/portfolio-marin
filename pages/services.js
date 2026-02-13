@@ -15,7 +15,7 @@ const Footer = dynamic(() => import('../components/global/Footer'), { ssr: false
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
 
-export default function Offre() {
+export default function Services() {
   const router = useRouter();
 
 
@@ -26,12 +26,12 @@ export default function Offre() {
 
   useEffect(() => {
     // Hero Animation Setup & Execution
-    const titleSpans = document.querySelectorAll('.offre-hero h1 .word-wrapper span');
-    const subtitle = document.querySelector('.offre-hero .offre-subtitle');
+    const titleSpans = document.querySelectorAll('.services-hero h1 .word-wrapper span');
+    const subtitle = document.querySelector('.services-hero .services-subtitle');
     const cards = document.querySelectorAll('.offer-item-wrap');
 
-    const missionText = document.querySelector('.offre-mission p');
-    const missionLabel = document.querySelector('.offre-mission .mission-label');
+    const missionText = document.querySelector('.services-mission p');
+    const missionLabel = document.querySelector('.services-mission .mission-label');
 
     // Initial states
     if (missionText) gsap.set(missionText, { opacity: 0, y: 30 });
@@ -90,7 +90,7 @@ export default function Offre() {
     }
 
     // Scroll Animations for sections
-    const sections = document.querySelectorAll('.offre-detail');
+    const sections = document.querySelectorAll('.services-detail');
     sections.forEach((section) => {
         const h2 = section.querySelector('h2');
         if (h2) {
@@ -170,13 +170,19 @@ export default function Offre() {
   return (
     <>
       <Head>
-        <title>Offres & Services – Marin Leclerc | Développement Web Sur Mesure</title>
-        <meta name="title" content="Offres & Services – Marin Leclerc | Développement Web Sur Mesure" />
+        <title>Services – Marin Leclerc | Développement Web Sur Mesure</title>
+        <meta name="title" content="Services – Marin Leclerc | Développement Web Sur Mesure" />
         <meta name="description" content="Développement front-end sur mesure, refonte technique et accompagnement web global. Expert WordPress, Webflow et HubSpot." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Marin Leclerc" />
+        <link rel="canonical" href="https://marinleclerc.dev/services" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://marinleclerc.dev/services" />
+        <meta property="og:title" content="Services – Marin Leclerc | Développement Web Sur Mesure" />
+        <meta property="og:description" content="Développement front-end sur mesure, refonte technique et accompagnement web global. Expert WordPress, Webflow et HubSpot." />
       </Head>
 
-      <main className="offre-page">
+      <main className="services-page">
         {/* MISSION SECTION */}
 {/*         <section className="offre-mission">
           <div className="container">
@@ -192,14 +198,14 @@ export default function Offre() {
         </section> */}
 
         {/* HERO SECTION */}
-        <section className="offre-hero">
+        <section className="services-hero">
           <div className="container">
             <h1>
               <span className='word-wrapper'>
                 <span>Mes services</span>
               </span>
             </h1>
-            <div className="offre-subtitle">
+            <div className="services-subtitle">
               <p>
                 J’interviens sur des projets nécessitant un cadre solide, une exécution propre et une attention particulière à la performance et la maintenabilité.
               </p>
@@ -208,7 +214,7 @@ export default function Offre() {
         </section>
 
         {/* OFFERS LIST - SIMPLIFIED */}
-        <section className="offre-list-section">
+        <section className="services-list-section">
           <div className="container">
             <div className="offers-list">
               {offers.map((offer, index) => (
@@ -308,7 +314,7 @@ export default function Offre() {
         </section> */}
 
         {/* CTA BOTTOM - MATCHING COLLABORER */}
-        <section className="offre-cta">
+        <section className="services-cta">
           <div className="container">
             <h2>Discutons de votre projet</h2>
             <p>Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée. Je réponds généralement sous 24h.</p>
@@ -323,7 +329,7 @@ export default function Offre() {
 
       </main>
 
-      <Footer triggerSelector=".offre-cta" />
+      <Footer triggerSelector=".services-cta" />
       <Layer />
     </>
   );
