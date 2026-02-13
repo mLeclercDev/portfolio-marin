@@ -317,7 +317,7 @@ export default function Services() {
         <section className="services-cta">
           <div className="container">
             <h2>Discutons de votre projet</h2>
-            <p>Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée. Je réponds généralement sous 24h.</p>
+            <p>Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée.</p>
             <MagneticCTA 
                 text="Prendre rendez-vous"
                 href="/contact" 
