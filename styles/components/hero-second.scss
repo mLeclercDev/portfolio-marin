@@ -6,6 +6,12 @@
   overflow: hidden;
   opacity: 1;
   z-index: 111;
+  h1 {
+    color: var(--color2);
+    font-family: var(--font1);
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -207,7 +213,7 @@
         top: inherit;
         bottom: 2rem;
         &:nth-last-child(2) {
-          display: none;
+          bottom: 8rem;
         }
         &:last-child {
           right: inherit;

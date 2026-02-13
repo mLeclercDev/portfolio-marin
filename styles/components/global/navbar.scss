@@ -35,7 +35,7 @@ header {
             }
         }
         .logo .text-roller-mask,
-        .collaborer-link .text-roller-mask {
+        .page-link .text-roller-mask {
             transform: translateY(100%);
             opacity: 0;
         }
@@ -94,7 +94,7 @@ header {
                 pointer-events: none;
             }
         }
-        .collaborer-link {
+        .page-link {
             display: flex;
             align-items: center;
             cursor: none;

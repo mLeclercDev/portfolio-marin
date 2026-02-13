@@ -122,8 +122,10 @@ const Reviews = () => {
             const posY = e.clientY;
 
             cursorContainers.forEach(cursor => {
-                cursor.style.left = `${posX}px`;
-                cursor.style.top = `${posY}px`;
+                if (cursor) {
+                    cursor.style.left = `${posX}px`;
+                    cursor.style.top = `${posY}px`;
+                }
             });
         };
 
@@ -133,20 +135,22 @@ const Reviews = () => {
             if (cursor) cursor.classList.add('active');
 
             reviews.forEach((review, i) => {
-                if (i + 1 === Number(index)) {
-                     review.classList.add('active');
-                     
-                     // Animation d'entrée des lignes (Reveal Mask)
-                     const lines = review.querySelectorAll('.quote .line-child');
-                     gsap.to(lines, {
-                         y: 0,
-                         duration: 0.8,
-                         stagger: 0.05,
-                         ease: "power3.out",
-                         overwrite: true
-                     });
-                } else {
-                    review.classList.add('unactive');
+                if (review) {
+                    if (i + 1 === Number(index)) {
+                         review.classList.add('active');
+                         
+                         // Animation d'entrée des lignes (Reveal Mask)
+                         const lines = review.querySelectorAll('.quote .line-child');
+                         gsap.to(lines, {
+                             y: 0,
+                             duration: 0.8,
+                             stagger: 0.05,
+                             ease: "power3.out",
+                             overwrite: true
+                         });
+                    } else {
+                        review.classList.add('unactive');
+                    }
                 }
             });
         };
@@ -157,17 +161,19 @@ const Reviews = () => {
             if (cursor) cursor.classList.remove('active');
 
             reviews.forEach(review => {
-                review.classList.remove('active', 'unactive');
-                
-                // Animation de sortie des lignes
-                const lines = review.querySelectorAll('.quote .line-child');
-                gsap.to(lines, {
-                    y: "100%",
-                    duration: 0.4,
-                    stagger: { from: "end", amount: 0.05 },
-                    ease: "power2.in",
-                    overwrite: true
-                });
+                if (review) {
+                    review.classList.remove('active', 'unactive');
+                    
+                    // Animation de sortie des lignes
+                    const lines = review.querySelectorAll('.quote .line-child');
+                    gsap.to(lines, {
+                        y: "100%",
+                        duration: 0.4,
+                        stagger: { from: "end", amount: 0.05 },
+                        ease: "power2.in",
+                        overwrite: true
+                    });
+                }
             });
         };
 
@@ -176,19 +182,23 @@ const Reviews = () => {
         const options = { root: null, rootMargin: '0px', threshold: 0.5 };
         const reviewObservers = [];
         reviews.forEach(review => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        review.addEventListener('mouseenter', handleMouseEnter);
-                        review.addEventListener('mouseleave', handleMouseLeave);
-                    } else {
-                        review.removeEventListener('mouseenter', handleMouseEnter);
-                        review.removeEventListener('mouseleave', handleMouseLeave);
-                    }
-                });
-            }, options);
-            reviewObservers.push(observer);
-            observer.observe(review);
+            if (review) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            review.addEventListener('mouseenter', handleMouseEnter);
+                            review.addEventListener('mouseleave', handleMouseLeave);
+                        } else {
+                            if (review) {
+                                review.removeEventListener('mouseenter', handleMouseEnter);
+                                review.removeEventListener('mouseleave', handleMouseLeave);
+                            }
+                        }
+                    });
+                }, options);
+                reviewObservers.push(observer);
+                observer.observe(review);
+            }
         });
 
         return () => {

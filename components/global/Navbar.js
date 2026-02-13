@@ -72,7 +72,7 @@ const Navbar = ({ delay = 0 }) => {
     );
 
     gsap.set("nav .logo .text-roller-mask", { opacity: 1 })
-    gsap.set("nav .collaborer-link .text-roller-mask", { opacity: 1 }) // MAJ selecteur
+    gsap.set("nav .page-link .text-roller-mask", { opacity: 1 }) 
     
     // 1. Initialisation : Opacité 0 simple
     gsap.set("nav .contact-link", { opacity: 0 });
@@ -80,7 +80,7 @@ const Navbar = ({ delay = 0 }) => {
     gsap.set(["nav .contact-link .navbar-cta", "nav .contact-link .text-roller-inner", "nav .contact-link .arrow"], { clearProps: "all" });
 
     gsap.to("nav .logo .text-roller-mask", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
-    gsap.to("nav .collaborer-link .text-roller-mask", { y: "0%", delay: delay + 2.1, duration: 0.8, ease: "hyperBounce" }) 
+    gsap.to("nav .page-link .text-roller-mask", { y: "0%", delay: delay + 2.05, duration: 0.8, ease: "hyperBounce" })
     
     // 2. Animation Simple : Fade in juste après
     gsap.to("nav .contact-link", { 
@@ -239,7 +239,20 @@ const Navbar = ({ delay = 0 }) => {
 
             {/* Desktop Links */}
             <div className="links desktop-links">
-              <div className={`collaborer-link hover-this cs-scale ${pathname === '/collaborer' ? 'active is-current' : ''}`} 
+              <div className={`page-link hover-this cs-scale ${pathname === '/offre' ? 'active is-current' : ''}`} 
+                   onClick={() => layersIn(`/offre`)}
+                   onMouseMove={handleLinkHover} 
+                   onMouseEnter={(e) => { handleLinkHover(e); handleRollerEnter(e); }}
+                   onMouseLeave={handleLinkHover}
+              >
+                <span className="text-roller-mask" style={{ transform: 'translateY(100%)', opacity: "0" }}>
+                  <span className="text-roller-inner">
+                    <span>Offres</span>
+                    <span>Offres</span>
+                  </span>
+                </span>
+              </div>
+              <div className={`page-link hover-this cs-scale ${pathname === '/collaborer' ? 'active is-current' : ''}`} 
                    onClick={() => layersIn(`/collaborer`)}
                    onMouseMove={handleLinkHover} 
                    onMouseEnter={(e) => { handleLinkHover(e); handleRollerEnter(e); }}
@@ -293,6 +306,19 @@ const Navbar = ({ delay = 0 }) => {
                   }}
                 >
                   Accueil
+                </Link>
+            </div>
+            <div className="nav-item-wrapper">
+                <Link 
+                  href="/offre" 
+                  className={`mobile-nav-link ${pathname === '/offre' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMobileMenu();
+                    layersIn('/offre');
+                  }}
+                >
+                  Services
                 </Link>
             </div>
             <div className="nav-item-wrapper">

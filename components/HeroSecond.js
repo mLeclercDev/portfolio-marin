@@ -203,14 +203,14 @@ const HeroSection = ({ delay }) => {
             <span>D</span>
           </div>
         </div>
-        <div className="catchline">
+        <h1 className="catchline">
           <div className="line-wrapper">
             <span className="line" style={{ opacity: 0 }}>Développement intelligent</span>
           </div>
           <div className="line-wrapper">
             <span className="line" style={{ opacity: 0 }}>Sites impactants</span>
           </div>
-        </div>
+        </h1>
         <div className="catchline">
           <div className="line-wrapper">
             <span className="line" style={{ opacity: 0 }}>HubSpot</span>
