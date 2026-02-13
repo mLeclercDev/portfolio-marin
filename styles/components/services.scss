@@ -428,8 +428,12 @@
 
   // CTA BOTTOM - MATCHING COLLABORER
   .services-cta {
-    padding: 6rem 0;
+    padding: 8rem 0 12rem;
     text-align: center;
+
+    @media (max-width: 768px) {
+      padding: 6rem 0 8rem;
+    }
 
     .container {
       max-width: 900px;
