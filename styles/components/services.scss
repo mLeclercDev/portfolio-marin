@@ -177,12 +177,13 @@
             max-width: 100%;
           }
 
-          h3 {
+          h2 {
             font-weight: 450;
             font-size: clamp(2.5rem, 6vw, 6rem);
             line-height: 1;
             letter-spacing: -2px;
             font-family: var(--font2);
+            margin: 0;
 
             @media (max-width: 1024px) {
               font-size: 3.5rem;

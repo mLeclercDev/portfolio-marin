@@ -223,7 +223,7 @@ export default function Services() {
                   <div className="offer-item hover-this">
                       <span className="offer-number">{offer.number}</span>
                     <div className="offer-title">
-                      <h3>{offer.title}<br></br>{offer.subtitle}</h3>
+                      <h2>{offer.title}<br></br>{offer.subtitle}</h2>
                     </div>
                     <div className="offer-right">
                       <div className='offer-description'>
