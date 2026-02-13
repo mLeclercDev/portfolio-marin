@@ -13,11 +13,7 @@
   .offre-mission {
     background-color: #000;
     color: #fff;
-    padding: 18rem 0 12rem;
-    
-    @media (max-width: 768px) {
-      padding: 12rem 0 8rem;
-    }
+    padding: 6rem 0;
 
     .mission-inner {
       display: grid;
@@ -123,7 +119,7 @@
 
   // LIST SUMMARY - ULTRA MINIMALIST
   .offre-list-section {
-    padding: 0 0 12rem;
+    padding: 0 0 6rem;
     @media (max-width: 480px) {
       padding: 0 0 6rem;
     }
@@ -246,7 +242,7 @@
 
   // DEDICATED PARTNER SECTION
   .dedicated-partner {
-    padding: 12rem 0;
+    padding: 6rem 0;
     color: var(--color2);
     @media (max-width: 480px) {
       padding: 0 0 6rem;
@@ -349,7 +345,7 @@
 
   // GROWTH STATS SECTION
   .growth-stats {
-    padding: 0 0 12rem;
+    padding: 0 0 6rem;
     color: var(--color2);
 
     .growth-intro {
@@ -432,7 +428,7 @@
 
   // CTA BOTTOM - MATCHING COLLABORER
   .offre-cta {
-    padding: 12rem 0 15rem;
+    padding: 6rem 0;
     text-align: center;
 
     .container {

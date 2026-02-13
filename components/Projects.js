@@ -37,7 +37,7 @@ const Projects = () => {
             <div className='column'>
                 <a className='project' href='eurosport.fr'>
                     <figure>
-                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Illustration du projet" width={1150} height={520} />
                     </figure>
                     <div className='informations'>
                         <span className='transform'>
@@ -47,7 +47,7 @@ const Projects = () => {
                 </a>
                 <a className='project' href='eurosport.fr'>
                     <figure>
-                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Illustration du projet" width={1150} height={520} />
                     </figure>
                     <div className='informations'>
                         <span className='transform'>
@@ -59,7 +59,7 @@ const Projects = () => {
             <div className='column'>
                 <a className='project' href='eurosport.fr'>
                     <figure>
-                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Illustration du projet" width={1150} height={520} />
                     </figure>
                     <div className='informations'>
                         <span className='transform'>
@@ -69,7 +69,7 @@ const Projects = () => {
                 </a>
                 <a className='project' href='eurosport.fr'>
                     <figure>
-                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+                        <Image className='fit-cover' src="/Images/layer-1.png" alt="Illustration du projet" width={1150} height={520} />
                     </figure>
                     <div className='informations'>
                         <span className='transform'>

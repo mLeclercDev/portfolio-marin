@@ -21,7 +21,7 @@ const ResponsiveMockups = ({ images }) => {
                 <div className="image-inner">
                   <Image
                     src={`https:${image.fields.file.url}`}
-                    alt={image.fields.title || `mockup-${i}`}
+                    alt={image.fields.title || `Mockup responsive ${currentIndex + 1}`}
                     fill
                     quality={80}
                   />

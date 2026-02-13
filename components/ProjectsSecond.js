@@ -235,7 +235,7 @@ const ProjectsSecond = ({ projects }) => {
       <div key={index} className='project-wrapper' data-index={index + 1} ref={el => projectRefs.current[index] = el}>
         <div className='wrapper-inner'>
           <div className="responsive-image" key={index} data-index={index + 1} onClick={() => layersIn(`/${formatToUrl(project.fields.title)}`)}>
-            <Image className='fit-cover' src={`https:${project.fields.featuredImageHomepage.fields.file.url}`} alt="Mon image" width={1150} height={520} />
+            <Image className='fit-cover' src={`https:${project.fields.featuredImageHomepage.fields.file.url}`} alt={`Aperçu du projet ${project.fields.title}`} width={1150} height={520} />
           </div>
           <div className='title-project'>
             <div className='o-wrapper'>
@@ -272,7 +272,7 @@ const ProjectsSecond = ({ projects }) => {
     // Utilisation de la méthode map() pour générer dynamiquement des éléments description à partir des données de projectsData
     const projectImage = projects.map((project, index) => (
       <div className="cs-scale" key={index} data-index={index + 1} onClick={() => layersIn(`/${formatToUrl(project.fields.title)}`)}>
-          <Image className='fit-cover' src={`https:${project.fields.featuredImageHomepage.fields.file.url}`} alt="Mon image" width={1150} height={520} />
+          <Image className='fit-cover' src={`https:${project.fields.featuredImageHomepage.fields.file.url}`} alt={`Aperçu du projet ${project.fields.title}`} width={1150} height={520} />
       </div>
     ));
 

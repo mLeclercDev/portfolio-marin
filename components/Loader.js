@@ -65,7 +65,7 @@ const Loader = ({title, description, projects}) => {
           </div>
           <div>
             <span className='images'>
-              <Image className='fit-cover' src="/Images/layer-1.png" alt="Mon image" width={1150} height={520} />
+              <Image className='fit-cover' src="/Images/layer-1.png" alt="Élément graphique du loader" width={1150} height={520} />
             </span>
             <span className='o-wrapper'>
                 <span className='target-percent'>

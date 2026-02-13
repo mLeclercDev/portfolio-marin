@@ -30,7 +30,7 @@ const Mockups = ({ images }) => {
                     <Image
                       className="fit-cover"
                       src={`https:${image.fields.file.url}`}
-                      alt={image.fields.title || `mockup-${i}`}
+                      alt={image.fields.title || `Aperçu du site sur smartphone - mockup ${i + 1}`}
                       width={860}
                       height={1690}
                     />
