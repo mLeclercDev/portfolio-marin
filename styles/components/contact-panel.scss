@@ -129,7 +129,8 @@
             }
         }
 
-        h2 {
+        .contact-panel-title {
+            font-weight: 500;
             font-size: clamp(40px, 5vw, 50px);
             line-height: 1.2;
             margin-bottom: 20px;

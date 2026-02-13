@@ -334,7 +334,7 @@ const ContactPanel = ({ isOpen, onClose }) => {
                              </span>
                              / 2
                         </span>
-                        <h2 ref={headerTitleRef}>
+                        <div className='contact-panel-title' ref={headerTitleRef}>
                             {step === 1 ? (
                                 <>
                                     <span className="title-line"><span className="title-line-inner">Commençons par</span></span>
@@ -346,7 +346,7 @@ const ContactPanel = ({ isOpen, onClose }) => {
                                     <span className="title-line"><span className="title-line-inner">de votre projet</span></span>
                                 </>
                             )}
-                        </h2>
+                        </div>
                         <p ref={headerDescRef}>
                             {step === 1 ? (
                                 <>
