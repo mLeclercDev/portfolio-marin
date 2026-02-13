@@ -12,6 +12,15 @@
       div.text-wrapper {
         font-size: 60px;
         font-weight: 500;
+
+        // Hide raw text before GSAP SplitText runs
+        & > div {
+            opacity: 0;
+        }
+        // When split is done, the injected line-wrappers will contain the text
+        & > .line-wrapper {
+            opacity: 1;
+        }
       }
     }
   }
@@ -28,7 +37,7 @@
         display: inline-block;
         //white-space: nowrap; // force chaque "line" à rester sur une seule ligne
         will-change: transform; // optimisé pour GSAP
-        /*        transform: translateY(100%); */
+        transform: translateY(100%) rotate(5deg);
       }
     }
   }

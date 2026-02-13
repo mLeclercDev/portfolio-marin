@@ -139,13 +139,17 @@ const Presentation = ({delayPresentation}) => {
                 // État initial caché
                 gsap.set(linesFirst, { y: "100%", rotate: 0 }); 
                 
-                timeline.from(linesSecond, { 
-                    y: "100%", 
-                    rotate: 0, 
-                    ease: "hyperBounce", 
-                    duration: 1, 
-                    stagger: 0.033 
-                });
+                timeline.fromTo(linesSecond, 
+                    { y: "100%", rotate: 5, opacity: 1 },
+                    { 
+                        y: "0%", 
+                        rotate: 0, 
+                        opacity: 1,
+                        ease: "hyperBounce", 
+                        duration: 1, 
+                        stagger: 0.033 
+                    }
+                );
             }, delayPresentation);
             
             timeline.to(".presentation .second img", { className: "fit-cover view" });

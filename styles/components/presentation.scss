@@ -56,6 +56,15 @@
           @media (max-width: 468px) {
             font-size: 30px;
           }
+
+        // Hide raw text before GSAP SplitText runs
+        & > div {
+            opacity: 0;
+        }
+        // When split is done, the injected line-wrappers will contain the text
+        & > .line-wrapper {
+            opacity: 1;
+        }
     }
 
     div:not(.arrow-span) {
@@ -79,14 +88,11 @@
         &.text-wrapper.first .line-wrapper .line {
             transform: translateY(100%) rotate(5deg);
         }
-        &.text-wrapper.second .line-wrapper .second {
-            transform: translateY(0%) rotate(0deg);
+        &.text-wrapper.second .line-wrapper .line {
+            transform: translateY(100%) rotate(5deg);
         }
     }
     .text-wrapper {
-        &.first {
-            //opacity: 0;
-        }
         &.second {
             position: absolute;
             top: 0;

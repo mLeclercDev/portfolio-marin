@@ -59,13 +59,17 @@ useEffect(() => {
       }
     }); 
 
-    timeline.from(split.lines, {
-      y: "100%",
-      duration: 1,
-      ease: "hyperBounce",
-      stagger: 0.05,
-      marker: false
-    });
+    timeline.fromTo(split.lines, 
+      { y: "100%", rotate: 5, opacity: 1 },
+      {
+        y: "0%",
+        rotate: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "hyperBounce",
+        stagger: 0.05
+      }
+    );
 
     return () => {
       split.revert();
