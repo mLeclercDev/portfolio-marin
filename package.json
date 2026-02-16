@@ -33,6 +33,7 @@
     "css-loader": "^6.10.0",
     "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
+    "sharp": "^0.34.5",
     "style-loader": "^3.3.4"
   },
   "browserslist": [
