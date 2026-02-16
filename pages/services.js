@@ -256,7 +256,7 @@ export default function Services() {
             <p>Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée.</p>
             <MagneticCTA 
                 text="Prendre rendez-vous"
-                href="/contact" 
+                href="mailto:contact@marinleclerc.dev" 
                 className="cta-button"
                 style={{ transition: 'transform 0.1s linear' }}
             />
