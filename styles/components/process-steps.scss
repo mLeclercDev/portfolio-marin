@@ -1,0 +1,122 @@
+// Process Steps Section
+.process-steps {
+  background-color: #000;
+  color: #fff;
+  padding: 8rem 0 10rem;
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 6rem 0 8rem;
+  }
+
+  .process-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+
+    @media (max-width: 768px) {
+      gap: 4rem;
+    }
+  }
+
+  .process-title {
+    font-family: var(--font2);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+    font-weight: 450;
+    max-width: 1100px;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+      letter-spacing: -1px;
+    }
+
+    .line-wrapper {
+      overflow: hidden;
+      display: block;
+    }
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 2rem;
+
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem 2rem;
+    }
+
+    @media (max-width: 568px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .process-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (max-width: 992px) {
+      &:nth-child(2) .step-arrow,
+      &:nth-child(4) .step-arrow {
+        display: none;
+      }
+    }
+
+    @media (max-width: 568px) {
+      .step-arrow {
+        transform: rotate(90deg);
+        position: absolute;
+        bottom: -2.5rem;
+        left: 0;
+      }
+
+      &:last-child .step-arrow {
+        display: none;
+      }
+    }
+  }
+
+  .step-number {
+    font-family: var(--font2);
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -3px;
+    opacity: 0.9;
+
+    @media (max-width: 768px) {
+      font-size: 5rem;
+    }
+  }
+
+  .step-arrow {
+    font-size: 2rem;
+    opacity: 0.4;
+    position: absolute;
+    right: -2.5rem;
+    top: 2.5rem;
+
+    @media (max-width: 992px) {
+      right: -1.5rem;
+    }
+  }
+
+  .step-label {
+    font-family: var(--font1);
+    font-size: 1.125rem;
+    text-transform: capitalize;
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}

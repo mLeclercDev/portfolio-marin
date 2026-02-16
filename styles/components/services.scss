@@ -133,18 +133,20 @@
       width: 100%;
       height: 1px;
       background-color: var(--color2);
-      opacity: 0.1;
+      opacity: 0.2;
+      transform-origin: left;
+      transform: scaleX(0); // Initial state for animation
     }
 
     .offer-item {
       display: grid;
-      grid-template-columns: 20px 2fr 1fr;
+      grid-template-columns: auto 2fr 1fr; // Auto width for number
       align-items: start;
       gap: 4rem;
       padding: 80px 0;
 
       @media (max-width: 1024px) {
-        grid-template-columns: 30px 1fr;
+        grid-template-columns: auto 1fr;
         gap: 2rem;
         padding: 60px 0;
       }
@@ -156,6 +158,11 @@
         padding: 40px 0;
       }
 
+      .offer-number-mask {
+        overflow: hidden;
+        display: block;
+      }
+
       .offer-number {
           font-family: var(--font1);
           font-size: 0.875rem;
@@ -163,6 +170,11 @@
           letter-spacing: 0.1em;
           display: block;
           margin-top: 15px;
+          white-space: nowrap; // Prevent wrapping
+          // transform: translateY(110%); // Moved to anim-content class or keep here if it IS anim-content
+          // In JSX: className="offer-number anim-content"
+          // So this class is applied.
+          opacity: 0; // Prevent FOUC - JS will set to 1 after split and masks applied
 
           @media (max-width: 1024px) {
             margin-top: 5px;
@@ -172,9 +184,17 @@
       .offer-title {
           width: 100%;
           max-width: 700px;
-
+          // overflow: hidden; // Mask removed from here, now in inner mask-block
+            
           @media (max-width: 1024px) {
             max-width: 100%;
+          }
+          
+          .mask-block {
+             display: block;
+             overflow: hidden;
+             padding-bottom: 0.15em; // Allow space for descenders (g, p, y)
+             margin-bottom: -0.15em; // Compensate spacing
           }
 
           h2 {
@@ -184,6 +204,12 @@
             letter-spacing: -2px;
             font-family: var(--font2);
             margin: 0;
+            // transform: translateY(100%); // Removed, now on inner span
+             
+             .anim-content {
+                display: block;
+                transform: translateY(100%);
+             }
 
             @media (max-width: 1024px) {
               font-size: 3.5rem;
@@ -215,7 +241,18 @@
           font-family: var(--font1);
           font-size: 1.125rem;
           line-height: 1.6;
-          opacity: 0.8;
+          opacity: 0; // Hidden initially
+          // overflow: hidden; // Now in mask-block
+          
+          .mask-block {
+            display: block;
+            overflow: hidden;
+          }
+
+          p {
+            margin: 0;
+            // class anim-content
+          }
 
           @media (max-width: 768px) {
             max-width: 100%;
@@ -250,12 +287,13 @@
     }
 
     .dedicated-partner-inner {
+      // display: flex; // Kept? No, let's keep flex but change gap
       display: flex;
       flex-direction: column;
-      gap: 8rem;
+      gap: 0; // Removing gap to handle spacing manually with separator
       
       @media (max-width: 768px) {
-        gap: 4rem;
+        gap: 0;
       }
     }
 
@@ -264,11 +302,23 @@
       grid-template-columns: 1.2fr 1fr;
       gap: 6rem;
       align-items: start;
+      margin-bottom: 8rem; // Space before line
 
       @media (max-width: 992px) {
         grid-template-columns: 1fr;
         gap: 3rem;
       }
+
+      @media (max-width: 768px) {
+        margin-bottom: 4rem;
+      }
+    }
+
+    .partner-separator {
+      width: 100%;
+      height: 1px;
+      background-color: rgba(0,0,0,0.1);
+      transform-origin: right center; // For animation
     }
 
     .partner-heading {
@@ -309,8 +359,8 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
-      padding-top: 4rem;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 4rem; // Space after line
+      // border-top: 1px solid rgba(0,0,0,0.1); // Removed in favor of partner-separator div
        
       @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
@@ -346,22 +396,34 @@
 
   // GROWTH STATS SECTION
   .growth-stats {
-    padding: 0 0 6rem;
+    padding: 8rem 0 10rem;
     color: var(--color2);
+    background-color: var(--color1);
+
+    @media (max-width: 768px) {
+      padding: 6rem 0 8rem;
+    }
 
     .growth-intro {
-      margin-bottom: 6rem;
+      margin-bottom: 4rem;
+      
       p {
         font-family: var(--font2);
-        font-size: 1.5rem;
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
         font-weight: 450;
-        opacity: 0.8;
+        opacity: 0.9;
+        letter-spacing: -0.5px;
+        
+        @media (max-width: 768px) {
+          font-size: 1.5rem;
+        }
       }
     }
 
     .growth-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      gap: 0;
       
       @media (max-width: 992px) {
          grid-template-columns: repeat(2, 1fr);
@@ -371,56 +433,71 @@
       }
 
       .growth-item {
-        padding: 4rem 2rem 1rem 2rem;
-        border-left: 1px solid rgba(17, 15, 9, 0.1);
+        padding: 3rem 2.5rem;
+        border-left: 1px solid rgba(17, 15, 9, 0.08);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%;
-        min-height: 250px;
+        gap: 2.5rem;
+        min-height: 220px;
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+          background-color: rgba(17, 15, 9, 0.02);
+        }
         
         @media (max-width: 1024px) {
-           padding: 3rem 1.5rem 1rem;
-           min-height: 220px;
+           padding: 2.5rem 2rem;
+           min-height: 200px;
         }
 
         @media (max-width: 992px) {
            padding: 2.5rem 1.5rem;
            min-height: 180px;
-           border-bottom: 1px solid rgba(17, 15, 9, 0.1);
+           border-bottom: 1px solid rgba(17, 15, 9, 0.08);
            &:nth-child(2n) { border-right: none; }
            &:nth-last-child(-n+2) { border-bottom: none; }
         }
+        
         @media (max-width: 550px) {
            border-right: none;
-           border-left: 1px solid rgba(17, 15, 9, 0.1);
+           border-left: 1px solid rgba(17, 15, 9, 0.08);
            padding: 2rem 0;
            &:nth-last-child(1) { border-bottom: none; }
         }
 
         .growth-label {
           font-family: var(--font1);
-          font-size: 0.75rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          line-height: 1.4;
-          opacity: 0.7;
-          margin-bottom: 2rem;
-          max-width: 200px;
+          font-size: 0.875rem;
+          text-transform: capitalize;
+          letter-spacing: 0.02em;
+          line-height: 1.5;
+          opacity: 0.6;
+          font-weight: 400;
+          
+          @media (max-width: 768px) {
+            font-size: 0.8125rem;
+          }
         }
 
         .growth-value {
           font-family: var(--font2);
-          font-size: clamp(3.5rem, 6vw, 5.5rem);
-          line-height: 1;
+          font-size: clamp(3.5rem, 6vw, 5rem);
+          line-height: 0.95;
           font-weight: 450;
-          letter-spacing: -2px;
+          letter-spacing: -2.5px;
           display: flex;
           align-items: baseline;
           
+          @media (max-width: 768px) {
+            font-size: 3.5rem;
+            letter-spacing: -2px;
+          }
+          
           .unit {
-            font-size: 0.6em;
-            margin-left: 0.1em;
+            font-size: 0.55em;
+            margin-left: 0.15em;
+            opacity: 0.9;
           }
         }
       }
