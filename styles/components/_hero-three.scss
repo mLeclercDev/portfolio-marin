@@ -1,0 +1,178 @@
+
+.hero-three {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // Align top initially
+  padding-top: 2rem;
+  background-color: var(--color1); // Cream
+  color: var(--color2); // Black
+  overflow: hidden;
+
+  .container-xl {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    max-width: var(--sizexl);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  // Top Nav (Top Right)
+  .hero-top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 1rem;
+    
+    .hero-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+
+      a {
+        font-family: var(--font2); // General Sans
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color2);
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.btn-work {
+          background-color: var(--color2); // Black
+          color: var(--color1); // Cream
+          padding: 0.75rem 1.5rem;
+          border-radius: 4px; // Slight radius or 0 if user prefers blocky
+          opacity: 1;
+          transition: transform 0.3s ease;
+          
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+
+  // Main Content
+  .hero-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 2rem; // Space for bottom image
+    
+    .hero-title {
+      font-size: var(--fs-0);
+      line-height: 0.9;
+      font-family: var(--font2);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color2);
+      
+      .light-text {
+        font-weight: 300; // Thinner like "Platform" in the screenshot
+        color: var(--text-color2); // Or a lighter shade if available, or just keeping weight diff
+        // User color2 is mostly used for text.
+        // Let's use opacity for distinguishing or font-weight.
+        opacity: 0.6;
+      }
+    }
+
+    .custom-line {
+      width: 100%;
+      height: 1px;
+      background-color: var(--color2);
+      margin: 2rem 0;
+      opacity: 0.2;
+      // This is a placeholder for the "trait/line" the user has.
+      // If svg, they can replace <div> with <img src="/path/to/line.svg" />
+    }
+
+    .hero-bottom-row {
+      display: flex;
+      justify-content: flex-end; // All content on right
+      align-items: flex-end;
+      width: 100%;
+      margin-top: 2rem;
+
+      .spacer {
+          // Optional: if you want to push content, but flex-end works
+          flex-grow: 1; 
+      }
+
+      .content-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end; // Align everything to right edge
+          gap: 2rem; // Space between description and CTA
+          max-width: 500px; // Limit width
+      }
+
+      .cta-wrapper {
+        position: relative;
+        z-index: 2;
+        // The CTA itself is inline-flex, so it will respect align-items: flex-end
+      }
+
+      .description {
+        text-align: right;
+        p {
+          font-family: var(--font2);
+          font-size: 1.1rem;
+          line-height: 1.4;
+          color: var(--color2);
+        }
+      }
+    }
+  }
+
+  // Bottom Black Frame Placeholder
+  .hero-image-container {
+    width: 100%;
+    // Height depending on design, let's give it fixed height or responsive
+    height: 30vh;
+    margin-top: auto;
+    
+    .hero-image-placeholder {
+      width: 100%;
+      height: 100%;
+      background-color: #000; // Black frame
+      border-radius: 8px 8px 0 0;
+      // Shadow or styling
+    }
+  }
+
+  @media (max-width: 992px) {
+    height: auto;
+    padding-bottom: 2rem;
+
+    .hero-title {
+      font-size: var(--fs-1-sm); // Smaller font for mobile
+    }
+    
+    .hero-bottom-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+
+      .description {
+        text-align: left;
+      }
+    }
+    
+    .hero-nav {
+      display: none; // Hide on mobile or adapt? Navbar usually handles this.
+    }
+  }
+}

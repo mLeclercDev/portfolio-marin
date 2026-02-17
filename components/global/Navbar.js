@@ -74,21 +74,61 @@ const Navbar = ({ delay = 0 }) => {
     gsap.set("nav .logo .text-roller-mask", { opacity: 1 })
     gsap.set("nav .page-link .text-roller-mask", { opacity: 1 }) 
     
-    // 1. Initialisation : Opacité 0 simple
-    gsap.set("nav .contact-link", { opacity: 0 });
-    // On s'assure que les enfants n'ont pas de transforms résiduels des essais précédents
-    gsap.set(["nav .contact-link .navbar-cta", "nav .contact-link .text-roller-inner", "nav .contact-link .arrow"], { clearProps: "all" });
-
+    // 1. Initialisation : Opacité 1 pour le conteneur, on anime le contenu
+    gsap.set("nav .contact-link", { opacity: 1 });
+    
     gsap.to("nav .logo .text-roller-mask", { y: "0%", delay: delay + 2, duration: 0.8, ease: "hyperBounce" })
     gsap.to("nav .page-link .text-roller-mask", { y: "0%", delay: delay + 2.05, duration: 0.8, ease: "hyperBounce" })
-    
-    // 2. Animation Simple : Fade in juste après
-    gsap.to("nav .contact-link", { 
-        opacity: 1, 
-        delay: delay + 2.5, // Plus proche de Collaborer (2.1)
-        duration: 0.6, // Plus rapide
-        ease: "hyperBounce" 
-    })
+
+    // === ANIMATION MAGNETIC CTA NAVBAR ===
+    const navCta = document.querySelector("nav .contact-link .navbar-cta");
+    // Force transition none to avoid conflict with CSS inside existing effect
+    if(navCta) gsap.set(navCta, { transition: "none" });
+
+    const navCtaText = navCta ? navCta.querySelector(".text-roller-inner") : null;
+    const navCtaArrow = navCta ? navCta.querySelector(".arrow svg.first") : null;
+
+    if (navCta && navCtaText && navCtaArrow) {
+        // Hide content initially
+        gsap.set(navCtaText, { y: "110%" }); 
+        gsap.set(navCtaArrow, { y: "100%", x: "-100%" }); // En bas à gauche
+
+        // Base delay for this sequence (juste après les liens pages)
+        const startDelay = delay + 2.2;
+
+        // 1. Capsule Scale (Black shell)
+        gsap.fromTo(navCta, 
+            { scale: 0, y: 5, opacity: 0 },
+            { 
+                scale: 1, 
+                duration: 1, 
+                opacity: 1,
+                y: 0,
+                delay: startDelay,
+                ease: "power3.out",
+                onComplete: () => {
+                     gsap.set(navCta, { clearProps: "transition" });
+                }
+            }
+        );
+
+        // 2. Text Reveal
+        gsap.to(navCtaText, {
+            y: "0%",
+            duration: 0.8,
+            delay: startDelay + 0.3,
+            ease: "power3.out"
+        });
+        
+        // 3. Arrow Reveal
+        gsap.to(navCtaArrow, {
+            y: "-50%",
+            x: "0%",
+            duration: 0.75,
+            delay: startDelay + 0.4,
+            ease: "power3.out"
+        });
+    }
 
     gsap.set("nav", { delay: delay + 3, overflow: "visible" })
 
@@ -146,16 +186,49 @@ const Navbar = ({ delay = 0 }) => {
         }
       );
 
-      // Animation spécifique pour le CTA mobile (Fade in simple)
-      gsap.fromTo('.mobile-menu .navbar-cta',
-        { opacity: 0, y: 0 }, // S'assurer que y est à 0
-        {
-          opacity: 1,
-          duration: 0.6,
-          delay: 0.5, // Apparait après les liens
-          ease: 'hyperBounce'
-        }
-      );
+      // Animation spécifique pour le CTA mobile (Complex Reveal)
+      const mobileCta = document.querySelector('.mobile-menu .navbar-cta');
+      if (mobileCta) {
+          const t = mobileCta.querySelector(".text-roller-inner");
+          const a = mobileCta.querySelector(".arrow svg.first");
+          
+          gsap.set(mobileCta, { transition: "none" });
+          if(t) gsap.set(t, { y: "110%" });
+          if(a) gsap.set(a, { y: "100%", x: "-100%" });
+
+          // 1. Capsule
+          gsap.fromTo(mobileCta,
+            { scale: 0, y: 5, opacity: 0 }, 
+            {
+              scale: 1, y: 0, opacity: 1,
+              duration: 1,
+              delay: 0.5,
+              ease: 'power3.out',
+              onComplete: () => gsap.set(mobileCta, { clearProps: "transition" })
+            }
+          );
+          
+          // 2. Text
+          if(t) {
+              gsap.to(t, {
+                  y: "0%",
+                  duration: 0.8,
+                  delay: 0.8, // 0.5 + 0.3
+                  ease: "power3.out"
+              });
+          }
+
+          // 3. Arrow
+          if(a) {
+              gsap.to(a, {
+                  y: "-50%",
+                  x: "0%",
+                  duration: 0.75,
+                  delay: 0.9, // 0.5 + 0.4
+                  ease: "power3.out"
+              });
+          }
+      }
 
       // Animation du footer du menu
       gsap.fromTo('.mobile-menu-footer a',
@@ -184,7 +257,8 @@ const Navbar = ({ delay = 0 }) => {
             y: '100%'
           });
           gsap.set('.mobile-menu .navbar-cta', {
-            opacity: 0
+            opacity: 0,
+            scale: 0
           });
         }
       });

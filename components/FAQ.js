@@ -26,8 +26,41 @@ const FAQ = ({
     
     const faqItems = containerRef.current.querySelectorAll('.faq-item');
     const splits = [];
+
+    // --- Entrance Animation (Title & Intro) ---
+    const titleEl = containerRef.current.querySelector('.faq-title h2');
+    const introEl = containerRef.current.querySelector('.faq-intro p');
     
-    // Initialisation des splits avec mask
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    if (titleEl) {
+         const splitTitle = new SplitText(titleEl, { type: "lines", linesClass: "line-child" });
+         splits.push(splitTitle);
+         
+         splitTitle.lines.forEach(line => {
+             const wrapper = document.createElement('div');
+             wrapper.style.overflow = 'hidden';
+             wrapper.style.display = 'block';
+             line.parentNode.insertBefore(wrapper, line);
+             wrapper.appendChild(line);
+         });
+
+         gsap.set(splitTitle.lines, { y: "100%" });
+         tl.to(splitTitle.lines, { y: "0%", duration: 1, stagger: 0.1, ease: "power3.out" });
+    }
+
+    if (introEl) {
+        gsap.set(introEl, { opacity: 0, y: 30 });
+        tl.to(introEl, { opacity: 0.8, y: 0, duration: 1, ease: "power3.out" }, "-=0.8");
+    }
+    
+    // Initialisation des splits pour les réponses (déjà existant)
     faqItems.forEach(item => {
         const answerText = item.querySelector('.answer-text');
         if(answerText) {

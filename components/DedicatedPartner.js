@@ -64,12 +64,50 @@ const DedicatedPartner = ({
         );
       }
 
-      // Animate CTA
+      // Animate CTA (Complex Sequence)
       if (partnerCTA) {
-        gsap.fromTo(partnerCTA,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "hyperBounce", scrollTrigger: { trigger: partnerSection, start: "top 65%" } }
-        );
+        // Init states
+        const ctaText = partnerCTA.querySelector('.text-roller-inner');
+        const ctaArrow = partnerCTA.querySelector('.arrow svg.first');
+        
+        // Force transition none
+        gsap.set(partnerCTA, { transition: 'none' });
+
+        if(ctaText) gsap.set(ctaText, { y: "110%" });
+        if(ctaArrow) gsap.set(ctaArrow, { y: "100%", x: "-100%" });
+
+        const ctaTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: partnerSection,
+                start: "top 60%", // Slightly later than text
+            }
+        });
+
+        // 1. Capsule
+        ctaTl.fromTo(partnerCTA, 
+            { scale: 0, y: 5, opacity: 0 },
+            { 
+                scale: 1, 
+                duration: 1, 
+                opacity: 1,
+                y: 0,
+                ease: "power3.out",
+                onComplete: () => gsap.set(partnerCTA, { clearProps: "transition" })
+            }
+        )
+        // 2. Text
+        .to(ctaText, {
+            y: "0%",
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.7")
+        // 3. Arrow
+        .to(ctaArrow, {
+            y: "-50%",
+            x: "0%",
+            duration: 0.75,
+            ease: "power3.out"
+        }, "-=0.6");
       }
 
       // Animate stats - Masked Reveal
@@ -149,7 +187,6 @@ const DedicatedPartner = ({
                 text={ctaText}
                 href={ctaHref} 
                 className="cta-button"
-                style={{ transition: 'transform 0.1s linear' }}
               />
             </div>
           </div>

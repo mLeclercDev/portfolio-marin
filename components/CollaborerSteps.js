@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { SplitText } from 'gsap/dist/SplitText';
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const CollaborerSteps = ({ 
   steps = [
@@ -29,8 +34,112 @@ const CollaborerSteps = ({
     }
   ]
 }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+        const stepElements = containerRef.current.querySelectorAll('.collaborer-step');
+
+        stepElements.forEach((step, index) => {
+            // Safety: Ensure parent step is visible (in case of legacy styles)
+            gsap.set(step, { opacity: 1, y: 0, visibility: "visible" });
+
+            const number = step.querySelector('.step-number');
+            const title = step.querySelector('.step-title');
+            const description = step.querySelector('.step-description');
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: step,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // 4. Border Scrub Animation
+            const border = step.querySelector('.step-line');
+            if(border) {
+                 gsap.fromTo(border, 
+                    { scaleX: 1 },
+                    { 
+                        scaleX: 0.85, 
+                        ease: "none",
+                        transformOrigin: "right center", // Shrink from left visually (scale down towards right or left?)
+                        // If transformOrigin is "right center", it scales towards the right, so the left side shrinks away. That's usually what "disappearing line" implies if consistent with DedicatedPartner.
+                        scrollTrigger: {
+                            trigger: step,
+                            start: "top 20%",
+                            end: "bottom top", 
+                            scrub: true
+                        }
+                    }
+                 );
+            }
+
+            // 1. Number Reveal
+            if(number) {
+                 // Init state explicit
+                 gsap.set(number, { opacity: 0, x: -20 });
+                 tl.to(number, { opacity: 0.5, x: 0, duration: 1, ease: "power3.out" });
+            }
+
+            // 2. Title Reveal (SplitText)
+            if(title) {
+                const split = new SplitText(title, { type: "lines", linesClass: "line-child" });
+                
+                // Wrap hidden
+                split.lines.forEach(line => {
+                    const w = document.createElement('div');
+                    w.style.overflow = 'hidden';
+                    w.style.display = 'block';
+                    line.parentNode.insertBefore(w, line);
+                    w.appendChild(line);
+                });
+
+                // Init split lines
+                gsap.set(split.lines, { y: "100%" });
+
+                tl.to(split.lines, 
+                    { y: "0%", duration: 1, stagger: 0.1, ease: "power3.out" },
+                    "<" // Sync with previous
+                );
+            }
+
+            // 3. Description Reveal (SplitText)
+            if(description) {
+                const splitDesc = new SplitText(description, { type: "lines", linesClass: "line-child" });
+                
+                // Wrap hidden
+                splitDesc.lines.forEach(line => {
+                    const w = document.createElement('div');
+                    w.style.overflow = 'hidden';
+                    w.style.display = 'block';
+                    line.parentNode.insertBefore(w, line);
+                    w.appendChild(line);
+                });
+
+                // Init split lines
+                gsap.set(splitDesc.lines, { y: "100%" });
+                
+                // Ensure parent is visible (if previously hidden)
+                gsap.set(description, { opacity: 1 });
+
+                tl.to(splitDesc.lines,
+                    { y: "0%", duration: 1, stagger: 0.05, ease: "power3.out" },
+                    "-=0.6"
+                );
+            }
+        });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="collaborer-steps">
+    <section className="collaborer-steps" ref={containerRef}>
       <div className="container">
         {steps.map((step, index) => (
           <div key={index} className="collaborer-step">
@@ -39,6 +148,7 @@ const CollaborerSteps = ({
               <h2 className="step-title">{step.title}</h2>
               <p className="step-description">{step.description}</p>
             </div>
+            <div className="step-line"></div>
           </div>
         ))}
       </div>

@@ -13,6 +13,7 @@ import CollaborerSteps from '../components/CollaborerSteps';
 import DesignCards from '../components/DesignCards';
 import ParallaxImage from '../components/ParallaxImage';
 import FAQ from '../components/FAQ';
+import CTASection from '../components/CTASection';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 CustomEase.create("hyperBounce", "0.4,0,0.2,1");
@@ -25,7 +26,18 @@ export default function Collaborer() {
     // Masquer les éléments du hero avant l'animation
     gsap.set('.collaborer-hero h1 .word-wrapper span', { y: '100%' });
     gsap.set('.collaborer-hero .collaborer-subtitle', { opacity: 0 });
-    gsap.set('.collaborer-step', { opacity: 0, y: 80 });
+    
+    // Init Hero CTA
+    const heroCta = document.querySelector(".collaborer-hero .magnetic-cta");
+    if (heroCta) {
+        gsap.set(heroCta, { transition: "none", scale: 0, opacity: 0, y: 5 });
+        const heroCtaText = heroCta.querySelector(".text-roller-inner");
+        const heroCtaArrow = heroCta.querySelector(".arrow svg.first");
+        if(heroCtaText) gsap.set(heroCtaText, { y: "110%" });
+        if(heroCtaArrow) gsap.set(heroCtaArrow, { y: "100%", x: "-100%" });
+    }
+
+
   }, []);
 
   useEffect(() => {
@@ -33,12 +45,11 @@ export default function Collaborer() {
     gsap.set(".layers__items", { className: "layers__items out" });
   }, [router.asPath]);
 
-    
   useEffect(() => {
     // Animation d'entrée pour le hero
     const tl = gsap.timeline({ delay: 0.1 });
     
-    // Animation des mots du h1 (comme sur les pages projets)
+    // Animation des mots du h1
     const wordSpans = document.querySelectorAll('.collaborer-hero h1 .word-wrapper span');
     gsap.set(wordSpans, { y: '100%' });
     
@@ -48,7 +59,6 @@ export default function Collaborer() {
     
     if (subtitle) {
         splitSubtitle = new SplitText(subtitle, { type: "lines", linesClass: "line-child" });
-        // Wrap mask
         splitSubtitle.lines.forEach(line => {
              const wrapper = document.createElement('div');
              wrapper.style.overflow = 'hidden';
@@ -57,15 +67,49 @@ export default function Collaborer() {
              wrapper.appendChild(line);
         });
         gsap.set(splitSubtitle.lines, { y: "100%" });
-        // On rend le conteneur visible maintenant que les lignes sont cachées par overflow:hidden
         gsap.set(subtitle, { opacity: 1 });
-    } else {
-        // Fallback si pas de split (ex: erreur), on s'assure que c'est visible pour l'animation ou on l'animera plus tard
-        // Ici on laisse opacity 0 car on l'animera dans la timeline si non splitté
     }
 
+    // Hero Timeline
+    tl.to(wordSpans, {
+      y: '0%',
+      stagger: 0.075,
+      duration: 1,
+      ease: 'power3.out',
+      force3D: true
+    })
+    .to(splitSubtitle ? splitSubtitle.lines : '.collaborer-hero p', {
+      y: "0%",
+      opacity: 1,
+      duration: 0.9,
+      stagger: 0.08,
+      ease: 'power3.out'
+    }, '-=0.5');
+
+    // Hero CTA Animation (Sequence)
+    const heroCta = document.querySelector(".collaborer-hero .magnetic-cta");
+    if (heroCta) {
+        const t = heroCta.querySelector(".text-roller-inner");
+        const a = heroCta.querySelector(".arrow svg.first");
+
+        tl.fromTo(heroCta, 
+            { scale: 0, opacity: 0, y: 5 },
+            { 
+               scale: 1, opacity: 1, y: 0, duration: 1, ease: "power3.out",
+               onComplete: () => gsap.set(heroCta, { clearProps: "transition" })
+            }, 
+            "-=0.5"
+        );
+        if(t) tl.to(t, { y: "0%", duration: 0.8, ease: "power3.out" }, "-=0.7");
+        if(a) tl.to(a, { y: "-50%", x: "0%", duration: 0.75, ease: "power3.out" }, "-=0.6");
+    }
+
+
+
+
+
+    /* --- Existing Logic (Design Section BG) --- */
     const mainElement = document.querySelector("main");
-    // Créer le trigger pour la section avec la classe "design" pour changer la couleur de fond
     const st = ScrollTrigger.create({
         trigger: ".design",
         start: "top center",
@@ -78,28 +122,6 @@ export default function Collaborer() {
             gsap.to(mainElement, { backgroundColor: "#FCFBF6", duration: 0.55, ease: "hyperBounce" });
         },
     });
-
-    tl.to(wordSpans, {
-      y: '0%',
-      stagger: 0.075,
-      duration: 1,
-      ease: 'power3.out',
-      force3D: true
-    })
-    .to(splitSubtitle ? splitSubtitle.lines : '.collaborer-hero p', {
-      y: "0%",
-      opacity: 1, // Assure que l'élément (ou ses lignes) devient visible
-      duration: 0.9, // Plus lent
-      stagger: 0.08,
-      ease: 'power3.out'
-    }, '-=0.5')
-    .to('.collaborer-step', { // Animation des étapes qui étaient opacity: 0
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'hyperBounce'
-    }, '-=0.5');
 
     return () => {
         if (splitSubtitle) splitSubtitle.revert();
@@ -162,6 +184,9 @@ export default function Collaborer() {
             <p className="collaborer-subtitle">
               Un accompagnement technique pour des projets web alliant design, performance et fiabilité.
             </p>
+            <div className="cta-container" style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+                <MagneticCTA text="Démarrer un projet" href="mailto:contact@marinleclerc.dev" />
+            </div>
           </div>
         </section>
 
@@ -178,21 +203,15 @@ export default function Collaborer() {
         <FAQ />
 
         {/* CTA Section */}
-        <section className="collaborer-cta">
-          <div className="container">
-            <h2>Envie de collaborer ?</h2>
-            <p>Un premier échange simple pour voir si on peut avancer ensemble sur votre projet web.</p>
-            <MagneticCTA 
-             text="Parlons-en"
-               href="mailto:contact@marinleclerc.dev" 
-               className="cta-button" // On garde cta-button si y'a des styles spécifiques margin/layout dans methodo.scss, sinon on peut l'enlever. Pour l'instant on garde.
-               style={{ transition: 'transform 0.1s linear' }}
-            />
-          </div>
-        </section>
+        <CTASection 
+            title="Envie de collaborer ?"
+            description="Un premier échange simple pour voir si on peut avancer ensemble sur votre projet web."
+            ctaText="Parlons-en"
+            ctaLink="mailto:contact@marinleclerc.dev"
+        />
       </main>
 
-      <Footer triggerSelector=".collaborer-cta" />
+      <Footer triggerSelector=".cta-section" />
       <Layer />
     </>
   );

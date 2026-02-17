@@ -4,6 +4,7 @@ import gsap from 'gsap';
 const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, style = {}, ...props }) => {
   const magneticRef = useRef(null);
   const textRef = useRef(null);
+  const boundingRect = useRef(null);
 
   useEffect(() => {
     const button = magneticRef.current;
@@ -12,31 +13,11 @@ const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, s
 
     if (!button || !textEl || !rollerInner) return;
 
-    const handleMouseMove = (e) => {
-      const { left, top, width, height } = button.getBoundingClientRect();
-      const centerX = left + width / 2;
-      const centerY = top + height / 2;
-
-      // Réactif : Plus d'attraction, moins de durée
-      const deltaX = (e.clientX - centerX) * 0.35;
-      const deltaY = (e.clientY - centerY) * 0.35;
-
-      gsap.to(button, {
-        x: deltaX,
-        y: deltaY,
-        duration: 0.3, 
-        ease: "power2.out"
-      });
-      
-      gsap.to(textEl, {
-        x: deltaX * 0.2, // Texte suit légèrement
-        y: deltaY * 0.2,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    };
-
     const handleMouseEnter = () => {
+        if (button) {
+            boundingRect.current = button.getBoundingClientRect();
+        }
+
         // RESET INVISIBLE
         gsap.set(rollerInner, { y: "0%" });
         
@@ -75,14 +56,69 @@ const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, s
         }
     };
 
+    const handleMouseMove = (e) => {
+      // Utiliser les dimensions stockées au MouseEnter pour une référence STABLE
+      if (!boundingRect.current) return;
+
+      const { left, top, width, height } = boundingRect.current;
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+
+      // Réactif : Plus léger (0.2 au lieu de 0.35)
+      const deltaX = (e.clientX - centerX) * 0.2;
+      const deltaY = (e.clientY - centerY) * 0.2;
+
+      gsap.to(button, {
+        x: deltaX,
+        y: deltaY,
+        duration: 0.5, // Un peu plus smooth (plus lent)
+        ease: "power2.out"
+      });
+      
+      gsap.to(textEl, {
+        x: deltaX * 0.1, // Texte suit très légèrement
+        y: deltaY * 0.1,
+        duration: 0.5,
+        ease: "power2.out"
+      });
+    };
+
     const handleMouseLeave = () => {
-      // Retour rapide à la position initiale (magnétique)
+      // 1. Reset Magnétique (Retour fluide et élastique)
       gsap.to([button, textEl], {
         x: 0,
         y: 0,
-        duration: 0.3,
-        ease: "power2.out"
+        duration: 0.7,
+        ease: "elastic.out(1, 0.4)"
       });
+
+      // 2. Reset Animation Interne (Texte & Flèches)
+      if (rollerInner) {
+          gsap.to(rollerInner, {
+            y: "0%",
+            duration: 0.5,
+            ease: "cubic-bezier(0.4, 0, 0.2, 1)"
+          });
+      }
+
+      const arrowFirst = button.querySelector('.arrow .first');
+      const arrowSecond = button.querySelector('.arrow .second');
+      
+      if(arrowFirst && arrowSecond) {
+          // Retour état initial
+          gsap.to(arrowFirst, {
+              x: "0%", y: "-50%", 
+              opacity: 1,
+              duration: 0.5,
+              ease: "cubic-bezier(0.4, 0, 0.2, 1)"
+          });
+          gsap.to(arrowSecond, {
+              opacity: 0,
+              x: "-100%", y: "100%", 
+              duration: 0.5, 
+              ease: "cubic-bezier(0.4, 0, 0.2, 1)" 
+          });
+      }
     };
 
     button.addEventListener('mousemove', handleMouseMove);

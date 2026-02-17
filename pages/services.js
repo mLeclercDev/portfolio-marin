@@ -13,6 +13,8 @@ import ProcessSteps from '../components/ProcessSteps';
 import DedicatedPartner from '../components/DedicatedPartner';
 import GrowthStats from '../components/GrowthStats';
 import OffersList from '../components/OffersList';
+import HeroThree from '../components/HeroThree';
+import CTASection from '../components/CTASection';
 
 // Dynamic import for Footer to improve performance
 const Footer = dynamic(() => import('../components/global/Footer'), { ssr: false });
@@ -44,9 +46,22 @@ export default function Services() {
       delay: 0.1
     });
     
-    // Animation des mots du h1
-    const wordSpans = document.querySelectorAll('.services-hero h1 .word-wrapper span');
-    gsap.set(wordSpans, { y: '100%' });
+    // Animation H1 (SplitText)
+    const h1 = document.querySelector('.services-hero h1');
+    let splitH1;
+    
+    if (h1) {
+        gsap.set(h1, { opacity: 1 });
+        splitH1 = new SplitText(h1, { type: "lines", linesClass: "line-child" });
+        splitH1.lines.forEach(line => {
+             const wrapper = document.createElement('div');
+             wrapper.style.overflow = 'hidden';
+             wrapper.style.display = 'block';
+             line.parentNode.insertBefore(wrapper, line);
+             wrapper.appendChild(line);
+        });
+        gsap.set(splitH1.lines, { y: "100%" });
+    }
     
     // Split du sous-titre
     const subtitle = document.querySelector('.services-hero .services-subtitle p');
@@ -66,62 +81,76 @@ export default function Services() {
         gsap.set(subtitle.parentElement, { opacity: 1 });
     }
 
-    tl.to(wordSpans, {
-      y: '0%',
-      stagger: 0.075,
-      duration: 1,
-      ease: 'power3.out',
-      force3D: true
-    })
-    .to(splitSubtitle ? splitSubtitle.lines : '.services-hero .services-subtitle p', {
+    if(splitH1) {
+        tl.to(splitH1.lines, {
+            y: '0%',
+            stagger: 0.1,
+            duration: 1,
+            ease: 'power3.out',
+            force3D: true
+        });
+    }
+    tl.to(splitSubtitle ? splitSubtitle.lines : '.services-hero .services-subtitle p', {
       y: "0%",
       opacity: 1,
       duration: 0.9,
       stagger: 0.08,
       ease: 'power3.out'
-    }, '-=0.5')
-    .call(() => setHeroAnimationComplete(true), null, "-=0.6");
+    }, '-=0.6');
+    
+    // === MAGNETIC CTA ANIMATION ===
+    // Force transition none to avoid conflict with CSS
+    gsap.set(".services-hero .magnetic-cta", { transition: "none" });
 
-    // === CTA SECTION ANIMATION ===
-    const ctaSection = document.querySelector('.services-cta');
-    if (ctaSection) {
-      const ctaTitle = ctaSection.querySelector('h2');
-      const ctaText = ctaSection.querySelector('p');
-      const ctaButton = ctaSection.querySelector('.cta-button');
+    // 1. Capsule Scale (Black shell only, content hidden)
+    const cta = document.querySelector(".services-hero .magnetic-cta");
+    const ctaText = cta ? cta.querySelector(".text-roller-inner") : null;
+    const ctaArrow = cta ? cta.querySelector(".arrow svg.first") : null;
 
-      const ctaTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ctaSection,
-          start: "top 75%",
-        }
-      });
+    if (cta && ctaText && ctaArrow) {
+        // Hide content initially
+        gsap.set(ctaText, { y: "110%" }); 
+        gsap.set(ctaArrow, { y: "100%", x: "-100%"});
 
-      if (ctaTitle) {
-        ctaTl.fromTo(ctaTitle,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
-        );
-      }
-
-      if (ctaText) {
-        ctaTl.fromTo(ctaText,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          "-=0.6"
-        );
-      }
-
-      if (ctaButton) {
-        ctaTl.fromTo(ctaButton,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.2)" },
-          "-=0.5"
-        );
-      }
+        // Animate Capsule
+        tl.fromTo(cta, 
+            { scale: 0, y: 5, opacity: 0 },
+            { 
+                scale: 1, 
+                duration: 1, 
+                opacity: 1,
+                y: 0,
+                ease: "power3.out",
+                onComplete: () => {
+                    // Restore transition after animation if needed, or keep it off until interaction
+                     gsap.set(cta, { clearProps: "transition" });
+                }
+            },
+            "-=0.75"
+        )
+        // 2. Text Reveal (distinct step after capsule)
+        .to(ctaText, {
+            y: "0%",
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.7") // Slight overlap for fluidity but distinct step
+        
+        // 3. Arrow Reveal (distinct step after text)
+        .to(ctaArrow, {
+            y: "-50%",
+            x: "0%",
+            duration: 0.75,
+            ease: "power3.out"
+        }, "-=0.6");
     }
+
+    tl.call(() => setHeroAnimationComplete(true), null, "-=0.1");
+
+
 
     return () => {
         if (splitSubtitle) splitSubtitle.revert();
+        if (splitH1) splitH1.revert();
     };
   }, []);
 
@@ -217,14 +246,16 @@ export default function Services() {
         <section className="services-hero">
           <div className="container">
             <h1>
-              <span className='word-wrapper'>
-                <span>Mes services</span>
-              </span>
+              Ce que vous ne voyez pas fait toute la différence.
             </h1>
             <div className="services-subtitle">
               <p>
-                J’interviens sur des projets nécessitant un cadre solide, une exécution propre et une attention particulière à la performance et la maintenabilité.
+                Développement front-end & intégration sur mesure pour des sites fiables, performants et durables.
               </p>
+            </div>
+            
+            <div className="cta-container" style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+                <MagneticCTA text="Me contacter" href="/contact" />
             </div>
           </div>
         </section>
@@ -249,23 +280,17 @@ export default function Services() {
           ]}
         /> */}
 
-        {/* CTA BOTTOM - MATCHING COLLABORER */}
-        <section className="services-cta">
-          <div className="container">
-            <h2>Discutons de votre projet</h2>
-            <p>Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée.</p>
-            <MagneticCTA 
-                text="Prendre rendez-vous"
-                href="mailto:contact@marinleclerc.dev" 
-                className="cta-button"
-                style={{ transition: 'transform 0.1s linear' }}
-            />
-          </div>
-        </section>
+        {/* CTA BOTTOM */}
+        <CTASection 
+            title="Discutons de votre projet"
+            description="Un premier échange permet de clarifier votre situation et de définir l’intervention la plus adaptée."
+            ctaText="Prendre rendez-vous"
+            ctaLink="mailto:contact@marinleclerc.dev"
+        />
 
       </main>
 
-      <Footer triggerSelector=".services-cta" />
+      <Footer triggerSelector=".cta-section" />
       <Layer />
     </>
   );
