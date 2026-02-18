@@ -30,9 +30,7 @@ export default function Services() {
 
   // Initialisation immédiate pour éviter le flash
   useEffect(() => {
-    // Masquer les éléments du hero avant l'animation
-    gsap.set('.services-hero h1 .word-wrapper span', { y: '100%' });
-    gsap.set('.services-hero .services-subtitle', { opacity: 0 });
+    // Masquer les éléments du hero avant l'animation est géré par CSS (visibility: hidden / opacity: 0)
   }, []);
 
   useEffect(() => {
@@ -51,8 +49,10 @@ export default function Services() {
     let splitH1;
     
     if (h1) {
-        gsap.set(h1, { opacity: 1 });
+        // H1 is visibility: hidden in CSS to prevent flash
         splitH1 = new SplitText(h1, { type: "lines", linesClass: "line-child" });
+        
+        // Custom wrapping for overflow hidden
         splitH1.lines.forEach(line => {
              const wrapper = document.createElement('div');
              wrapper.style.overflow = 'hidden';
@@ -60,14 +60,21 @@ export default function Services() {
              line.parentNode.insertBefore(wrapper, line);
              wrapper.appendChild(line);
         });
+        
         gsap.set(splitH1.lines, { y: "100%" });
+        // Now reveal the parent H1 (content is hidden by y:100% inside overflow:hidden wrappers)
+        gsap.set(h1, { autoAlpha: 1 });
     }
     
     // Split du sous-titre
     const subtitle = document.querySelector('.services-hero .services-subtitle p');
     let splitSubtitle;
     
+    // Subtitle parent .services-subtitle is opacity: 0 in CSS
+    const subtitleContainer = document.querySelector('.services-hero .services-subtitle');
+
     if (subtitle) {
+        // Ensure container is visible for splitting (opacity 0 handles visibility)
         splitSubtitle = new SplitText(subtitle, { type: "lines", linesClass: "line-child" });
         // Wrap mask
         splitSubtitle.lines.forEach(line => {
@@ -78,7 +85,10 @@ export default function Services() {
              wrapper.appendChild(line);
         });
         gsap.set(splitSubtitle.lines, { y: "100%" });
-        gsap.set(subtitle.parentElement, { opacity: 1 });
+        if (subtitleContainer) gsap.set(subtitleContainer, { opacity: 1 }); // Container visible, content hidden by y:100%
+    } else if (subtitleContainer) {
+         // Fallback if split fails or single line
+         gsap.set(subtitleContainer, { opacity: 0 });
     }
 
     if(splitH1) {
@@ -90,13 +100,24 @@ export default function Services() {
             force3D: true
         });
     }
-    tl.to(splitSubtitle ? splitSubtitle.lines : '.services-hero .services-subtitle p', {
-      y: "0%",
-      opacity: 1,
-      duration: 0.9,
-      stagger: 0.08,
-      ease: 'power3.out'
-    }, '-=0.6');
+    
+    // Subtitle Animation
+    if (splitSubtitle) {
+        tl.to(splitSubtitle.lines, {
+          y: "0%",
+          duration: 0.9,
+          stagger: 0.08,
+          ease: 'power3.out'
+        }, '-=0.6');
+    } else {
+        // Fallback simple opacity fade
+        tl.to('.services-hero .services-subtitle', {
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out'
+        }, '-=0.6');
+    }
+
     
     // === MAGNETIC CTA ANIMATION ===
     // Force transition none to avoid conflict with CSS
@@ -113,12 +134,13 @@ export default function Services() {
         gsap.set(ctaArrow, { y: "100%", x: "-100%"});
 
         // Animate Capsule
+        // Use autoAlpha to handle visibility: hidden from CSS
         tl.fromTo(cta, 
-            { scale: 0, y: 5, opacity: 0 },
+            { scale: 0, y: 5, autoAlpha: 0 },
             { 
                 scale: 1, 
                 duration: 1, 
-                opacity: 1,
+                autoAlpha: 1,
                 y: 0,
                 ease: "power3.out",
                 onComplete: () => {

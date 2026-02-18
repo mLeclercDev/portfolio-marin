@@ -89,17 +89,14 @@
       margin-right: auto;
       width: 100%;
       max-width: 1200px;
+      visibility: hidden; // Prevent FOUC
 
       @media (max-width: 468px) {
         font-size: var(--fs-4); 
         letter-spacing: -2px;
       }
-      // .word-wrapper removed as SplitText handles overflow
       .line-child {
-         overflow: hidden; // Redundant if created by SplitText wrapper logic? 
-         // Actually SplitText creates divs, maybe I target them here?
-         // In JS: wrapper.style.overflow = 'hidden'.
-         // So no need here unless for safety.
+         overflow: hidden; 
       }
     }
 
@@ -107,7 +104,7 @@
        font-size: clamp(16px, 1.5vw, 1.25rem);
       line-height: 1.6;
       color: var(--color2);
-      opacity: 0.8;
+      opacity: 0; // Hidden initially
       max-width: 750px;
       margin: 0 auto;
       font-family: var(--font1);
@@ -115,6 +112,9 @@
       @media (max-width: 768px) {
         max-width: 90%;
       }
+    }
+    .magnetic-cta {
+       visibility: hidden; // Prevent FOUC
     }
   }
 

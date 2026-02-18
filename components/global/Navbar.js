@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase"; // important en Next.js
 import { animatePageOut } from "../../utils/animations"
 import MagneticCTA from './MagneticCTA';
-import ContactPanel from '../ContactPanel';
+import { useContact } from './ContactContext';
 
 function formatToUrl(title) {
   // Convertir en minuscules et remplacer les espaces par des tirets
@@ -24,7 +24,7 @@ const Navbar = ({ delay = 0 }) => {
   const [isHoveringLink, setIsHoveringLink] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  const { openContact } = useContact();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -341,8 +341,6 @@ const Navbar = ({ delay = 0 }) => {
               </div>
               <div className="contact-link">
                 <MagneticCTA 
-                   href='#'
-                   onClick={(e) => { e.preventDefault(); setIsContactOpen(true); }}
                    className='navbar-cta'
                 />
               </div>
@@ -410,8 +408,7 @@ const Navbar = ({ delay = 0 }) => {
             </div>
             <div className="cta-wrapper">
                 <MagneticCTA 
-                   href='#'
-                   onClick={(e) => { e.preventDefault(); closeMobileMenu(); setIsContactOpen(true); }}
+                   onClick={(e) => { e.preventDefault(); closeMobileMenu(); openContact(); }}
                    className='navbar-cta'
                    lg={true}
                 />
@@ -431,7 +428,7 @@ const Navbar = ({ delay = 0 }) => {
             </div>
             <div className="footer-item-wrapper">
                 <button 
-                   onClick={() => { closeMobileMenu(); setIsContactOpen(true); }}
+                   onClick={() => { closeMobileMenu(); openContact(); }}
                   className="mobile-email-link"
                   style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
                 >
@@ -442,7 +439,6 @@ const Navbar = ({ delay = 0 }) => {
         </div>
       </div>
 
-      <ContactPanel isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
   );
 };

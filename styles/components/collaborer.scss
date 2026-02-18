@@ -58,6 +58,10 @@
       max-width: 90%;
     }
   }
+  
+  .magnetic-cta {
+      visibility: hidden; // Prevent FOUC
+  }
 }
 
 // Steps Section

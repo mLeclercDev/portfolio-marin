@@ -23,21 +23,7 @@ export default function Collaborer() {
 
   // Initialisation immédiate pour éviter le flash
   useEffect(() => {
-    // Masquer les éléments du hero avant l'animation
-    gsap.set('.collaborer-hero h1 .word-wrapper span', { y: '100%' });
-    gsap.set('.collaborer-hero .collaborer-subtitle', { opacity: 0 });
-    
-    // Init Hero CTA
-    const heroCta = document.querySelector(".collaborer-hero .magnetic-cta");
-    if (heroCta) {
-        gsap.set(heroCta, { transition: "none", scale: 0, opacity: 0, y: 5 });
-        const heroCtaText = heroCta.querySelector(".text-roller-inner");
-        const heroCtaArrow = heroCta.querySelector(".arrow svg.first");
-        if(heroCtaText) gsap.set(heroCtaText, { y: "110%" });
-        if(heroCtaArrow) gsap.set(heroCtaArrow, { y: "100%", x: "-100%" });
-    }
-
-
+    // Masquer les éléments du hero avant l'animation est géré par CSS (visibility: hidden / opacity: 0 / transform)
   }, []);
 
   useEffect(() => {
@@ -50,8 +36,8 @@ export default function Collaborer() {
     const tl = gsap.timeline({ delay: 0.1 });
     
     // Animation des mots du h1
+    // CSS sets translateY(100%) initially so no need to set here
     const wordSpans = document.querySelectorAll('.collaborer-hero h1 .word-wrapper span');
-    gsap.set(wordSpans, { y: '100%' });
     
     // Split du sous-titre
     const subtitle = document.querySelector('.collaborer-hero .collaborer-subtitle');
@@ -67,7 +53,7 @@ export default function Collaborer() {
              wrapper.appendChild(line);
         });
         gsap.set(splitSubtitle.lines, { y: "100%" });
-        gsap.set(subtitle, { opacity: 1 });
+        gsap.set(subtitle, { opacity: 1 }); // Container visible, content hidden by y:100%
     }
 
     // Hero Timeline
@@ -89,13 +75,21 @@ export default function Collaborer() {
     // Hero CTA Animation (Sequence)
     const heroCta = document.querySelector(".collaborer-hero .magnetic-cta");
     if (heroCta) {
+        // Force transition none
+        gsap.set(heroCta, { transition: "none" });
+
         const t = heroCta.querySelector(".text-roller-inner");
         const a = heroCta.querySelector(".arrow svg.first");
 
+        // Set internal parts positions before revealing parent
+        if(t) gsap.set(t, { y: "110%" });
+        if(a) gsap.set(a, { y: "100%", x: "-100%" });
+
+        // Use autoAlpha to handle visibility: hidden from CSS
         tl.fromTo(heroCta, 
-            { scale: 0, opacity: 0, y: 5 },
+            { scale: 0, autoAlpha: 0, y: 5 },
             { 
-               scale: 1, opacity: 1, y: 0, duration: 1, ease: "power3.out",
+               scale: 1, autoAlpha: 1, y: 0, duration: 1, ease: "power3.out",
                onComplete: () => gsap.set(heroCta, { clearProps: "transition" })
             }, 
             "-=0.5"

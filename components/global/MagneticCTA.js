@@ -1,10 +1,24 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { useContact } from './ContactContext';
 
-const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, style = {}, ...props }) => {
+const MagneticCTA = ({ href, text, children, className = '', lg = false, style = {}, onClick, ...props }) => {
   const magneticRef = useRef(null);
   const textRef = useRef(null);
   const boundingRect = useRef(null);
+  const { openContact } = useContact();
+
+  const handleClick = (e) => {
+    if (onClick) {
+      onClick(e);
+      // On n'ouvre pas forcément le contact si un onClick spécifique est présent, 
+      // sauf si c'est explicitement pour le contact.
+      // Mais dans le cas de la Navbar, le onClick ouvre déjà le contact.
+    } else {
+      e.preventDefault();
+      openContact();
+    }
+  };
 
   useEffect(() => {
     const button = magneticRef.current;
@@ -138,7 +152,8 @@ const MagneticCTA = ({ href = '#', text, children, className = '', lg = false, s
   return (
     <a
       ref={magneticRef}
-      href={href}
+      href={href || '#'}
+      onClick={handleClick}
       className={`magnetic-cta cs-scale ${lg ? 'lg' : ''} ${className}`}
       style={style}
       {...props}
