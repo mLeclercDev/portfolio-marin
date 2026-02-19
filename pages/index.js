@@ -36,6 +36,22 @@ export default function Home({ projects, delayHero = 0, delayPresentation = 1000
         <title>Marin Leclerc – Développeur Web Freelance spécialisé WordPress, Webflow & HubSpot</title>
         <meta name="description" content="J'accompagne particuliers, entreprises et agences pour transformer leurs idées en sites web sur mesure, intuitifs et modernes, réalisés avec WordPress, HubSpot et Webflow." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://marinleclerc.fr/" />
+        <meta property="og:title" content="Marin Leclerc – Développeur Web Freelance" />
+        <meta property="og:description" content="Sites web sur mesure, intuitifs et modernes avec WordPress, HubSpot et Webflow." />
+        <meta property="og:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
+        <meta property="og:site_name" content="Marin Leclerc" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://marinleclerc.fr/" />
+        <meta name="twitter:title" content="Marin Leclerc – Développeur Web Freelance" />
+        <meta name="twitter:description" content="Sites web sur mesure, intuitifs et modernes avec WordPress, HubSpot et Webflow." />
+        <meta name="twitter:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
+
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5ff730a5-9ee9-49bb-a24e-5773e82d776a"></script>
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

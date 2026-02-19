@@ -221,19 +221,19 @@ export default function Services() {
         <meta name="description" content="Développement front-end sur mesure, refonte technique et accompagnement web global. Expert WordPress, Webflow et HubSpot." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="développeur web freelance, services web, développement sur mesure, WordPress, Webflow, HubSpot, audit technique, optimisation performance, accompagnement web" />
-        <link rel="canonical" href="https://marinleclerc.dev/services" />
+        <link rel="canonical" href="https://marinleclerc.fr/services" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://marinleclerc.dev/services" />
+        <meta property="og:url" content="https://marinleclerc.fr/services" />
         <meta property="og:title" content="Services – Marin Leclerc | Développement Web Sur Mesure" />
         <meta property="og:description" content="Développement front-end sur mesure, refonte technique et accompagnement web global. Expert WordPress, Webflow et HubSpot." />
-        <meta property="og:image" content="https://marinleclerc.dev/Images/og-services.jpg" />
+        <meta property="og:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:site_name" content="Marin Leclerc - Développeur Web" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://marinleclerc.dev/services" />
+        <meta name="twitter:url" content="https://marinleclerc.fr/services" />
         <meta name="twitter:title" content="Services – Marin Leclerc | Développement Web Sur Mesure" />
         <meta name="twitter:description" content="Développement front-end sur mesure, refonte technique et accompagnement web global. Expert WordPress, Webflow et HubSpot." />
-        <meta name="twitter:image" content="https://marinleclerc.dev/Images/og-services.jpg" />
+        <meta name="twitter:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
 
 
 

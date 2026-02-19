@@ -133,24 +133,23 @@ export default function Collaborer() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="développeur web freelance, intégration web, WordPress, Webflow, HubSpot, collaboration agence, développeur front-end" />
         <meta name="author" content="Marin Leclerc" />
-        <link rel="canonical" href="https://marinleclerc.dev/collaborer" />
+        <link rel="canonical" href="https://marinleclerc.fr/collaborer" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://marinleclerc.dev/collaborer" />
+        <meta property="og:url" content="https://marinleclerc.fr/collaborer" />
         <meta property="og:title" content="Collaborer – Marin Leclerc | Développeur Web Freelance" />
         <meta property="og:description" content="Méthodologie en 5 étapes pour créer des sites web performants. Intégration WordPress, Webflow, HubSpot. Collaboration agences & designers." />
-        <meta property="og:image" content="https://marinleclerc.dev/Images/collaborer-marin-2.avif" />
+        <meta property="og:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
         <meta property="og:locale" content="fr_FR" />
-        <meta property="og:site_name" content="Marin Leclerc - Développeur Web" />
+        <meta property="og:site_name" content="Marin Leclerc" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://marinleclerc.dev/collaborer" />
+        <meta name="twitter:url" content="https://marinleclerc.fr/collaborer" />
         <meta name="twitter:title" content="Collaborer – Marin Leclerc | Développeur Web Freelance" />
         <meta name="twitter:description" content="Méthodologie en 5 étapes pour créer des sites web performants. Intégration WordPress, Webflow, HubSpot. Collaboration agences & designers." />
-        <meta name="twitter:image" content="https://marinleclerc.dev/Images/collaborer-marin-2.avif" />
-        <meta name="twitter:creator" content="@marinleclerc" />
+        <meta name="twitter:image" content="https://marinleclerc.fr/Images/marin-portfolio.png" />
 
         {/* Analytics */}
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5ff730a5-9ee9-49bb-a24e-5773e82d776a"></script>
