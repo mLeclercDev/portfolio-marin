@@ -8,27 +8,27 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const OffersList = ({
   offers = [
     {
-      id: 'integration',
+      id: 'vitrine',
       number: '01',
-      title: 'Développement',
-      subtitle: '& Intégration',
-      description: 'Je développe des sites web adaptés à vos besoins et à vos objectifs. Architecture claire, intégration propre et bases techniques solides pour un site fiable et durable.',
+      title: 'Site vitrine',
+      subtitle: 'engageant',
+      description: 'Je crée des sites web sur mesure, conçus pour captiver vos visiteurs et refléter l\'identité de votre marque. Architecture claire, intégration soignée et bases techniques solides pour un site fiable et durable.',
       link: '#benefits'
     },
     {
-      id: 'refonte',
+      id: 'e-commerce',
       number: '02',
+      title: 'E-commerce',
+      subtitle: 'performant',
+      description: 'Je crée des boutiques en ligne performantes et optimisées pour la conversion. Architecture claire, intégration propre et bases techniques solides pour un site fiable et durable.',
+      link: '#benefits'
+    },
+    {
+      id: 'audit',
+      number: '03',
       title: 'Audit',
       subtitle: '& optimisation',
-      description: 'J\'analyse votre site existant pour identifier les points d\'amélioration techniques, de performance et d\'expérience utilisateur. Recommandations concrètes et plan d\'action adapté.',
-      link: '#benefits'
-    },
-    {
-      id: 'accompagnement',
-      number: '03',
-      title: 'Partenaire',
-      subtitle: 'Web',
-      description: 'Un accompagnement régulier pour vos besoins web : maintenance, évolutions, support technique. Une collaboration sur le long terme pour faire évoluer votre présence digitale.',
+      description: 'Je réalise des audits complets de votre site web pour identifier les points d\'amélioration techniques, de performance et d\'expérience utilisateur. Recommandations concrètes et plan d\'action adapté.',
       link: '#benefits'
     }
   ],

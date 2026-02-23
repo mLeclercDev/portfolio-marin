@@ -1,0 +1,175 @@
+// styles/components/competences.scss
+
+.competences-section {
+  padding: 8rem 0;
+  background-color: var(--color1);
+  color: var(--color2);
+
+  @media (max-width: 768px) {
+    padding: 5rem 0;
+  }
+
+  .competences-title {
+    font-family: var(--font2);
+    font-size: clamp(2.75rem, 4vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    font-weight: 450;
+    margin-bottom: 8rem;
+
+    @media (max-width: 768px) {
+      letter-spacing: -1px;
+    }
+
+    .line-wrapper {
+      overflow: hidden;
+      display: block;
+    }
+  }
+
+  // ── Desktop grid ─────────────────────────────────────────────────────
+  .competences-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-right: 3rem;
+
+    @media (max-width: 992px) {
+      margin-top: 4rem;
+      row-gap: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  // ── Mobile carousel wrapper ──────────────────────────────────────────
+  .competences-carousel-wrapper {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+      // Break out of .container padding → bleed to screen edges
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+  }
+
+  // Lerp-controlled scroll – overflow hidden so JS drives scrollLeft ──
+  .competences-carousel {
+    display: flex;
+    overflow: hidden;          // native scroll disabled — JS lerp takes over
+    scrollbar-width: none;
+    gap: 2rem;
+    // 2rem matches container padding → first card aligned with page content
+    padding-left: 2rem;
+    padding-right: 2rem;
+    cursor: grab;
+    user-select: none;
+
+    @media (max-width: 768px) {
+      gap: 6rem;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .carousel-card {
+    flex-shrink: 0;
+    // 78vw → right card peeks ~14vw on the right, feels like a carousel
+    width: 78vw;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 768px) {
+      width: auto;
+    }
+  }
+
+  // ── Thin progress bar ────────────────────────────────────────────────
+  .carousel-track {
+    position: relative;
+    height: 1px;
+    background-color: rgba(17, 15, 9, 0.15);
+    // Aligned with container content (matches the 2rem padding above)
+    margin: 2rem 2rem 0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .carousel-fill {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color2);
+    transform-origin: left center;
+    transform: scaleX(0);
+    // NO CSS transition — value mutated directly by JS via RAF
+  }
+
+  // ── Shared card internals ────────────────────────────────────────────
+  .comp-category,
+  .carousel-card {
+    .comp-header {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 2rem;
+      gap: 1.5rem;
+    }
+
+    .comp-number {
+      font-family: var(--font1);
+      font-size: 12px;
+      opacity: 0.7;
+      font-weight: 500;
+      display: flex;
+      width: 18px;
+      transform: translateY(-1px);
+    }
+
+    .comp-title {
+      font-family: var(--font2);
+      font-size: clamp(24px, 28px, 2rem);
+      font-weight: 450;
+      letter-spacing: -1px;
+      margin: 0;
+    }
+
+    .comp-list {
+      list-style: none;
+      padding: 0 0 0 calc(18px + 1.5rem);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      li {
+        font-family: var(--font1);
+        font-size: 15px;
+        opacity: 0.8;
+        font-weight: 400;
+        line-height: 1.3;
+        transition: opacity 0.3s ease;
+
+        @media (max-width: 992px) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .comp-category {
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 992px) {
+      width: 50%;
+    }
+  }
+}

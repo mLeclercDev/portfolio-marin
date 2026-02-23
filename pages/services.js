@@ -13,8 +13,8 @@ import ProcessSteps from '../components/ProcessSteps';
 import DedicatedPartner from '../components/DedicatedPartner';
 import GrowthStats from '../components/GrowthStats';
 import OffersList from '../components/OffersList';
-import HeroThree from '../components/HeroThree';
 import CTASection from '../components/CTASection';
+import Competences from '../components/Competences';
 
 // Dynamic import for Footer to improve performance
 const Footer = dynamic(() => import('../components/global/Footer'), { ssr: false });
@@ -180,33 +180,27 @@ export default function Services() {
 
   const offers = [
     {
-      id: 'integration',
+      id: 'vitrine',
       number: '01',
-      title: 'Développement',
-      subtitle: '& Intégration',
-      target: 'Agences, Indépendants, Designers',
-      context: 'Vous avez des maquettes prêtes',
-      description: 'Je développe des sites web adaptés à vos besoins et à vos objectifs. Architecture claire, intégration propre et bases techniques solides pour un site fiable et durable.',
+      title: 'Site vitrine',
+      subtitle: 'engageant',
+      description: 'Je crée des sites web sur mesure, conçus pour captiver vos visiteurs et refléter l\'identité de votre marque. Architecture claire, intégration soignée et bases techniques solides pour un site fiable et durable.',
       link: '#benefits'
     },
     {
-      id: 'refonte',
+      id: 'e-commerce',
       number: '02',
+      title: 'E-commerce',
+      subtitle: 'performant',
+      description: 'Je crée des boutiques en ligne performantes et optimisées pour la conversion. Architecture claire, intégration propre et bases techniques solides pour un site fiable et durable.',
+      link: '#benefits'
+    },
+    {
+      id: 'audit',
+      number: '03',
       title: 'Audit &',
       subtitle: 'optimisation',
-      target: 'Sites lents, Code vieillissant',
-      context: 'Votre site est devenu un frein',
-      description: 'J’optimise votre site existant pour le rendre plus rapide, plus stable et plus performant. Des améliorations concrètes, sans repartir de zéro.',
-      link: '#benefits'
-    },
-    {
-      id: 'accompagnement',
-      number: '03',
-      title: 'Partenaire',
-      subtitle: 'Web',
-      target: 'Clients cherchant un partenaire',
-      context: 'Suivi sur la durée',
-      description: 'Je vous accompagne dans vos décisions techniques et stratégiques. Objectif : structurer votre présence en ligne avec un site cohérent et efficace.',
+      description: 'Je réalise des audits complets de votre site web pour identifier les points d\'amélioration techniques, de performance et d\'expérience utilisateur. Recommandations concrètes et plan d\'action adapté.',
       link: '#benefits'
     }
   ];
@@ -285,14 +279,17 @@ export default function Services() {
         {/* OFFERS LIST */}
         <OffersList offers={offers} startAnimation={heroAnimationComplete} />
 
+        {/* COMPETENCES SECTION */}
+        <Competences />
+
         {/* DEDICATED PARTNER SECTION */}
         <DedicatedPartner />
 
         {/* GROWTH STATS SECTION */}
-        {/* <GrowthStats /> */}
+{/*         { <GrowthStats /> } */}
 
         {/* PROCESS STEPS SECTION */}
-        {/* <ProcessSteps 
+{/*         { <ProcessSteps 
           title="Ma méthode de travail repose sur une approche structurée et collaborative. Chaque projet suit un processus pensé pour garantir qualité, performance et alignement avec vos objectifs."
           steps={[
             { number: '01', label: 'Cadrage' },
@@ -300,7 +297,7 @@ export default function Services() {
             { number: '03', label: 'Tests' },
             { number: '04', label: 'Livraison' }
           ]}
-        /> */}
+        /> } */}
 
         {/* CTA BOTTOM */}
         <CTASection 

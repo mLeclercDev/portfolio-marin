@@ -330,6 +330,9 @@
         line-height: 1.1;
         letter-spacing: -1.5px;
         font-weight: 450;
+        @media (max-width: 768px) {
+          letter-spacing: -1px;
+        }
       }
     }
 
@@ -391,6 +394,9 @@
           text-transform: uppercase;
           letter-spacing: 0.05em;
           opacity: 0.6;
+          @media (max-width: 480px) {
+            font-size: 10px;
+          }
         }
       }
     }
